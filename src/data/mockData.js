@@ -1,107 +1,939 @@
 export const mockProperties = [
   {
-    id: "1",
-    title: "Apartment in New Cairo",
-    location: "New Cairo, Egypt",
+    id: "alex-1",
+    title: "Apartment in San Stefano",
+    location: "San Stefano, Alexandria",
     category: "Homes",
     type: "Entire apartment",
-    pricePerNight: 2811,
-    rating: 5.0,
-    reviewsCount: 24,
+    pricePerNight: 4778,
+    nights: 2,
+    rating: 4.88,
+    reviewsCount: 74,
     isGuestFavorite: true,
     images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800"
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800",
+      "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?q=80&w=800"
     ],
-    host: {
-      name: "Ahmed",
-      isSuperhost: true,
-      avatar: "https://i.pravatar.cc/150?img=11"
-    },
-    specs: {
-      guests: 4,
-      bedrooms: 2,
-      beds: 2,
-      baths: 1
-    },
-    amenities: ["Wifi", "Air conditioning", "Pool", "Free parking", "Kitchen"],
-    coordinates: {
-      lat: 30.0279,
-      lng: 31.4913
-    },
-    description: "Beautiful modern apartment in the heart of New Cairo. Close to restaurants and shopping malls."
+    host: { name: "Farida", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Sea View", "WiFi", "Air Conditioning"],
+    coordinates: { lat: 31.2218, lng: 29.9441 },
+    description: "Luxury apartment with a breathtaking Mediterranean sea view in San Stefano."
   },
   {
-    id: "2",
-    title: "Chalet in Dahab",
-    location: "Dahab, South Sinai",
-    category: "Beach",
-    type: "Private Chalet",
-    pricePerNight: 1305,
-    rating: 4.88,
-    reviewsCount: 52,
+    id: "alex-2",
+    title: "Apartment in Sidi Beshr Bahari",
+    location: "Sidi Beshr, Alexandria",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 4168,
+    nights: 2,
+    rating: 4.86,
+    reviewsCount: 55,
     isGuestFavorite: false,
     images: [
-      "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=800",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800"
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800",
+      "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800"
     ],
-    host: {
-      name: "Mariam",
-      isSuperhost: true,
-      avatar: "https://i.pravatar.cc/150?img=5"
-    },
-    specs: {
-      guests: 2,
-      bedrooms: 1,
-      beds: 1,
-      baths: 1
-    },
-    amenities: ["Wifi", "Sea view", "Air conditioning", "Beach access"],
-    coordinates: {
-      lat: 28.5097,
-      lng: 34.5136
-    },
-    description: "Relaxing chalet directly on the beach in Dahab with stunning sea view."
+    host: { name: "Walaa", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=23" },
+    specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning", "Kitchen"],
+    coordinates: { lat: 31.2468, lng: 29.9902 },
+    description: "Quiet and cozy apartment in the heart of Sidi Beshr."
   },
   {
-    id: "3",
-    title: "Villa in Sheikh Zayed",
-    location: "Sheikh Zayed City, Giza",
-    category: "Luxury",
+    id: "alex-3",
+    title: "Villa in Alexandria",
+    location: "Alexandria, Egypt",
+    category: "Mansions",
     type: "Entire villa",
-    pricePerNight: 5522,
-    rating: 4.95,
+    pricePerNight: 2974,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 33,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800"
+    ],
+    host: { name: "Kareem", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=11" },
+    specs: { guests: 8, bedrooms: 4, beds: 5, baths: 3 },
+    amenities: ["Private Garden", "Swimming Pool", "WiFi"],
+    coordinates: { lat: 30.9716, lng: 29.6196 },
+    description: "Luxurious villa with a private garden in Alexandria."
+  },
+  {
+    id: "alex-4",
+    title: "Luxury Terrace Apartment",
+    location: "San Stefano, Alexandria",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 4829,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 19,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800"
+    ],
+    host: { name: "Mervat", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=41" },
+    specs: { guests: 5, bedrooms: 3, beds: 3, baths: 2 },
+    amenities: ["Sea View Terrace", "WiFi"],
+    coordinates: { lat: 31.2208, lng: 29.9428 },
+    description: "High-end apartment featuring a panoramic sea-view terrace in San Stefano."
+  },
+  {
+    id: "alex-5",
+    title: "Modern Flat near Mall & Corniche",
+    location: "San Stefano, Alexandria",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 8784,
+    nights: 2,
+    rating: 4.88,
+    reviewsCount: 62,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800",
+      "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=800"
+    ],
+    host: { name: "Essam", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=22" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning", "Parking"],
+    coordinates: { lat: 31.2215, lng: 29.9435 },
+    description: "An elegant flat close to San Stefano Mall and the Corniche."
+  },
+  {
+    id: "alex-6",
+    title: "Sidi Beshr Beachfront Apartment",
+    location: "Sidi Beshr Bahari, Alexandria",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2795,
+    nights: 2,
+    rating: 4.93,
+    reviewsCount: 87,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800"
+    ],
+    host: { name: "Asmaa", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=16" },
+    specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
+    amenities: ["Sea View", "WiFi"],
+    coordinates: { lat: 31.2481, lng: 29.988 },
+    description: "Stylish apartment directly overlooking Sidi Beshr Corniche."
+  },
+  {
+    id: "alex-7",
+    title: "Cosy Flat near the Beach",
+    location: "Sidi Beshr Bahari, Alexandria",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 4004,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 28,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800",
+      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800"
+    ],
+    host: { name: "Mohamed", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=8" },
+    specs: { guests: 3, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Near Beach", "WiFi"],
+    coordinates: { lat: 31.2491, lng: 29.9887 },
+    description: "Comfortable apartment in Sidi Beshr, just steps away from the beach."
+  },
+  {
+    id: "alex-8",
+    title: "Panoramic Sea View Flat in Fleming",
+    location: "Fleming, Alexandria",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 4883,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 41,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800",
+      "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800"
+    ],
+    host: { name: "Hisham", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=35" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Sea View", "WiFi"],
+    coordinates: { lat: 31.2391, lng: 29.9622 },
+    description: "Elegant apartment in Fleming neighborhood with full panoramic views of the Mediterranean."
+  },
+
+  {
+    id: "hotel-1",
+    title: "Hotel George - Astotel",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 4971,
+    nights: 2,
+    rating: 4.83,
+    reviewsCount: 218,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800"
+    ],
+    host: { name: "Astotel", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=1" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Restaurant", "Room Service", "WiFi"],
+    coordinates: { lat: 48.8566, lng: 2.3522 },
+    description: "Charming hotel located in the heart of Paris near key sights."
+  },
+  {
+    id: "hotel-2",
+    title: "Hotel Beauregard",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 6996,
+    nights: 2,
+    rating: 4.94,
+    reviewsCount: 153,
+    isGuestFavorite: false,
+    images: [
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800"
+    ],
+    host: { name: "Beauregard", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=2" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Free Breakfast", "WiFi"],
+    coordinates: { lat: 48.875, lng: 2.298 },
+    description: "Modern boutique hotel situated close to the Arc de Triomphe."
+  },
+  {
+    id: "hotel-3",
+    title: "Hotel Beaugency",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 9910,
+    nights: 2,
+    rating: 4.69,
+    reviewsCount: 302,
+    isGuestFavorite: false,
+    images: [
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800"
+    ],
+    host: { name: "Beaugency Group", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=4" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Breakfast", "WiFi"],
+    coordinates: { lat: 48.8741, lng: 2.3045 },
+    description: "Classic Parisian hotel offering high standard service."
+  },
+  {
+    id: "hotel-4",
+    title: "Korner Montparnasse",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 7547,
+    nights: 2,
+    rating: 4.61,
+    reviewsCount: 178,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800"
+    ],
+    host: { name: "Korner", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=6" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Breakfast Bar", "WiFi"],
+    coordinates: { lat: 48.841, lng: 2.329 },
+    description: "Trendy hotel in the Montparnasse area with top amenities."
+  },
+  {
+    id: "hotel-5",
+    title: "Korner Étoile",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 6955,
+    nights: 2,
+    rating: 4.74,
+    reviewsCount: 421,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800"
+    ],
+    host: { name: "Korner", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=10" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Near Station", "WiFi"],
+    coordinates: { lat: 48.8804, lng: 2.3548 },
+    description: "Comfortable and accessible stay near the central train station."
+  },
+  {
+    id: "hotel-6",
+    title: "Hotel Monterosa - Astotel",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 7172,
+    nights: 2,
+    rating: 4.8,
+    reviewsCount: 264,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800"
+    ],
+    host: { name: "Astotel", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=13" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Boutique Design", "WiFi"],
+    coordinates: { lat: 48.8638, lng: 2.3512 },
+    description: "An elegant boutique hotel with Parisian charm."
+  },
+  {
+    id: "hotel-7",
+    title: "Hôtel des Orfèvres",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Luxury Hotel",
+    pricePerNight: 15706,
+    nights: 2,
+    rating: 4.94,
+    reviewsCount: 89,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800"
+    ],
+    host: { name: "Orfèvres", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=17" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Spa", "5-Star Restaurant"],
+    coordinates: { lat: 48.8553, lng: 2.3467 },
+    description: "Historic luxury hotel in the heart of Paris."
+  },
+  {
+    id: "hotel-8",
+    title: "London Hotel - Paris",
+    location: "Paris, France",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 7913,
+    nights: 2,
+    rating: 4.61,
+    reviewsCount: 312,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800"
+    ],
+    host: { name: "London Hotel", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=18" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Parisian Breakfast", "WiFi"],
+    coordinates: { lat: 48.8492, lng: 2.3601 },
+    description: "Parisian hotel with classic French interior decor."
+  },
+
+  {
+    id: "sz-1",
+    title: "Spacious Apartment in El Sheikh Zayed",
+    location: "El Sheikh Zayed, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 5706,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 51,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800"
+    ],
+    host: { name: "Tarek", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=7" },
+    specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning", "Elevator"],
+    coordinates: { lat: 29.9742, lng: 30.9572 },
+    description: "Spacious apartment situated in one of Sheikh Zayed's finest districts."
+  },
+  {
+    id: "sz-2",
+    title: "Modern Apartment in 6th of October",
+    location: "6th of October City, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 1423,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 37,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800",
+      "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800"
+    ],
+    host: { name: "Sara", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=9" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
+    amenities: ["Air Conditioning", "WiFi"],
+    coordinates: { lat: 30.052, lng: 30.965 },
+    description: "Modern design apartment in 6th of October City."
+  },
+  {
+    id: "sz-3",
+    title: "Cosy Flat with Shared Pool",
+    location: "El Sheikh Zayed, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 3457,
+    nights: 2,
+    rating: 4.98,
+    reviewsCount: 29,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800",
+      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800"
+    ],
+    host: { name: "Hossam", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
+    specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
+    amenities: ["Shared Pool", "WiFi"],
+    coordinates: { lat: 30.039, lng: 30.976 },
+    description: "Cozy apartment with pool access in Sheikh Zayed."
+  },
+  {
+    id: "sz-4",
+    title: "Super Lux Flat in 6th of October",
+    location: "6th of October City, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 4245,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 22,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800"
+    ],
+    host: { name: "Noha", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=26" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
+    amenities: ["Super Lux Finishing", "WiFi"],
+    coordinates: { lat: 30.021, lng: 30.989 },
+    description: "Luxurious apartment with high-grade finishes in October."
+  },
+  {
+    id: "sz-5",
+    title: "Bright Flat near Pyramids Gate",
+    location: "Hadayek El Ahram, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2196,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 44,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800",
+      "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?q=80&w=800"
+    ],
+    host: { name: "Omar", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=3" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Large Balcony", "WiFi"],
+    coordinates: { lat: 30.044, lng: 30.983 },
+    description: "Bright apartment conveniently located near the Pyramids entrance."
+  },
+  {
+    id: "sz-6",
+    title: "Compound Villa / House",
+    location: "6th of October City, Giza",
+    category: "Homes",
+    type: "Entire house",
+    pricePerNight: 4067,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 68,
+    isGuestFavorite: false,
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800"
+    ],
+    host: { name: "Dina", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=38" },
+    specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
+    amenities: ["Private Garden", "Air Conditioning"],
+    coordinates: { lat: 29.968, lng: 30.952 },
+    description: "Spacious house located inside a private compound in October."
+  },
+  {
+    id: "sz-7",
+    title: "Stylish Flat in Sheikh Zayed",
+    location: "El Sheikh Zayed, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 3884,
+    nights: 2,
+    rating: 4.87,
+    reviewsCount: 31,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800",
+      "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800"
+    ],
+    host: { name: "Hala", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=47" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning"],
+    coordinates: { lat: 30.031, lng: 30.958 },
+    description: "Stylish and well-located apartment in Sheikh Zayed City."
+  },
+  {
+    id: "sz-8",
+    title: "Luxury Apartment in 6th of October",
+    location: "6th of October City, Giza",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 3704,
+    nights: 2,
+    rating: 4.93,
     reviewsCount: 18,
     isGuestFavorite: true,
     images: [
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800",
       "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800"
     ],
-    host: {
-      name: "Omar",
-      isSuperhost: false,
-      avatar: "https://i.pravatar.cc/150?img=12"
-    },
-    specs: {
-      guests: 8,
-      bedrooms: 4,
-      beds: 5,
-      baths: 3
-    },
-    amenities: ["Wifi", "Private pool", "Garden", "Air conditioning", "BBQ grill"],
-    coordinates: {
-      lat: 30.0444,
-      lng: 30.9833
-    },
-    description: "Luxury villa with a private swimming pool and a big garden for family getaways."
-  }
-];
+    host: { name: "Mostafa", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=52" },
+    specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning"],
+    coordinates: { lat: 30.046, lng: 30.972 },
+    description: "Luxury and comfortable accommodation in October."
+  },
 
-export const mockCategories = [
-  { id: "1", name: "Homes", icon: "home" },
-  { id: "2", name: "Beachfront", icon: "beach" },
-  { id: "3", name: "Cabins", icon: "cabin" },
-  { id: "4", name: "Mansions", icon: "mansion" },
-  { id: "5", name: "Trending", icon: "fire" }
+  {
+    id: "nc-1",
+    title: "Luxury Apartment in New Cairo First District",
+    location: "New Cairo, Egypt",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 6838,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 32,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800"
+    ],
+    host: { name: "Kareem", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=11" },
+    specs: { guests: 5, bedrooms: 3, beds: 3, baths: 2 },
+    amenities: ["Spacious Terrace", "High-Speed WiFi"],
+    coordinates: { lat: 30.0054, lng: 31.4778 },
+    description: "High-end apartment located in the 1st Settlement of New Cairo."
+  },
+  {
+    id: "nc-2",
+    title: "Quiet Flat in 5th Settlement",
+    location: "5th Settlement, New Cairo",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 3356,
+    nights: 2,
+    rating: 4.86,
+    reviewsCount: 75,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800",
+      "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800"
+    ],
+    host: { name: "Mariam", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=5" },
+    specs: { guests: 3, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning"],
+    coordinates: { lat: 30.0185, lng: 31.502 },
+    description: "Peaceful residential flat in Tagamoa, New Cairo."
+  },
+  {
+    id: "nc-3",
+    title: "Modern Apartment in New Cairo",
+    location: "New Cairo, Egypt",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2785,
+    nights: 2,
+    rating: 4.95,
+    reviewsCount: 48,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800"
+    ],
+    host: { name: "Ahmed", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=12" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
+    amenities: ["Free WiFi", "Air Conditioning"],
+    coordinates: { lat: 30.0279, lng: 31.4913 },
+    description: "Modern interior setup in the heart of New Cairo."
+  },
+  {
+    id: "nc-4",
+    title: "Family Flat in New Cairo",
+    location: "New Cairo, Egypt",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 1762,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 28,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=800",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800"
+    ],
+    host: { name: "Sara", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=9" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Air Conditioning", "WiFi"],
+    coordinates: { lat: 30.035, lng: 31.482 },
+    description: "Affordable and cozy family apartment in New Cairo."
+  },
+  {
+    id: "nc-5",
+    title: "Apartment with Jacuzzi & Terrace",
+    location: "New Cairo, Egypt",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2029,
+    nights: 2,
+    rating: 4.98,
+    reviewsCount: 14,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800"
+    ],
+    host: { name: "Maged", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=14" },
+    specs: { guests: 6, bedrooms: 3, beds: 3, baths: 3 },
+    amenities: ["Jacuzzi", "Balcony / Terrace"],
+    coordinates: { lat: 30.012, lng: 31.435 },
+    description: "Unique features with private Jacuzzi and big balcony space."
+  },
+  {
+    id: "nc-6",
+    title: "Modern Flat in Gated Compound",
+    location: "New Cairo, Egypt",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 1876,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 21,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800"
+    ],
+    host: { name: "Layla", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=20" },
+    specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
+    amenities: ["Scenic View", "24/7 Security"],
+    coordinates: { lat: 30.001, lng: 31.515 },
+    description: "Modern apartment located inside a secured compound in New Cairo."
+  },
+  {
+    id: "nc-7",
+    title: "Cosy Studio in 1st Settlement",
+    location: "New Cairo, Egypt",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2981,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 119,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800",
+      "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?q=80&w=800"
+    ],
+    host: { name: "Hala", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=47" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["WiFi", "Air Conditioning"],
+    coordinates: { lat: 30.021, lng: 31.469 },
+    description: "Quiet and comfortable flat situated in 1st Settlement."
+  },
+  {
+    id: "nc-8",
+    title: "Apartment near Cairo Airport",
+    location: "Sheraton Al Matar, Cairo",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2896,
+    nights: 2,
+    rating: 4.98,
+    reviewsCount: 37,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=800"
+    ],
+    host: { name: "Nadia", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=32" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Close to Airport", "WiFi"],
+    coordinates: { lat: 30.048, lng: 31.491 },
+    description: "Extremely convenient location right next to Cairo International Airport."
+  },
+
+  {
+    id: "hg-1",
+    title: "Red Sea Front Flat in Hurghada",
+    location: "Hurghada, Red Sea",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 1325,
+    nights: 2,
+    rating: 4.95,
+    reviewsCount: 48,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800"
+    ],
+    host: { name: "Hassan", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=3" },
+    specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
+    amenities: ["Sea View", "Swimming Pool"],
+    coordinates: { lat: 27.2252, lng: 33.8407 },
+    description: "Stunning view directly overlooking the Red Sea."
+  },
+  {
+    id: "hg-2",
+    title: "Deluxe Resort Apartment",
+    location: "Hurghada, Red Sea",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2522,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 31,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800"
+    ],
+    host: { name: "Ramy", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=22" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
+    amenities: ["Pool", "WiFi"],
+    coordinates: { lat: 27.2100, lng: 33.8500 },
+    description: "Luxurious apartment with pool facilities in Hurghada."
+  },
+  {
+    id: "hg-3",
+    title: "Touristic Village Flat",
+    location: "Hurghada, Red Sea",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 1170,
+    nights: 2,
+    rating: 4.9,
+    reviewsCount: 52,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800"
+    ],
+    host: { name: "Khaled", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=60" },
+    specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
+    amenities: ["Near Beach", "Pool"],
+    coordinates: { lat: 27.162, lng: 33.819 },
+    description: "Cozy stay in a resort village in Hurghada."
+  },
+  {
+    id: "hg-4",
+    title: "Elegant Seaside Flat",
+    location: "Hurghada, Red Sea",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 1658,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 41,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800"
+    ],
+    host: { name: "Maha", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=32" },
+    specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
+    amenities: ["Air Conditioning", "WiFi"],
+    coordinates: { lat: 27.23, lng: 33.85 },
+    description: "Elegant apartment situated near Hurghada beaches."
+  },
+  {
+    id: "hg-5",
+    title: "Beach Hotel Room",
+    location: "Hurghada, Red Sea",
+    category: "Hotels",
+    type: "Hotel room",
+    pricePerNight: 821,
+    nights: 2,
+    rating: 4.95,
+    reviewsCount: 64,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=800",
+      "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=800"
+    ],
+    host: { name: "Dina", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=38" },
+    specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
+    amenities: ["Breakfast Included", "Pool"],
+    coordinates: { lat: 27.3949, lng: 33.6783 },
+    description: "Comfortable hotel room with breakfast included."
+  },
+  {
+    id: "hg-6",
+    title: "Spacious Private Beach Villa",
+    location: "Hurghada, Red Sea",
+    category: "Homes",
+    type: "Entire house",
+    pricePerNight: 1475,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 22,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800",
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800"
+    ],
+    host: { name: "Ziad", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
+    specs: { guests: 6, bedrooms: 3, beds: 4, baths: 3 },
+    amenities: ["Pool", "Private Garden"],
+    coordinates: { lat: 27.401, lng: 33.672 },
+    description: "Standalone villa with private garden and pool."
+  },
+  {
+    id: "hg-7",
+    title: "Sea View Hurghada Flat",
+    location: "Hurghada, Red Sea",
+    category: "Homes",
+    type: "Entire apartment",
+    pricePerNight: 2629,
+    nights: 2,
+    rating: 5.0,
+    reviewsCount: 18,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=800",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800"
+    ],
+    host: { name: "Samar", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=47" },
+    specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
+    amenities: ["Beach Access", "WiFi"],
+    coordinates: { lat: 26.851, lng: 33.952 },
+    description: "Beachfront apartment with open views."
+  },
+  {
+    id: "hg-8",
+    title: "Lagoon View Apartment in El Gouna",
+    location: "El Gouna, Hurghada",
+    category: "Beachfront",
+    type: "Entire apartment",
+    pricePerNight: 6728,
+    nights: 2,
+    rating: 4.97,
+    reviewsCount: 36,
+    isGuestFavorite: true,
+    images: [
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800"
+    ],
+    host: { name: "Mona", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=42" },
+    specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
+    amenities: ["Lagoon Front", "Pool Access"],
+    coordinates: { lat: 27.388, lng: 33.682 },
+    description: "Upscale apartment right on the lagoon in El Gouna."
+  },
+
+  {
+    id: "exp-cairo-1",
+    title: "Sunset Nile Sailing on a Felucca",
+    location: "Zamalek, Cairo",
+    category: "Experiences",
+    type: "Felucca Ride",
+    pricePerNight: 977,
+    nights: 1,
+    rating: 4.94,
+    reviewsCount: 142,
+    isGuestFavorite: false,
+    badgeText: "Most Popular",
+    priceLabel: "From EGP 977 / person",
+    images: [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800"
+    ],
+    host: { name: "Sameh", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=11" },
+    specs: { guests: 10, bedrooms: 0, beds: 0, baths: 0 },
+    amenities: ["Local Guide", "Drinks Included"],
+    coordinates: { lat: 30.0626, lng: 31.2224 },
+    description: "Magical sunset sailing trip on the Nile river in Zamalek."
+  },
+  {
+    id: "exp-cairo-2",
+    title: "Giza Pyramids, Sphinx, Quad Biking & Lunch Tour",
+    location: "Giza, Egypt",
+    category: "Experiences",
+    type: "Private Tour",
+    pricePerNight: 3305,
+    nights: 1,
+    rating: 4.92,
+    reviewsCount: 89,
+    isGuestFavorite: false,
+    badgeText: "Most Popular",
+    priceLabel: "From EGP 3,305 / person",
+    images: [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800",
+      "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800"
+    ],
+    host: { name: "Nour", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=5" },
+    specs: { guests: 8, bedrooms: 0, beds: 0, baths: 0 },
+    amenities: ["Oriental Lunch", "Quad Biking"],
+    coordinates: { lat: 29.9792, lng: 31.1342 },
+    description: "All-inclusive desert adventure around Pyramids and Sphinx with lunch and quads."
+  },
+  {
+    id: "exp-cairo-3",
+    title: "Egyptian Culture & Bazaar Walk",
+    location: "Khan el-Khalili, Cairo",
+    category: "Experiences",
+    type: "Cultural Tour",
+    pricePerNight: 1780,
+    nights: 1,
+    rating: 4.98,
+    reviewsCount: 67,
+    isGuestFavorite: false,
+    badgeText: "Most Popular",
+    priceLabel: "From EGP 1,780 / person",
+    images: [
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800"
+    ],
+    host: { name: "Ahmed", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=12" },
+    specs: { guests: 6, bedrooms: 0, beds: 0, baths: 0 },
+    amenities: ["Food Tasting", "Local Guide"],
+    coordinates: { lat: 30.0478, lng: 31.2622 },
+    description: "Interactive historical walk through Khan El-Khalili alleys with local food tasting."
+  },
+  {
+    id: "exp-cairo-4",
+    title: "Pyramids ATV Desert Safari",
+    location: "Pyramids, Giza",
+    category: "Experiences",
+    type: "Adventure Tour",
+    pricePerNight: 2150,
+    nights: 1,
+    rating: 4.95,
+    reviewsCount: 110,
+    isGuestFavorite: true,
+    badgeText: "Top Experience",
+    priceLabel: "From EGP 2,150 / person",
+    images: [
+      "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800"
+    ],
+    host: { name: "Youssef", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
+    specs: { guests: 12, bedrooms: 0, beds: 0, baths: 0 },
+    amenities: ["ATV Quad", "Safety Gear"],
+    coordinates: { lat: 29.9750, lng: 31.1300 },
+    description: "Thrilling quad bike adventure in the Sahara desert surrounding the Great Pyramids."
+  }
 ];
