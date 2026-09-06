@@ -1,4 +1,5 @@
 import React from 'react';
+import PropertyCard from './PropertyCard.jsx';
 import PropertyCarousel from './PropertyCarousel.jsx';
 import ExperienceCategoryCarousel from './ExperienceCategoryCarousel.jsx';
 
@@ -71,12 +72,69 @@ const SECTIONS_CONFIG = [
   }
 ];
 
-const PropertyGrid = ({ properties = [], isLoading = false }) => {
+const SkeletonGrid = ({ count = 12 }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-8 py-6">
+    {Array.from({ length: count }).map((_, idx) => (
+      <div key={idx} className="flex flex-col gap-2 animate-pulse w-full">
+        <div className="aspect-square w-full rounded-xl bg-gray-200" />
+        <div className="h-4 bg-gray-200 rounded w-3/4 mt-1" />
+        <div className="h-3 bg-gray-200 rounded w-1/2" />
+        <div className="h-3.5 bg-gray-200 rounded w-1/3" />
+      </div>
+    ))}
+  </div>
+);
+
+const PropertyGrid = ({
+  properties = [],
+  isLoading = false,
+  selectedCategory = 'all'
+}) => {
   if (isLoading) {
+    if (selectedCategory !== 'all') {
+      return (
+        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4">
+          <SkeletonGrid count={10} />
+        </div>
+      );
+    }
     return (
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4">
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 space-y-8">
         <PropertyCarousel title="جاري التحميل..." isLoading={true} />
         <PropertyCarousel title="جاري التحميل..." isLoading={true} />
+      </div>
+    );
+  }
+
+  const isFiltered = selectedCategory !== 'all' && Boolean(selectedCategory);
+  
+  if (isFiltered) {
+    const filteredProperties = properties.filter((p) => {
+      if (!p.category) return false;
+      return p.category.toLowerCase() === selectedCategory.toLowerCase();
+    });
+
+    if (filteredProperties.length === 0) {
+      return (
+        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-16 text-center">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </div>
+          <h3 className="text-[18px] font-bold text-gray-900 mb-2">لا توجد أماكن إقامة متطابقة</h3>
+          <p className="text-gray-500 text-[14px]">جرب اختيار فئة أخرى لاستكشاف الممتلكات المتاحة.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-8">
+          {filteredProperties.map((property, idx) => (
+            <PropertyCard key={property.id || idx} property={property} />
+          ))}
+        </div>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropertyGrid from './components/PropertyGrid.jsx';
-import Footer from './components/Footer.jsx';
 import { mockProperties } from './data/mockData.js';
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
       <main>
         <PropertyGrid properties={mockProperties} isLoading={false} />
       </main>
-      <Footer />
     </div>
   );
 }

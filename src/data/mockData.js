@@ -2233,3 +2233,20 @@ export const experienceCategories = [
   { id: "9", title: "تناول الطعام", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400" },
   { id: "10", title: "الرياضات المائية", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=400" }
 ];
+
+export const categories = [
+  { id: "all", title: "الكل", icon: "all" },
+  { id: "Homes", title: "منازل", icon: "homes" },
+  { id: "Mansions", title: "قصور", icon: "mansions" },
+  { id: "Hotels", title: "فنادق", icon: "hotels" },
+  { id: "Beachfront", title: "على الشاطئ", icon: "beachfront" },
+  { id: "Beach", title: "شواطئ", icon: "beach" },
+  { id: "Trending", title: "رائجة", icon: "trending" },
+  { id: "Experiences", title: "تجارب", icon: "experiences" },
+  { id: "Pools", title: "مسابح مذهلة", icon: "pools" },
+  { id: "Cabins", title: "أكواخ", icon: "cabins" },
+  { id: "Countryside", title: "ريف", icon: "countryside" },
+  { id: "Cities", title: "مدن شهيرة", icon: "cities" },
+  { id: "Islands", title: "جزر", icon: "islands" },
+  { id: "Design", title: "تصاميم مميزة", icon: "design" }
+];
