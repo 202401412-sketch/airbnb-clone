@@ -21,12 +21,12 @@ function App() {
 
   
   const allProperties = [
-    { id: 1, title: 'شقة في سان ستيفانو', price: 4778, rating: 4.85, location: 'سان ستيفانو، الإسكندرية', lat: 31.244, lng: 29.965, category: 'Beachfront', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500' },
-    { id: 2, title: 'شقة في سيدي بشر بحري', price: 4168, rating: 4.90, location: 'سيدي بشر، الإسكندرية', lat: 31.258, lng: 29.981, category: 'Pools', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500' },
-    { id: 3, title: 'فيلا في الإسكندرية', price: 2974, rating: 4.75, location: 'الإسكندرية، مصر', lat: 31.220, lng: 29.940, category: 'Luxe', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500' },
-    { id: 4, title: 'شقة مطلة على البحر', price: 3500, rating: 4.80, location: 'ستانلي، الإسكندرية', lat: 31.233, lng: 29.950, category: 'Beachfront', typeOfPlace: 'Room', image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500' },
-    { id: 5, title: 'شقة مودرن بوسط البلد', price: 5200, rating: 4.95, location: 'محطة الرمل، الإسكندرية', lat: 31.200, lng: 29.899, category: 'Icons', typeOfPlace: 'Room', image: 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=500' },
-    { id: 6, title: 'شاليه خاص بحمام سباحة', price: 6100, rating: 4.65, location: 'الساحل الشمالي', lat: 31.020, lng: 29.600, category: 'Pools', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500' },
+    { id: 1, title: 'شقة في سان ستيفانو', price: 4778, rating: 4.85, location: 'سان ستيفانو، الإسكندرية', lat: 31.244, lng: 29.965, category: 'Beachfront', typeOfPlace: 'Entire home', bedrooms: '2', amenities: ['Wifi', 'Air conditioning'], image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500' },
+    { id: 2, title: 'شقة في سيدي بشر بحري', price: 4168, rating: 4.90, location: 'سيدي بشر، الإسكندرية', lat: 31.258, lng: 29.981, category: 'Pools', typeOfPlace: 'Entire home', bedrooms: '3', amenities: ['Wifi', 'Pool'], image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500' },
+    { id: 3, title: 'فيلا في الإسكندرية', price: 2974, rating: 4.75, location: 'الإسكندرية، مصر', lat: 31.220, lng: 29.940, category: 'Luxe', typeOfPlace: 'Entire home', bedrooms: '4+', amenities: ['Pool', 'Free parking'], image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500' },
+    { id: 4, title: 'شقة مطلة على البحر', price: 3500, rating: 4.80, location: 'ستانلي، الإسكندرية', lat: 31.233, lng: 29.950, category: 'Beachfront', typeOfPlace: 'Room', bedrooms: '1', amenities: ['Wifi'], image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500' },
+    { id: 5, title: 'شقة مودرن بوسط البلد', price: 5200, rating: 4.95, location: 'محطة الرمل، الإسكندرية', lat: 31.200, lng: 29.899, category: 'Icons', typeOfPlace: 'Room', bedrooms: '2', amenities: ['Air conditioning', 'Free parking'], image: 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=500' },
+    { id: 6, title: 'شاليه خاص بحمام سباحة', price: 6100, rating: 4.65, location: 'الساحل الشمالي', lat: 31.020, lng: 29.600, category: 'Pools', typeOfPlace: 'Entire home', bedrooms: '3', amenities: ['Pool', 'Air conditioning', 'Free parking'], image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500' },
   ];
 
   
@@ -35,6 +35,11 @@ function App() {
     if (appliedFilters) {
       if (appliedFilters.typeOfPlace !== 'Any type' && prop.typeOfPlace !== appliedFilters.typeOfPlace) return false;
       if (prop.price < appliedFilters.minPrice || prop.price > appliedFilters.maxPrice) return false;
+      if (appliedFilters.bedrooms !== 'Any' && prop.bedrooms !== appliedFilters.bedrooms) return false;
+      if (appliedFilters.amenities && appliedFilters.amenities.length > 0) {
+        const hasAllAmenities = appliedFilters.amenities.every((amenity) => prop.amenities?.includes(amenity));
+        if (!hasAllAmenities) return false;
+      }
     }
     return true;
   });
@@ -66,6 +71,12 @@ const WhenModal = () => {
   const octEmpty = [null, null, null, null];
 
   return (
+    <div style={{ fontFamily: 'sans-serif', color: '#222', backgroundColor: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      
+      {/* Categories & Controls */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 40px', borderBottom: '1px solid #f0f0f0', position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 100 }}>
+        
+        <div style={{ display: 'flex', gap: '28px', overflowX: 'auto' }}>
     <div style={{ fontFamily: 'sans-serif', color: '#222', backgroundColor: '#fff', minHeight: '100vh' }}>
       
       {}
@@ -344,6 +355,21 @@ const SearchModal = ({ activeSection, setActiveSection, onClose }) => {
         </div>
       )}
 
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <button 
+            onClick={() => setIsFilterOpen(true)}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 16px', borderRadius: '12px', border: '1px solid #dddddd', backgroundColor: '#fff', fontWeight: 'bold', cursor: 'pointer', fontSize: '13px' }}
+          >
+            🎛️ Filters
+          </button>
+
+          <button 
+            onClick={() => setShowMap(!showMap)}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 16px', borderRadius: '12px', border: 'none', backgroundColor: '#222', color: '#fff', fontWeight: 'bold', cursor: 'pointer', fontSize: '13px' }}
+          >
+            {showMap ? 'Show List 📋' : 'Show Map 🗺️'}
+          </button>
+        </div>
       <div className="flex justify-between items-center pt-4 mt-4 border-t border-gray-100">
         <button
           onClick={resetSearch}
@@ -394,6 +420,11 @@ const SearchBarContent = ({ onSearchSubmit, activeSection, setActiveSection }) =
         <div className="text-xs text-gray-500">Add dates</div>
       </div>
 
+      {/* Main Section */}
+      <main style={{ padding: '24px 40px', flex: 1, width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ marginBottom: '16px', fontSize: '14px', color: '#717171', fontWeight: 'bold' }}>
+          Available properties count: {filteredProperties.length}
+        </div>
       <span className="border-r h-8 border-gray-300"></span>
 
       <div 
@@ -419,6 +450,36 @@ const SearchBarContent = ({ onSearchSubmit, activeSection, setActiveSection }) =
         </button>
       </div>
 
+        {showMap ? (
+          <div style={{ height: '580px', width: '100%' }}>
+            <MapContainer 
+              properties={filteredProperties} 
+              onClose={() => setShowMap(false)} 
+            />
+          </div>
+        ) : (
+          /* شبكة منسقة بالضبط 3 كروت في الصف */
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px', 
+            width: '100%' 
+          }}>
+            {filteredProperties.map((prop) => (
+              <div 
+                key={prop.id} 
+                style={{ 
+                  border: '1px solid #e0e0e0', 
+                  borderRadius: '16px', 
+                  overflow: 'hidden', 
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)', 
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <div style={{ position: 'relative', height: '200px', width: '100%' }}>
+                  <img src={prop.image} alt={prop.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       {activeSection && (
         <SearchModal 
           activeSection={activeSection}
@@ -779,6 +840,18 @@ const MainApp = () => {
                 <div className="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center justify-between">
                   <span className="font-semibold">Help Center</span>
                 </div>
+                
+                <div style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                      <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 'bold' }}>{prop.title}</h3>
+                      <span style={{ fontSize: '13px', fontWeight: 'bold' }}>★ {prop.rating}</span>
+                    </div>
+                    <p style={{ margin: '0 0 8px 0', color: '#717171', fontSize: '13px' }}>{prop.location}</p>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '14px', fontWeight: 'bold' }}>
+                    {prop.price} EGP <span style={{ fontWeight: 'normal', color: '#717171' }}>/ night</span>
+                  </p>
                 <hr className="my-1.5 border-gray-100" />
                 <div className="px-4 py-2.5 hover:bg-gray-50 cursor-pointer flex items-center justify-between">
                   <div>
@@ -888,6 +961,12 @@ const MainApp = () => {
       <main className="flex-1 max-w-[1700px] mx-auto px-8 py-8 w-full">
         <h2 className="text-xl font-bold mb-4">Inspiration for future getaways</h2>
       </main>
+
+      <FilterModal 
+        isOpen={isFilterOpen} 
+        onClose={() => setIsFilterOpen(false)} 
+        onApplyFilters={(filters) => setAppliedFilters(filters)} 
+      />
 
       {/* FOOTER */}
       <Footer />
