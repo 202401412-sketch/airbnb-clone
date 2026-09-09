@@ -8,7 +8,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [appliedFilters, setAppliedFilters] = useState(null);
 
-  // قائمة التصنيفات المشهورة في Airbnb
+  
   const categories = [
     { id: 'All', label: 'All', icon: '🏡' },
     { id: 'Beachfront', label: 'Beachfront', icon: '🏖️' },
@@ -18,7 +18,7 @@ function App() {
     { id: 'Icons', label: 'Icons', icon: '⭐' },
   ];
 
-  // البيانات التجريبية للعقارات
+  
   const allProperties = [
     { id: 1, title: 'شقة في سان ستيفانو', price: 4778, rating: 4.85, location: 'سان ستيفانو، الإسكندرية', lat: 31.244, lng: 29.965, category: 'Beachfront', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500' },
     { id: 2, title: 'شقة في سيدي بشر بحري', price: 4168, rating: 4.90, location: 'سيدي بشر، الإسكندرية', lat: 31.258, lng: 29.981, category: 'Pools', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500' },
@@ -28,7 +28,7 @@ function App() {
     { id: 6, title: 'شاليه خاص بحمام سباحة', price: 6100, rating: 4.65, location: 'الساحل الشمالي', lat: 31.020, lng: 29.600, category: 'Pools', typeOfPlace: 'Entire home', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500' },
   ];
 
-  // تصفية العقارات بناءً على التصنيف والفلاتر المطبقة
+  
   const filteredProperties = allProperties.filter((prop) => {
     if (selectedCategory !== 'All' && prop.category !== selectedCategory) return false;
     if (appliedFilters) {
@@ -41,13 +41,13 @@ function App() {
   return (
     <div style={{ fontFamily: 'sans-serif', color: '#222', backgroundColor: '#fff', minHeight: '100vh' }}>
       
-      {/* 1. Navbar الرئيسي */}
+      {}
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 40px', borderBottom: '1px solid #ebedef', position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 100 }}>
         <div style={{ color: '#ff385c', fontSize: '22px', fontWeight: 'bold', cursor: 'pointer' }}>
           airbnb
         </div>
 
-        {/* Search Bar */}
+        {}
         <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #dddddd', borderRadius: '40px', padding: '8px 16px', boxShadow: '0 1px 2px rgba(0,0,0,0.08)', gap: '12px', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer' }}>
           <span>Anywhere</span>
           <span style={{ color: '#ddd' }}>|</span>
@@ -63,7 +63,7 @@ function App() {
         </div>
       </header>
 
-      {/* 2. شريط التصنيفات والتحكم (Categories & Controls) */}
+      
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 40px', borderBottom: '1px solid #f0f0f0' }}>
         
         {/* Categories Bar */}
