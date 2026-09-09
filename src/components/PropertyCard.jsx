@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 
 const PropertyCard = ({ property }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
+
+  const [isLiked, setIsLiked] = useState(() => {
+    try {
+      const saved = localStorage.getItem('airbnb_wishlist');
+      const ids = saved ? JSON.parse(saved) : [];
+      return property?.id ? ids.includes(property.id) : false;
+    } catch {
+      return false;
+    }
+  });
 
   const fallbackImage = "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800";
 
@@ -20,6 +29,25 @@ const PropertyCard = ({ property }) => {
     e.stopPropagation();
     e.preventDefault();
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const toggleWishlist = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsLiked((prev) => {
+      const next = !prev;
+      if (property?.id) {
+        try {
+          const saved = localStorage.getItem('airbnb_wishlist');
+          const ids = saved ? JSON.parse(saved) : [];
+          const updated = next
+            ? [...new Set([...ids, property.id])]
+            : ids.filter((id) => id !== property.id);
+          localStorage.setItem('airbnb_wishlist', JSON.stringify(updated));
+        } catch {}
+      }
+      return next;
+    });
   };
 
   const priceText = property?.priceLabel
@@ -42,11 +70,7 @@ const PropertyCard = ({ property }) => {
         ) : null}
 
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            setIsLiked(!isLiked);
-          }}
+          onClick={toggleWishlist}
           aria-label="Wishlist"
           aria-pressed={isLiked}
           className="absolute top-2.5 left-2.5 z-10 p-1 rounded-full hover:scale-110 active:scale-95 transition"

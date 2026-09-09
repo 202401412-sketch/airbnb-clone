@@ -55,7 +55,7 @@ const PropertyCarousel = ({
   properties = [],
   isLoading = false,
   visibleCount,
-  totalCount,
+  totalCount
 }) => {
   const scrollRef = useRef(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
