@@ -1,3 +1,6 @@
+import React from 'react';
+import PropertyGrid from './components/PropertyGrid.jsx';
+import { mockProperties } from './data/mockData.js';
 import React, { useState, useEffect } from 'react';
 import { FaAirbnb } from 'react-icons/fa';
 import Footer from './components/Footer';
@@ -71,6 +74,10 @@ const WhenModal = () => {
   const octEmpty = [null, null, null, null];
 
   return (
+    <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-gray-900 selection:text-white">
+      <main>
+        <PropertyGrid properties={mockProperties} isLoading={false} />
+      </main>
     <div style={{ fontFamily: 'sans-serif', color: '#222', backgroundColor: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* Categories & Controls */}

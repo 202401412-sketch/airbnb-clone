@@ -881,7 +881,7 @@ export const mockProperties = [
     badgeText: "الأكثر رواجًا",
     priceLabel: "بدءًا من ج.م 3,305 / للشخص",
     images: [
-      "https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=800",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800",
       "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800"
     ],
     host: { name: "نور", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=5" },
@@ -973,7 +973,7 @@ export const mockProperties = [
     badgeText: "الأكثر رواجًا",
     priceLabel: "بدءًا من ج.م 1,526 / للشخص",
     images: [
-      "https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=800",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800",
       "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800"
     ],
     host: { name: "محمود", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=24" },
@@ -1043,7 +1043,7 @@ export const mockProperties = [
     priceLabel: "بدءًا من ج.م 2,796 / للشخص",
     images: [
       "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=800",
-      "https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=800"
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800"
     ],
     host: { name: "سارة", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=9" },
     specs: { guests: 4, bedrooms: 0, beds: 0, baths: 0 },
@@ -2224,12 +2224,29 @@ export const mockProperties = [
 export const experienceCategories = [
   { id: "1", title: "جولات ثقافية", image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=400" },
   { id: "2", title: "المعالم السياحية", image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" },
-  { id: "3", title: "المتاحف", image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=400" },
+  { id: "3", title: "المتاحف", image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=400" },
   { id: "4", title: "جولات الطعام", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400" },
-  { id: "5", title: "في الهواء الطلق", image: "https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=400" },
+  { id: "5", title: "في الهواء الطلق", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=400" },
   { id: "6", title: "ورش عمل فنية", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=400" },
   { id: "7", title: "طهي", image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400" },
   { id: "8", title: "الجولات المعمارية", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=400" },
   { id: "9", title: "تناول الطعام", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400" },
   { id: "10", title: "الرياضات المائية", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=400" }
+];
+
+export const categories = [
+  { id: "all", title: "الكل", icon: "all" },
+  { id: "Homes", title: "منازل", icon: "homes" },
+  { id: "Mansions", title: "قصور", icon: "mansions" },
+  { id: "Hotels", title: "فنادق", icon: "hotels" },
+  { id: "Beachfront", title: "على الشاطئ", icon: "beachfront" },
+  { id: "Beach", title: "شواطئ", icon: "beach" },
+  { id: "Trending", title: "رائجة", icon: "trending" },
+  { id: "Experiences", title: "تجارب", icon: "experiences" },
+  { id: "Pools", title: "مسابح مذهلة", icon: "pools" },
+  { id: "Cabins", title: "أكواخ", icon: "cabins" },
+  { id: "Countryside", title: "ريف", icon: "countryside" },
+  { id: "Cities", title: "مدن شهيرة", icon: "cities" },
+  { id: "Islands", title: "جزر", icon: "islands" },
+  { id: "Design", title: "تصاميم مميزة", icon: "design" }
 ];
