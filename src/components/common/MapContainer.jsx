@@ -3,7 +3,7 @@ import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from 'react-leaf
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// إصلاح أيقونة Leaflet الافتراضية
+// EGP EGP Leaflet EGP
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -36,10 +36,10 @@ const createPriceIcon = (price) => {
 };
 
 const MapContainer = ({ properties = [], onClose }) => {
-  // موقع سنتر الخريطة يغطي الإسكندرية والساحل الشمالي
+  // EGP EGP EGP EGP Alexandria, Egypt EGPNorth Coast EGP
   const centerPosition = [31.150, 29.800];
 
-  // فلترة العقارات للتأكد من وجود إحداثيات صحيحة قبل الرسم
+  // EGP EGP EGP EGP EGP EGP EGP EGP EGP
   const validProperties = properties.filter(p => p && p.lat && p.lng);
 
   return (

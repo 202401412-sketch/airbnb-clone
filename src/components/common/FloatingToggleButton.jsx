@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 
 const FloatingToggleButton = ({ showMap, onToggle }) => {
+  const { t } = useLanguage();
+
   return (
     <button
       onClick={onToggle}
@@ -24,7 +27,7 @@ const FloatingToggleButton = ({ showMap, onToggle }) => {
         gap: '8px'
       }}
     >
-      {showMap ? 'Show list ☰' : 'Show map 🗺️'}
+      {showMap ? `${t('showList')} ☰` : `${t('showMap')} 🗺️`}
     </button>
   );
 };

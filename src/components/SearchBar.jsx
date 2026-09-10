@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FiSearch, FiMinus, FiPlus, FiChevronLeft, FiChevronRight, FiCalendar } from 'react-icons/fi';
+import { useLanguage } from '../context/LanguageContext.jsx';
 
 const SearchBar = ({ onSearch }) => {
+  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState(null);
   const [destination, setDestination] = useState('');
   const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
@@ -11,7 +13,7 @@ const SearchBar = ({ onSearch }) => {
 
   const searchBarRef = useRef(null);
 
-  // قائمة الأشهر التفاعلية لتبويب Flexible
+  // EGP EGP EGPAliEGP EGP Flexible
   const allMonths = [
     { month: 'September', year: '2026' },
     { month: 'October', year: '2026' },
@@ -78,9 +80,9 @@ const SearchBar = ({ onSearch }) => {
             activeSection === 'where' ? 'bg-white shadow-xl border border-gray-200' : 'hover:bg-gray-100'
           }`}
         >
-          <div className="text-[11px] font-bold text-gray-800 uppercase tracking-wider">Where</div>
+          <div className="text-[11px] font-bold text-gray-800 uppercase tracking-wider">{t('where')}</div>
           <div className="text-gray-500 text-xs truncate">
-            {destination || 'Search destinations'}
+            {destination || t('searchDestinations')}
           </div>
         </div>
 
@@ -93,9 +95,9 @@ const SearchBar = ({ onSearch }) => {
             activeSection === 'when' ? 'bg-white shadow-xl border border-gray-200' : 'hover:bg-gray-100'
           }`}
         >
-          <div className="text-[11px] font-bold text-gray-800 uppercase tracking-wider">When</div>
+          <div className="text-[11px] font-bold text-gray-800 uppercase tracking-wider">{t('checkIn')}</div>
           <div className="text-gray-500 text-xs truncate">
-            {dateTab === 'flexible' ? 'Anytime' : 'Add dates'}
+            {dateTab === 'flexible' ? 'Anytime' : t('anyWeek')}
           </div>
         </div>
 
@@ -109,9 +111,9 @@ const SearchBar = ({ onSearch }) => {
           }`}
         >
           <div>
-            <div className="text-[11px] font-bold text-gray-800 uppercase tracking-wider">Who</div>
+            <div className="text-[11px] font-bold text-gray-800 uppercase tracking-wider">{t('who')}</div>
             <div className="text-gray-500 text-xs truncate">
-              {totalGuests > 0 ? `${totalGuests} guests` : 'Add guests'}
+              {totalGuests > 0 ? `${totalGuests} guests` : t('addGuests')}
             </div>
           </div>
 
@@ -125,7 +127,7 @@ const SearchBar = ({ onSearch }) => {
             className="p-3 bg-[#FF385C] hover:bg-[#E00B41] text-white rounded-full transition duration-200 flex items-center gap-2 shadow-md"
           >
             <FiSearch className="w-4 h-4 stroke-[2.5]" />
-            <span className="text-xs font-semibold pr-1">Search</span>
+            <span className="text-xs font-semibold pr-1">{t('search')}</span>
           </button>
         </div>
 

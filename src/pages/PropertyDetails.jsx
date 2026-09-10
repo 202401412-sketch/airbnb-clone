@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { mockProperties } from '../data/mockData';
 import Calendar from '../components/Calendar';
+import Footer from '../components/Footer';
 
 import {
   Heart,
@@ -1288,6 +1289,9 @@ function PropertyDetails() {
         </div>
 
       </div>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }
