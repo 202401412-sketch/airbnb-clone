@@ -4,7 +4,7 @@ import { FaAirbnb } from 'react-icons/fa';
 const languages = [
   { name: 'English', region: 'United States' },
   { name: 'English', region: 'United Kingdom' },
-  { name: 'العربية', region: 'العالم' },
+  { name: 'EGP', region: 'EGP' },
   { name: 'Azərbaycan dili', region: 'Azərbaycan' },
   { name: 'Bahasa Indonesia', region: 'Indonesia' },
   { name: 'Bosanski', region: 'Bosna i Hercegovina' },
@@ -49,7 +49,7 @@ const languages = [
 ];
 
 const currencies = [
-  { name: 'Egyptian pound', code: 'EGP', symbol: 'ج.م' },
+  { name: 'Egyptian pound', code: 'EGP', symbol: 'EGP' },
   { name: 'Australian dollar', code: 'AUD', symbol: '$' },
   { name: 'Brazilian real', code: 'BRL', symbol: 'R$' },
   { name: 'Bulgarian lev', code: 'BGN', symbol: 'лв.' },
@@ -60,7 +60,7 @@ const currencies = [
   { name: 'Costa Rican colon', code: 'CRC', symbol: '₡' },
   { name: 'Czech koruna', code: 'CZK', symbol: 'Kč' },
   { name: 'Danish krone', code: 'DKK', symbol: 'kr' },
-  { name: 'Emirati dirham', code: 'AED', symbol: 'د.إ' },
+  { name: 'Emirati dirham', code: 'AED', symbol: 'EGP.EGP' },
   { name: 'Euro', code: 'EUR', symbol: '€' },
   { name: 'Ghanaian cedi', code: 'GHS', symbol: 'GHC' },
   { name: 'Hong Kong dollar', code: 'HKD', symbol: '$' },
@@ -81,7 +81,7 @@ const currencies = [
   { name: 'Philippine peso', code: 'PHP', symbol: '₱' },
   { name: 'Polish zloty', code: 'PLN', symbol: 'zł' },
   { name: 'Pound sterling', code: 'GBP', symbol: '£' },
-  { name: 'Qatari riyal', code: 'QAR', symbol: 'ر.ق' },
+  { name: 'Qatari riyal', code: 'QAR', symbol: 'EGP.EGP' },
   { name: 'Romanian leu', code: 'RON', symbol: 'lei' },
   { name: 'Saudi Arabian riyal', code: 'SAR', symbol: 'SR' },
   { name: 'Singapore dollar', code: 'SGD', symbol: '$' },
@@ -105,7 +105,7 @@ const Navbar = () => {
   const [selectedTab, setSelectedTab] = useState('lang');
   const [selectedCurrency, setSelectedCurrency] = useState('EGP');
 
-  // state لمراقبة التمرير (السكرووول)
+  // state EGP EGP (EGP)
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

@@ -25,21 +25,21 @@ const ShowAllCard = ({ count = 0, images = [] }) => {
 
       <div className="pt-0.5">
         <div className="flex items-center gap-1 text-[14px] font-semibold text-gray-900 group-hover:underline">
-          <span>عرض الكل</span>
+          <span>Show all</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={2.5}
             stroke="currentColor"
-            className="w-3.5 h-3.5 rtl:rotate-180"
+            className="w-3.5 h-3.5"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
         </div>
         {count > 0 && (
           <p className="text-gray-500 text-[12.5px] mt-0.5">
-            {count}+ مكان إقامة
+            {count}+ places
           </p>
         )}
       </div>
@@ -56,7 +56,7 @@ const PropertyCarousel = ({
   isLoading = false,
   visibleCount,
   totalCount,
-  onSelectProperty // 👈 تم إضافة استقبال الخاصية هنا
+  onSelectProperty
 }) => {
   const scrollRef = useRef(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -106,7 +106,7 @@ const PropertyCarousel = ({
   const total = totalCount ?? (properties.length + 1);
 
   return (
-    <section className="py-5 border-b border-gray-100 last:border-none">
+    <section className="py-5 border-b border-gray-100 last:border-none" dir="ltr">
       <div className="flex items-start justify-between mb-3 px-0.5 gap-4">
         <div className="min-w-0">
           <h2 className="text-[19px] sm:text-[21px] font-bold text-gray-900 tracking-tight flex items-center gap-1.5 group cursor-pointer hover:underline leading-snug flex-wrap">
@@ -117,15 +117,15 @@ const PropertyCarousel = ({
               viewBox="0 0 24 24"
               strokeWidth={2.5}
               stroke="currentColor"
-              className="w-4 h-4 flex-shrink-0 text-gray-900 transition-transform group-hover:translate-x-[-2px]"
+              className="w-4 h-4 flex-shrink-0 text-gray-900 transition-transform group-hover:translate-x-1"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </h2>
 
           {!isLoading && (
             <p className="text-[12.5px] text-gray-400 mt-0.5 font-normal">
-              {displayed} من أصل {total} عناصر ظاهرة
+              {displayed} of {total} places shown
             </p>
           )}
 
@@ -140,7 +140,7 @@ const PropertyCarousel = ({
           <button
             onClick={() => scroll('prev')}
             disabled={!canScrollPrev}
-            aria-label="السابق"
+            aria-label="Previous"
             className="w-8 h-8 rounded-full border border-gray-300 bg-white text-gray-700 flex items-center justify-center transition-all shadow-sm hover:shadow-md hover:bg-gray-50 active:scale-95 disabled:opacity-25 disabled:cursor-not-allowed"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3.5 h-3.5">
@@ -150,7 +150,7 @@ const PropertyCarousel = ({
           <button
             onClick={() => scroll('next')}
             disabled={!canScrollNext}
-            aria-label="التالي"
+            aria-label="Next"
             className="w-8 h-8 rounded-full border border-gray-300 bg-white text-gray-700 flex items-center justify-center transition-all shadow-sm hover:shadow-md hover:bg-gray-50 active:scale-95 disabled:opacity-25 disabled:cursor-not-allowed"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3.5 h-3.5">
@@ -188,7 +188,7 @@ const PropertyCarousel = ({
                 >
                   <PropertyCard 
                     property={property} 
-                    onClick={onSelectProperty} // 👈 تم تمرير الخاصية هنا إلى الكارت
+                    onClick={onSelectProperty}
                   />
                 </div>
               ))}

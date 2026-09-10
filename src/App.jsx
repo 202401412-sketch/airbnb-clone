@@ -5,6 +5,7 @@ import PropertyGrid from './components/PropertyGrid.jsx';
 import PropertyDetails from './components/PropertyDetails.jsx';
 import Footer from './components/Footer.jsx';
 import LanguageModal from './components/LanguageModal.jsx';
+import InfoFeatureModal from './components/InfoFeatureModal.jsx';
 
 // Developer 1 Components
 import AuthModal from './components/AuthModal.jsx';
@@ -16,13 +17,19 @@ import FloatingToggleButton from './components/common/FloatingToggleButton.jsx';
 
 import { mockProperties } from './data/mockData.js';
 import { SearchProvider } from './context/SearchContext.jsx';
+import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
 
 const MainLayout = () => {
+  const { language, setLanguage, currency, setCurrency, dir, t } = useLanguage();
+  const [activeMainTab, setActiveMainTab] = useState('All');
   const [activeSearchSection, setActiveSearchSection] = useState(null);
   const [isLangModalOpen, setIsLangModalOpen] = useState(false);
+  const [langModalTab, setLangModalTab] = useState('lang');
+  const [activeFeatureModal, setActiveFeatureModal] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
+  const [selectedAmenity, setSelectedAmenity] = useState(null);
 
   // Developer 1 State
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -41,7 +48,25 @@ const MainLayout = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Filter application handler
+  // Filter properties dynamically whenever quick filter amenity changes
+  useEffect(() => {
+    if (!selectedAmenity) {
+      setDisplayedProperties(mockProperties);
+      return;
+    }
+
+    const filtered = mockProperties.filter((property) => {
+      const propAmenities = property.amenities || [];
+      return propAmenities.some((a) =>
+        a.toLowerCase().includes(selectedAmenity.toLowerCase()) ||
+        selectedAmenity.toLowerCase().includes(a.toLowerCase())
+      );
+    });
+
+    setDisplayedProperties(filtered);
+  }, [selectedAmenity]);
+
+  // Full Filter Modal application handler
   const handleApplyFilters = (filters) => {
     const { typeOfPlace, minPrice, maxPrice, bedrooms, amenities } = filters;
 
@@ -79,19 +104,30 @@ const MainLayout = () => {
     setDisplayedProperties(filtered);
   };
 
+  const handleOpenLangModal = (tab = 'lang') => {
+    setLangModalTab(tab);
+    setIsLangModalOpen(true);
+  };
+
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between" dir="ltr">
+    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between" dir={dir}>
       
       {/* Sticky Header */}
       <header className="sticky top-0 bg-white z-40 border-b border-gray-100">
         <Header 
-          setIsLangModalOpen={setIsLangModalOpen} 
+          setIsLangModalOpen={() => handleOpenLangModal('lang')} 
           isScrolled={isScrolled} 
           isSearched={isSearched}
           setIsSearched={setIsSearched}
           activeSearchSection={activeSearchSection}
           setActiveSearchSection={setActiveSearchSection}
           onOpenAuth={() => setIsAuthModalOpen(true)}
+          onOpenFeatureModal={setActiveFeatureModal}
+          selectedAmenity={selectedAmenity}
+          onSelectAmenity={setSelectedAmenity}
+          onOpenFilterModal={() => setIsFilterModalOpen(true)}
+          activeMainTab={activeMainTab}
+          onSelectMainTab={setActiveMainTab}
         />
         
         {!isScrolled && !isSearched && (
@@ -109,16 +145,34 @@ const MainLayout = () => {
       <main className="p-6 flex-1 relative max-w-7xl mx-auto w-full">
         {/* Filter Trigger Button */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-gray-900">
-            {displayedProperties.length} {displayedProperties.length === 1 ? 'place' : 'places'} available
-          </h2>
-          <button
-            onClick={() => setIsFilterModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl text-sm font-semibold hover:border-black transition bg-white shadow-sm"
-          >
-            <span>Filters</span>
-            <span>🎛️</span>
-          </button>
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl font-bold text-gray-900">
+              {displayedProperties.length} {displayedProperties.length === 1 ? t('placeAvailable') : t('placesAvailable')}
+            </h2>
+            {selectedAmenity && (
+              <span className="bg-rose-100 text-[#FF385C] text-xs font-bold px-3 py-1 rounded-full border border-rose-200">
+                {t('filteredBy')}: {selectedAmenity}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-3">
+            {selectedAmenity && (
+              <button
+                onClick={() => setSelectedAmenity(null)}
+                className="text-xs font-bold text-gray-700 underline hover:text-black"
+              >
+                {t('resetFilters')}
+              </button>
+            )}
+            <button
+              onClick={() => setIsFilterModalOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl text-sm font-semibold hover:border-black transition bg-white shadow-sm"
+            >
+              <span>{t('filters')}</span>
+              <span>🎛️</span>
+            </button>
+          </div>
         </div>
 
         {/* Dynamic Display (Grid vs Map View) */}
@@ -134,6 +188,7 @@ const MainLayout = () => {
             properties={displayedProperties} 
             isLoading={false} 
             onSelectProperty={(property) => setSelectedProperty(property)}
+            activeMainTab={activeMainTab}
           />
         )}
       </main>
@@ -149,7 +204,19 @@ const MainLayout = () => {
       {/* Language Modal */}
       <LanguageModal 
         isOpen={isLangModalOpen} 
-        onClose={() => setIsLangModalOpen(false)} 
+        onClose={() => setIsLangModalOpen(false)}
+        selectedLang={language}
+        selectedCurr={currency}
+        onSelectLang={setLanguage}
+        onSelectCurr={setCurrency}
+        initialTab={langModalTab}
+      />
+
+      {/* Feature Modals (Become a host, Refer a host, Co-host, Gift cards, Help center) */}
+      <InfoFeatureModal
+        isOpen={Boolean(activeFeatureModal)}
+        onClose={() => setActiveFeatureModal(null)}
+        feature={activeFeatureModal}
       />
 
       {/* Auth Modal (Dev 1) */}
@@ -171,15 +238,17 @@ const MainLayout = () => {
         onToggle={() => setShowMap(!showMap)}
       />
 
-      <Footer setIsLangModalOpen={setIsLangModalOpen} />
+      <Footer onOpenLangModal={handleOpenLangModal} setIsLangModalOpen={setIsLangModalOpen} />
     </div>
   );
 };
 
 export default function App() {
   return (
-    <SearchProvider>
-      <MainLayout />
-    </SearchProvider>
+    <LanguageProvider>
+      <SearchProvider>
+        <MainLayout />
+      </SearchProvider>
+    </LanguageProvider>
   );
 }

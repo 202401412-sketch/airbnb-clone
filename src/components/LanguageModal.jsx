@@ -1,34 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiX, FiCheck } from 'react-icons/fi';
 
-const LanguageModal = ({ isOpen, onClose, selectedLang = 'English', selectedCurr = 'Egyptian pound', onSelectLang, onSelectCurr }) => {
-  const [activeTab, setActiveTab] = useState('lang'); // 'lang' | 'currency'
+const LanguageModal = ({ isOpen, onClose, selectedLang = 'English', selectedCurr = 'Egyptian pound', onSelectLang, onSelectCurr, initialTab = 'lang' }) => {
+  const [activeTab, setActiveTab] = useState(initialTab); // 'lang' | 'currency'
   const [currentLang, setCurrentLang] = useState(selectedLang);
   const [currentCurr, setCurrentCurr] = useState(selectedCurr);
   const [translationAuto, setTranslationAuto] = useState(true);
 
+  useEffect(() => {
+    setCurrentLang(selectedLang);
+  }, [selectedLang]);
+
+  useEffect(() => {
+    setCurrentCurr(selectedCurr);
+  }, [selectedCurr]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setActiveTab(initialTab);
+    }
+  }, [isOpen, initialTab]);
+
   if (!isOpen) return null;
 
   const languages = [
-    { name: 'English', region: 'United States' },
-    { name: 'English', region: 'United Kingdom' },
-    { name: 'العربية', region: 'العالم العربي' },
-    { name: 'Français', region: 'France' },
-    { name: 'Deutsch', region: 'Deutschland' },
-    { name: 'Español', region: 'España' },
-    { name: 'Italiano', region: 'Italia' },
-    { name: 'Türkçe', region: 'Türkiye' },
-    { name: '日本語', region: '日本' },
-    { name: '한국어', region: '대한민국' },
+    { name: 'English', region: 'United States', code: 'en' },
+    { name: 'English', region: 'United Kingdom', code: 'en' },
+    { name: 'Arabic', region: 'Arab World', code: 'ar' },
+    { name: 'French', region: 'France', code: 'fr' },
+    { name: 'German', region: 'Germany', code: 'de' },
+    { name: 'Spanish', region: 'Spain', code: 'es' },
+    { name: 'Italian', region: 'Italy', code: 'it' },
+    { name: 'Turkish', region: 'Turkey', code: 'tr' },
+    { name: 'Japanese', region: 'Japan', code: 'ja' },
+    { name: 'Korean', region: 'South Korea', code: 'ko' },
   ];
 
   const currencies = [
-    { name: 'Egyptian pound', symbol: 'EGP – ج.م' },
+    { name: 'Egyptian pound', symbol: 'EGP' },
     { name: 'United States dollar', symbol: 'USD – $' },
     { name: 'Euro', symbol: 'EUR – €' },
     { name: 'Pound sterling', symbol: 'GBP – £' },
-    { name: 'Emirati dirham', symbol: 'AED – إ.د' },
-    { name: 'Saudi Arabian riyal', symbol: 'SAR – SR' },
+    { name: 'Emirati dirham', symbol: 'AED' },
+    { name: 'Saudi Arabian riyal', symbol: 'SAR' },
     { name: 'Canadian dollar', symbol: 'CAD – $' },
     { name: 'Australian dollar', symbol: 'AUD – $' },
     { name: 'Japanese yen', symbol: 'JPY – ¥' },
@@ -38,13 +52,13 @@ const LanguageModal = ({ isOpen, onClose, selectedLang = 'English', selectedCurr
   const handleSelectLanguage = (lang) => {
     setCurrentLang(lang.name);
     if (onSelectLang) onSelectLang(lang.name);
-    setTimeout(() => onClose(), 200);
+    onClose();
   };
 
   const handleSelectCurrency = (curr) => {
     setCurrentCurr(curr.name);
     if (onSelectCurr) onSelectCurr(curr.name);
-    setTimeout(() => onClose(), 200);
+    onClose();
   };
 
   return (

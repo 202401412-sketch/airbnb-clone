@@ -6,74 +6,74 @@ import ExperienceCategoryCarousel from './ExperienceCategoryCarousel.jsx';
 const SECTIONS_CONFIG = [
   {
     id: "alexandria",
-    title: "بيوت رائجة في الإسكندرية",
-    match: (p) => p.id?.startsWith("alex-") || p.location?.includes("الإسكندرية") || p.location?.includes("سان ستيفانو") || p.location?.includes("سيدي بشر") || p.location?.includes("فليمنج")
+    title: "Popular homes in Alexandria",
+    match: (p) => p.id?.startsWith("alex-") || p.location?.includes("Alexandria") || p.location?.includes("San Stefano") || p.location?.includes("Sidi Beshr") || p.location?.includes("Fleming")
   },
   {
     id: "hotels",
-    title: "فنادق رائعة لرحلتك القادمة",
-    subtitle: "بالإضافة إلى ذلك، ستحصل على رصيد Airbnb عند الإقامة في فندق مميز.",
+    title: "Great hotels for your next trip",
+    subtitle: "Plus, earn Airbnb credit when staying at a featured hotel.",
     match: (p) => p.id?.startsWith("hotel-") || p.category === "Hotels"
   },
   {
     id: "sheikh_zayed",
-    title: "بيوت متاحة في عطلة نهاية هذا الأسبوع في مدينة الشيخ زايد",
-    match: (p) => p.id?.startsWith("sz-") || (p.location?.includes("زايد") && !p.id?.startsWith("oct-"))
+    title: "Available homes for this weekend in Sheikh Zayed",
+    match: (p) => p.id?.startsWith("sz-") || (p.location?.includes("Zayed") && !p.id?.startsWith("oct-"))
   },
   {
     id: "new_cairo",
-    title: "إقامة في القاهرة الجديدة",
-    match: (p) => p.id?.startsWith("nc-") || p.location?.includes("القاهرة الجديدة") || p.location?.includes("التجمع") || p.location?.includes("شريف") || p.location?.includes("شيرتون")
+    title: "Stays in New Cairo",
+    match: (p) => p.id?.startsWith("nc-") || p.location?.includes("New Cairo") || p.location?.includes("5th Settlement") || p.location?.includes("Tagamoa")
   },
   {
     id: "hurghada",
-    title: "بيوت متاحة في عطلة نهاية الأسبوع في الغردقة",
-    match: (p) => p.id?.startsWith("hg-") || p.location?.includes("الغردقة") || p.location?.includes("الجونة") || p.location?.includes("سهل حشيش")
+    title: "Available homes for this weekend in Hurghada",
+    match: (p) => p.id?.startsWith("hg-") || p.location?.includes("Hurghada") || p.location?.includes("Gouna") || p.location?.includes("Sahl Hasheesh")
   },
   {
     id: "exp_cairo",
-    title: "تجارب سفر رائجة في القاهرة",
+    title: "Popular travel experiences in Cairo",
     match: (p) => p.id?.startsWith("exp-cairo-")
   },
   {
     id: "photo_memories",
-    title: "خلِّد ذكرياتك في وجهة قريبة منك",
+    title: "Capture memories in a destination near you",
     match: (p) => p.id?.startsWith("photo-")
   },
   {
     id: "october",
-    title: "البيوت في مدينة السادس من أكتوبر",
-    match: (p) => p.id?.startsWith("oct-") || p.location?.includes("أكتوبر")
+    title: "Homes in 6th of October City",
+    match: (p) => p.id?.startsWith("oct-") || p.location?.includes("October")
   },
   {
     id: "dubai",
-    title: "بيوت متاحة في الشهر القادم في دبي",
-    match: (p) => p.id?.startsWith("dubai-") || p.location?.includes("دبي")
+    title: "Available homes next month in Dubai",
+    match: (p) => p.id?.startsWith("dubai-") || p.location?.includes("Dubai")
   },
   {
     id: "sokhna",
-    title: "أماكن الإقامة في العين السخنة",
-    match: (p) => p.id?.startsWith("sokhna-") || p.location?.includes("السخنة") || p.location?.includes("السويس") || p.location?.includes("عتاقة")
+    title: "Places to stay in Ain Sokhna",
+    match: (p) => p.id?.startsWith("sokhna-") || p.location?.includes("Sokhna")
   },
   {
     id: "riyadh",
-    title: "استكشِف البيوت في الرياض",
-    match: (p) => p.id?.startsWith("riyadh-") || p.location?.includes("الرياض") || p.location?.includes("الياسمين") || p.location?.includes("النرجس") || p.location?.includes("اليرموك") || p.location?.includes("المونسية") || p.location?.includes("الملقا") || p.location?.includes("غرناطة")
+    title: "Explore homes in Riyadh",
+    match: (p) => p.id?.startsWith("riyadh-") || p.location?.includes("Riyadh")
   },
   {
     id: "alamein",
-    title: "بيوت رائجة في العلمين",
-    match: (p) => p.id?.startsWith("al-") || p.location?.includes("العلمين") || p.location?.includes("الساحل") || p.location?.includes("مراسي")
+    title: "Popular homes in El Alamein",
+    match: (p) => p.id?.startsWith("al-") || p.location?.includes("Alamein") || p.location?.includes("Marassi")
   },
   {
     id: "istanbul",
-    title: "إقامة في إسطنبول",
-    match: (p) => p.id?.startsWith("istanbul-") || p.location?.includes("إسطنبول") || p.location?.includes("Fatih") || p.location?.includes("بي أوغلو")
+    title: "Stays in Istanbul",
+    match: (p) => p.id?.startsWith("istanbul-") || p.location?.includes("Istanbul")
   }
 ];
 
 const SkeletonGrid = ({ count = 12 }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-8 py-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-8 py-6" dir="ltr">
     {Array.from({ length: count }).map((_, idx) => (
       <div key={idx} className="flex flex-col gap-2 animate-pulse w-full">
         <div className="aspect-square w-full rounded-xl bg-gray-200" />
@@ -85,24 +85,60 @@ const SkeletonGrid = ({ count = 12 }) => (
   </div>
 );
 
+const SERVICES = [
+  {
+    id: 'chef',
+    title: 'Personal Chef Service',
+    description: 'Enjoy custom gourmet meals prepared in your rental by top local chefs.',
+    price: 'From EGP 1,200 / meal',
+    rating: '4.98 (124 reviews)',
+    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'transfer',
+    title: 'Airport Transfer & Private Chauffeur',
+    description: 'Seamless airport pickup and drop-off in premium luxury vehicles with professional drivers.',
+    price: 'From EGP 600 / trip',
+    rating: '4.95 (88 reviews)',
+    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'spa',
+    title: 'In-House Spa & Wellness Treatments',
+    description: 'Relaxing massages, facials, and spa treatments delivered directly to your doorstep.',
+    price: 'From EGP 850 / session',
+    rating: '4.99 (210 reviews)',
+    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'photo',
+    title: 'Private Destination Photography',
+    description: 'Capture unforgettable memories during your travel with a professional photographer.',
+    price: 'From EGP 950 / hour',
+    rating: '4.97 (156 reviews)',
+    image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80'
+  }
+];
+
 const PropertyGrid = ({
   properties = [],
   isLoading = false,
   selectedCategory = 'all',
-  onSelectProperty
+  onSelectProperty,
+  activeMainTab = 'All'
 }) => {
   if (isLoading) {
     if (selectedCategory !== 'all') {
       return (
-        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4">
+        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4" dir="ltr">
           <SkeletonGrid count={10} />
         </div>
       );
     }
     return (
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 space-y-8">
-        <PropertyCarousel title="جاري التحميل..." isLoading={true} />
-        <PropertyCarousel title="جاري التحميل..." isLoading={true} />
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 space-y-8" dir="ltr">
+        <PropertyCarousel title="Loading..." isLoading={true} />
+        <PropertyCarousel title="Loading..." isLoading={true} />
       </div>
     );
   }
@@ -117,20 +153,20 @@ const PropertyGrid = ({
 
     if (filteredProperties.length === 0) {
       return (
-        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-16 text-center">
+        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-16 text-center" dir="ltr">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
           </div>
-          <h3 className="text-[18px] font-bold text-gray-900 mb-2">لا توجد أماكن إقامة متطابقة</h3>
-          <p className="text-gray-500 text-[14px]">جرب اختيار فئة أخرى لاستكشاف الممتلكات المتاحة.</p>
+          <h3 className="text-[18px] font-bold text-gray-900 mb-2">No matching stays found</h3>
+          <p className="text-gray-500 text-[14px]">Try selecting another category to explore available properties.</p>
         </div>
       );
     }
 
     return (
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-6">
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-6" dir="ltr">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-8">
           {filteredProperties.map((property, idx) => (
             <PropertyCard 
@@ -165,9 +201,79 @@ const PropertyGrid = ({
 
   const unassignedProperties = properties.filter((p) => !assignedPropertyIds.has(p.id));
 
+  // Services View
+  if (activeMainTab === 'Services') {
+    return (
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-8 space-y-6" dir="ltr">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Curated Services for Your Stay</h2>
+          <p className="text-gray-500 text-sm mt-1">Enhance your trip with trusted local service providers and premium experiences.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SERVICES.map((service) => (
+            <div key={service.id} className="group border border-gray-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition bg-white flex flex-col justify-between">
+              <div>
+                <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 relative">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                  />
+                  <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-xs font-bold px-2.5 py-1 rounded-full text-gray-900 shadow-sm">
+                    ★ {service.rating}
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-gray-900 text-base mb-1">{service.title}</h3>
+                  <p className="text-gray-500 text-xs line-clamp-2 mb-3">{service.description}</p>
+                  <span className="text-sm font-semibold text-gray-900">{service.price}</span>
+                </div>
+              </div>
+              <div className="p-4 pt-0">
+                <button className="w-full py-2 border border-black rounded-xl text-xs font-bold hover:bg-black hover:text-white transition">
+                  Book service
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Experiences View
+  if (activeMainTab === 'Experiences') {
+    return (
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 space-y-4" dir="ltr">
+        <ExperienceCategoryCarousel />
+
+        {sectionMap.exp_cairo?.properties?.length > 0 && (
+          <PropertyCarousel
+            title={sectionMap.exp_cairo.title}
+            subtitle={sectionMap.exp_cairo.subtitle}
+            properties={sectionMap.exp_cairo.properties}
+            onSelectProperty={onSelectProperty}
+          />
+        )}
+
+        {sectionMap.photo_memories?.properties?.length > 0 && (
+          <PropertyCarousel
+            title={sectionMap.photo_memories.title}
+            subtitle={sectionMap.photo_memories.subtitle}
+            properties={sectionMap.photo_memories.properties}
+            onSelectProperty={onSelectProperty}
+          />
+        )}
+      </div>
+    );
+  }
+
+  const showHomes = activeMainTab === 'All' || activeMainTab === 'Homes';
+  const showExp = activeMainTab === 'All';
+
   return (
-    <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 space-y-4">
-      {sectionMap.alexandria?.properties?.length > 0 && (
+    <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 space-y-4" dir="ltr">
+      {showHomes && sectionMap.alexandria?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.alexandria.title}
           subtitle={sectionMap.alexandria.subtitle}
@@ -176,7 +282,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.hotels?.properties?.length > 0 && (
+      {showHomes && sectionMap.hotels?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.hotels.title}
           subtitle={sectionMap.hotels.subtitle}
@@ -185,7 +291,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.sheikh_zayed?.properties?.length > 0 && (
+      {showHomes && sectionMap.sheikh_zayed?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.sheikh_zayed.title}
           subtitle={sectionMap.sheikh_zayed.subtitle}
@@ -194,7 +300,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.new_cairo?.properties?.length > 0 && (
+      {showHomes && sectionMap.new_cairo?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.new_cairo.title}
           subtitle={sectionMap.new_cairo.subtitle}
@@ -203,7 +309,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.hurghada?.properties?.length > 0 && (
+      {showHomes && sectionMap.hurghada?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.hurghada.title}
           subtitle={sectionMap.hurghada.subtitle}
@@ -212,9 +318,9 @@ const PropertyGrid = ({
         />
       )}
 
-      <ExperienceCategoryCarousel />
+      {showExp && <ExperienceCategoryCarousel />}
 
-      {sectionMap.exp_cairo?.properties?.length > 0 && (
+      {showExp && sectionMap.exp_cairo?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.exp_cairo.title}
           subtitle={sectionMap.exp_cairo.subtitle}
@@ -223,7 +329,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.photo_memories?.properties?.length > 0 && (
+      {showExp && sectionMap.photo_memories?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.photo_memories.title}
           subtitle={sectionMap.photo_memories.subtitle}
@@ -232,7 +338,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.october?.properties?.length > 0 && (
+      {showHomes && sectionMap.october?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.october.title}
           subtitle={sectionMap.october.subtitle}
@@ -241,7 +347,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.dubai?.properties?.length > 0 && (
+      {showHomes && sectionMap.dubai?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.dubai.title}
           subtitle={sectionMap.dubai.subtitle}
@@ -250,7 +356,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.sokhna?.properties?.length > 0 && (
+      {showHomes && sectionMap.sokhna?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.sokhna.title}
           subtitle={sectionMap.sokhna.subtitle}
@@ -259,7 +365,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.riyadh?.properties?.length > 0 && (
+      {showHomes && sectionMap.riyadh?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.riyadh.title}
           subtitle={sectionMap.riyadh.subtitle}
@@ -268,7 +374,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.alamein?.properties?.length > 0 && (
+      {showHomes && sectionMap.alamein?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.alamein.title}
           subtitle={sectionMap.alamein.subtitle}
@@ -277,7 +383,7 @@ const PropertyGrid = ({
         />
       )}
 
-      {sectionMap.istanbul?.properties?.length > 0 && (
+      {showHomes && sectionMap.istanbul?.properties?.length > 0 && (
         <PropertyCarousel
           title={sectionMap.istanbul.title}
           subtitle={sectionMap.istanbul.subtitle}
@@ -286,10 +392,10 @@ const PropertyGrid = ({
         />
       )}
 
-      {unassignedProperties.length > 0 && (
+      {showHomes && unassignedProperties.length > 0 && (
         <PropertyCarousel
-          title="أماكن إقامة أخرى مقترحة لك"
-          subtitle="مختارات إضافية للإقامة في مختلف المدن والمحافظات"
+          title="Other suggested stays for you"
+          subtitle="Additional recommendations across popular destinations"
           properties={unassignedProperties}
           onSelectProperty={onSelectProperty}
         />

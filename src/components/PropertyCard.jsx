@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext.jsx';
 
 const PropertyCard = ({ property, onClick }) => {
+  const { formatPrice, t, dir } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [isLiked, setIsLiked] = useState(() => {
@@ -50,9 +52,13 @@ const PropertyCard = ({ property, onClick }) => {
     });
   };
 
+  const egpBase = property?.pricePerNight ? (property.pricePerNight * (property.nights || 1)) : 3000;
+  const formattedPrice = formatPrice(egpBase);
+  const nightsCount = property?.nights || 1;
+
   const priceText = property?.priceLabel
     ? property.priceLabel
-    : `ج.م ${property?.pricePerNight ? (property.pricePerNight * (property.nights || 1)).toLocaleString('ar-EG') : '3,000'} مقابل ${property?.nights || 1} ${property?.nights === 1 ? 'ليلة' : 'ليالٍ'}`;
+    : `${formattedPrice} ${t('forNights')} ${nightsCount} ${nightsCount === 1 ? t('night') : t('nights')}`;
 
   const ratingText = property?.rating ? property.rating.toFixed(2).replace('.00', '.0') : "5.0";
 
@@ -60,6 +66,7 @@ const PropertyCard = ({ property, onClick }) => {
     <div 
       onClick={() => onClick && onClick(property)} 
       className="flex flex-col gap-1.5 group cursor-pointer w-full"
+      dir={dir}
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
         {property?.badgeText ? (
@@ -68,7 +75,7 @@ const PropertyCard = ({ property, onClick }) => {
           </div>
         ) : property?.isGuestFavorite ? (
           <div className="absolute top-2.5 right-2.5 z-10 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm text-[11px] font-semibold text-gray-900 border border-gray-200/60">
-            مفضل لدى الضيوف
+            {t('guestFavorite')}
           </div>
         ) : null}
 
@@ -156,7 +163,7 @@ const PropertyCard = ({ property, onClick }) => {
           </p>
         )}
 
-        <div className="text-[13px] text-gray-500 truncate leading-snug mt-0.5 flex items-center gap-1" dir="rtl">
+        <div className="text-[13px] font-semibold text-gray-900 truncate leading-snug mt-0.5 flex items-center gap-1" dir="ltr">
           <span>{priceText}</span>
         </div>
       </div>

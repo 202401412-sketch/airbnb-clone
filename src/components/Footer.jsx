@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useLanguage } from '../context/LanguageContext.jsx';
 
 // Category Tabs Data
 const inspirationTabs = [
@@ -35,8 +36,17 @@ const inspirationItems = [
   { city: 'Washington', type: 'Monthly Rentals' },
 ];
 
-const Footer = ({ onOpenLangModal, currentCurrency = 'EGP' }) => {
+const Footer = ({ onOpenLangModal, setIsLangModalOpen }) => {
+  const { language, currency, t } = useLanguage();
   const [activeInspirationTab, setActiveInspirationTab] = useState('Popular');
+
+  const openModalWithTab = (tabName) => {
+    if (onOpenLangModal) {
+      onOpenLangModal(tabName);
+    } else if (setIsLangModalOpen) {
+      setIsLangModalOpen(true);
+    }
+  };
 
   return (
     <footer className="bg-[#F7F7F7] border-t border-gray-200 text-gray-800 text-sm mt-auto">
@@ -155,20 +165,20 @@ const Footer = ({ onOpenLangModal, currentCurrency = 'EGP' }) => {
           {/* Right Language, Currency & Social Icons */}
           <div className="flex items-center gap-6 font-semibold">
             <button 
-              onClick={() => onOpenLangModal && onOpenLangModal('lang')}
+              onClick={() => openModalWithTab('lang')}
               className="flex items-center gap-2 hover:underline"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
               </svg>
-              <span>English (US)</span>
+              <span>{language === 'Arabic' ? 'العربية (مصر)' : 'English (US)'}</span>
             </button>
 
             <button 
-              onClick={() => onOpenLangModal && onOpenLangModal('currency')}
+              onClick={() => openModalWithTab('currency')}
               className="hover:underline"
             >
-              {currentCurrency}
+              {currency}
             </button>
 
             <div className="flex items-center gap-4 text-base">

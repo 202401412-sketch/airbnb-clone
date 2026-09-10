@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from './Calendar';
+import Footer from './Footer.jsx';
 import {
   Heart,
   Share,
@@ -102,26 +103,6 @@ const PropertyDetails = ({ property, onClose }) => {
     setCheckOut(endDate);
   };
 
-  const handleGuestChange = (type, delta) => {
-    setGuests((prev) => {
-      const current = prev[type];
-      const nextVal = Math.max(0, current + delta);
-      if (type === 'adults') {
-        const newAdults = Math.max(1, nextVal);
-        if (newAdults + prev.children > maxGuests) return prev;
-        return { ...prev, adults: newAdults };
-      }
-      if (type === 'children') {
-        if (prev.adults + nextVal > maxGuests) return prev;
-        return { ...prev, children: nextVal };
-      }
-      if (type === 'infants') {
-        return { ...prev, infants: Math.min(5, nextVal) };
-      }
-      return prev;
-    });
-  };
-
   const handleShare = () => {
     navigator.clipboard?.writeText(window.location.href);
     setCopiedShare(true);
@@ -149,6 +130,33 @@ const PropertyDetails = ({ property, onClose }) => {
     { name: "Fully Equipped Kitchen", icon: Utensils, offered: true }
   ];
 
+  const ratingCategories = [
+    { name: "Cleanliness", score: 4.9, percentage: "98%" },
+    { name: "Accuracy", score: 4.9, percentage: "98%" },
+    { name: "Communication", score: 5.0, percentage: "100%" },
+    { name: "Location", score: 4.9, percentage: "98%" },
+    { name: "Value", score: 4.8, percentage: "96%" }
+  ];
+
+  const reviewsList = property.reviews?.length > 0 ? property.reviews : [
+    {
+      id: 1,
+      author: "Omar Khaled",
+      date: "August 2026",
+      avatar: "https://i.pravatar.cc/150?img=11",
+      rating: 5,
+      comment: "Outstanding stay! Clean, spacious, and the view over the Mediterranean Sea was unbelievable."
+    },
+    {
+      id: 2,
+      author: "Maryam Ali",
+      date: "July 2026",
+      avatar: "https://i.pravatar.cc/150?img=32",
+      rating: 5,
+      comment: "Great interior design and very smooth self check-in process. Location is unbeatable."
+    }
+  ];
+
   return (
     <div className="fixed inset-0 z-50 bg-white overflow-y-auto" dir="ltr">
       
@@ -172,9 +180,9 @@ const PropertyDetails = ({ property, onClose }) => {
       </div>
 
       {/* Main Details Body */}
-      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-6 py-8 space-y-12">
         
-        {/* Title */}
+        {/* 1. Header & Title */}
         <div>
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight">{title}</h1>
           <div className="flex items-center gap-2 text-sm font-semibold text-gray-800 mt-2">
@@ -189,7 +197,7 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
-        {/* 5 Image Gallery Grid */}
+        {/* 2. Photo Gallery Grid */}
         <div className="relative rounded-3xl overflow-hidden group">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2.5 h-[360px] md:h-[460px]">
             <div className="md:col-span-2 h-full cursor-pointer overflow-hidden" onClick={() => setShowAllPhotos(true)}>
@@ -205,11 +213,11 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
-        {/* Content Details & Sidebar */}
+        {/* Main Content & Sticky Booking Widget */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           <div className="lg:col-span-2 space-y-10">
             
-            {/* Host Section */}
+            {/* Overview & Host Summary */}
             <div className="border-b pb-8 flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">
@@ -228,7 +236,7 @@ const PropertyDetails = ({ property, onClose }) => {
               <p className="text-gray-700 text-base leading-relaxed">{property.description}</p>
             </div>
 
-            {/* Amenities */}
+            {/* Amenities Grid */}
             <div className="border-b pb-8 space-y-6">
               <h3 className="text-2xl font-bold text-gray-900">What this place offers</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base">
@@ -244,7 +252,7 @@ const PropertyDetails = ({ property, onClose }) => {
               </div>
             </div>
 
-            {/* STANDALONE CALENDAR COMPONENT */}
+            {/* 3. STANDALONE CALENDAR COMPONENT */}
             <Calendar
               startDate={checkIn}
               endDate={checkOut}
@@ -277,7 +285,7 @@ const PropertyDetails = ({ property, onClose }) => {
                 Reserve
               </button>
 
-              {/* Price Breakdown */}
+              {/* Dynamic Price Breakdown */}
               <div className="space-y-3.5 border-t pt-5 text-sm text-gray-700">
                 <div className="flex justify-between">
                   <span>{pricePerNight.toLocaleString()} EGP x {nightsCount} nights</span>
@@ -297,7 +305,131 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
+        {/* 4. Detailed Reviews Section */}
+        <div className="border-t pt-12 space-y-10">
+          <div className="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-gray-900">
+            <Star className="w-7 h-7 fill-black text-black" />
+            <h2>{rating} · {reviewsCount} reviews</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 bg-gray-50/60 p-6 md:p-8 rounded-3xl border border-gray-200">
+            {ratingCategories.map((cat, idx) => (
+              <div key={idx} className="flex items-center justify-between gap-4">
+                <span className="text-sm font-semibold text-gray-700 w-32">{cat.name}</span>
+                <div className="flex-1 flex items-center gap-3">
+                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-gray-900 h-full rounded-full" style={{ width: cat.percentage }}></div>
+                  </div>
+                  <span className="text-xs font-bold text-gray-900 w-8 text-right">{cat.score.toFixed(1)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {reviewsList.map((rev, idx) => (
+              <div key={rev.id || idx} className="border border-gray-200 p-6 rounded-3xl bg-white shadow-xs space-y-4">
+                <div className="flex items-center gap-4">
+                  <img src={rev.avatar || "https://i.pravatar.cc/150?img=11"} alt={rev.author || rev.name} className="w-12 h-12 rounded-full object-cover border" />
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-base">{rev.author || rev.name || "Guest"}</h4>
+                    <p className="text-gray-500 text-xs">{rev.date || "Recent stay"}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 text-[#FF385C]">
+                  {Array.from({ length: rev.rating || 5 }).map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-[#FF385C]" />
+                  ))}
+                </div>
+                <p className="text-gray-700 text-sm leading-relaxed">{rev.comment || rev.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Location Map Section */}
+        <div className="border-t pt-12 space-y-6">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Where you’ll be</h2>
+          <p className="text-gray-600 text-base font-medium flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-gray-700" />
+            <span>{location}</span>
+          </p>
+          <div className="w-full h-80 bg-gray-100 rounded-3xl overflow-hidden shadow-md border border-gray-200">
+            <iframe
+              title="Location Map"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(location)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+              className="w-full h-full border-0"
+              allowFullScreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
+        {/* 5. "Meet Your Host" Card */}
+        <div className="border-t pt-12 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Meet your host</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-md text-center space-y-4">
+              <img src={property.host?.avatar || "https://i.pravatar.cc/150?img=47"} alt="Host" className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-gray-200" />
+              <div>
+                <h3 className="text-2xl font-extrabold text-gray-900">{property.host?.name || "Farida"}</h3>
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-1">{property.host?.isSuperhost ? "Superhost" : "Host"}</p>
+              </div>
+              <div className="grid grid-cols-3 gap-2 border-t pt-4 text-center">
+                <div>
+                  <span className="block text-lg font-bold text-gray-900">{property.host?.reviewsCount || 142}</span>
+                  <span className="text-[11px] text-gray-500">Reviews</span>
+                </div>
+                <div className="border-x border-gray-200">
+                  <span className="block text-lg font-bold text-gray-900">{property.host?.rating || 4.98} ★</span>
+                  <span className="text-[11px] text-gray-500">Rating</span>
+                </div>
+                <div>
+                  <span className="block text-lg font-bold text-gray-900">{property.host?.yearsHosting || 3}</span>
+                  <span className="text-[11px] text-gray-500">Years hosting</span>
+                </div>
+              </div>
+            </div>
+            <div className="md:col-span-2 space-y-6">
+              <p className="text-gray-600 text-sm leading-relaxed">{property.host?.bio || "We always strive to create a seamless, elegant, and personalized stay experience for our guests."}</p>
+              <div className="grid grid-cols-2 gap-4 text-sm font-medium text-gray-700">
+                <div className="bg-gray-50 p-3.5 rounded-2xl border">Response rate: <strong className="text-gray-900">{property.host?.responseRate || "100%"}</strong></div>
+                <div className="bg-gray-50 p-3.5 rounded-2xl border">Languages: <strong className="text-gray-900">{property.host?.languages || "English, Arabic"}</strong></div>
+              </div>
+              <button onClick={() => setShowMessageHostModal(true)} className="border-2 border-gray-900 px-6 py-3 rounded-2xl font-bold text-sm hover:bg-gray-900 hover:text-white transition">
+                Message Host
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* 6. "Things to Know" Footer Grid */}
+        <div className="border-t pt-12 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Things to know</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-3 bg-gray-50 p-6 rounded-3xl border border-gray-200">
+              <h3 className="font-bold text-lg text-gray-900">House rules</h3>
+              <p className="text-sm text-gray-600">Check-in: 3:00 PM – 8:00 PM</p>
+              <p className="text-sm text-gray-600">Checkout before 11:00 AM</p>
+              <p className="text-sm text-gray-600">{property.specs?.guests || 4} guests maximum</p>
+            </div>
+            <div className="space-y-3 bg-gray-50 p-6 rounded-3xl border border-gray-200">
+              <h3 className="font-bold text-lg text-gray-900">Safety & property</h3>
+              <p className="text-sm text-gray-600">Carbon monoxide alarm installed</p>
+              <p className="text-sm text-gray-600">Smoke alarm installed</p>
+              <p className="text-sm text-gray-600">Self check-in with keypad</p>
+            </div>
+            <div className="space-y-3 bg-gray-50 p-6 rounded-3xl border border-gray-200">
+              <h3 className="font-bold text-lg text-gray-900">Cancellation policy</h3>
+              <p className="text-sm text-gray-600">Free cancellation up to 48 hours before check-in. Full refund minus service fee.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      {/* Global Footer */}
+      <Footer />
 
       {/* Confirmation Modal */}
       {showReserveModal && (
