@@ -41,16 +41,39 @@ const MainLayout = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // دالة تطبيق الفلاتر (Dev 4)
+  // Filter application handler
   const handleApplyFilters = (filters) => {
-    const { typeOfPlace, minPrice, maxPrice, bedrooms } = filters;
+    const { typeOfPlace, minPrice, maxPrice, bedrooms, amenities } = filters;
 
     const filtered = mockProperties.filter((property) => {
-      const matchType = typeOfPlace === 'Any type' || property.typeOfPlace === typeOfPlace;
-      const matchPrice = property.price >= minPrice && property.price <= maxPrice;
-      const matchBedrooms = bedrooms === 'Any' || property.bedrooms === bedrooms;
+      // Type matching
+      const propType = property.type || property.category || '';
+      let matchType = typeOfPlace === 'Any type';
+      if (!matchType) {
+        if (typeOfPlace === 'Room') {
+          matchType = propType.toLowerCase().includes('room') || propType.toLowerCase().includes('hotel');
+        } else if (typeOfPlace === 'Entire home') {
+          matchType = propType.toLowerCase().includes('apartment') || propType.toLowerCase().includes('villa') || propType.toLowerCase().includes('home');
+        }
+      }
 
-      return matchType && matchPrice && matchBedrooms;
+      // Price matching
+      const price = property.pricePerNight || property.price || 0;
+      const matchPrice = price >= minPrice && price <= maxPrice;
+
+      // Bedrooms matching
+      const numBedrooms = property.specs?.bedrooms || property.bedrooms || 1;
+      const matchBedrooms =
+        bedrooms === 'Any' ||
+        (bedrooms === '4+' ? numBedrooms >= 4 : String(numBedrooms) === String(bedrooms));
+
+      // Amenities matching
+      const propAmenities = property.amenities || [];
+      const matchAmenities =
+        !amenities || amenities.length === 0 ||
+        amenities.every((a) => propAmenities.some((pa) => pa.toLowerCase().includes(a.toLowerCase())));
+
+      return matchType && matchPrice && matchBedrooms && matchAmenities;
     });
 
     setDisplayedProperties(filtered);
@@ -83,9 +106,12 @@ const MainLayout = () => {
       </header>
 
       {/* Main Content Area */}
-      <main className="p-6 flex-1 relative">
+      <main className="p-6 flex-1 relative max-w-7xl mx-auto w-full">
         {/* Filter Trigger Button */}
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-bold text-gray-900">
+            {displayedProperties.length} {displayedProperties.length === 1 ? 'place' : 'places'} available
+          </h2>
           <button
             onClick={() => setIsFilterModalOpen(true)}
             className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl text-sm font-semibold hover:border-black transition bg-white shadow-sm"
@@ -145,7 +171,7 @@ const MainLayout = () => {
         onToggle={() => setShowMap(!showMap)}
       />
 
-      <Footer />
+      <Footer setIsLangModalOpen={setIsLangModalOpen} />
     </div>
   );
 };
