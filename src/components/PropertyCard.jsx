@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, onClick }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [isLiked, setIsLiked] = useState(() => {
@@ -57,7 +57,10 @@ const PropertyCard = ({ property }) => {
   const ratingText = property?.rating ? property.rating.toFixed(2).replace('.00', '.0') : "5.0";
 
   return (
-    <div className="flex flex-col gap-1.5 group cursor-pointer w-full">
+    <div 
+      onClick={() => onClick && onClick(property)} 
+      className="flex flex-col gap-1.5 group cursor-pointer w-full"
+    >
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
         {property?.badgeText ? (
           <div className="absolute top-2.5 right-2.5 z-10 bg-gray-900/90 text-white backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm text-[11px] font-semibold tracking-tight">

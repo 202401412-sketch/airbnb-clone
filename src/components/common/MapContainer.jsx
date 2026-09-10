@@ -36,11 +36,14 @@ const createPriceIcon = (price) => {
 };
 
 const MapContainer = ({ properties = [], onClose }) => {
-  // موقع سنتر الخريطة يغطي الإسكندرية والساحل الشمالي مع زوم 10 لضمان ظهور الـ 6 شقق
+  // موقع سنتر الخريطة يغطي الإسكندرية والساحل الشمالي
   const centerPosition = [31.150, 29.800];
 
+  // فلترة العقارات للتأكد من وجود إحداثيات صحيحة قبل الرسم
+  const validProperties = properties.filter(p => p && p.lat && p.lng);
+
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '16px', overflow: 'hidden', border: '1px solid #ddd' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '500px', borderRadius: '16px', overflow: 'hidden', border: '1px solid #ddd' }}>
       {onClose && (
         <button 
           onClick={onClose} 
@@ -73,7 +76,7 @@ const MapContainer = ({ properties = [], onClose }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
         />
 
-        {properties.map((prop) => (
+        {validProperties.map((prop) => (
           <Marker 
             key={prop.id} 
             position={[prop.lat, prop.lng]} 
@@ -81,13 +84,15 @@ const MapContainer = ({ properties = [], onClose }) => {
           >
             <Popup>
               <div style={{ padding: '4px', maxWidth: '180px' }}>
-                <img 
-                  src={prop.image} 
-                  alt={prop.title} 
-                  style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '8px', marginBottom: '6px' }} 
-                />
+                {prop.image && (
+                  <img 
+                    src={prop.image} 
+                    alt={prop.title} 
+                    style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '8px', marginBottom: '6px' }} 
+                  />
+                )}
                 <h4 style={{ margin: 0, fontSize: '13px', fontWeight: 'bold' }}>{prop.title}</h4>
-                <p style={{ margin: '2px 0', fontSize: '11px', color: '#666' }}>{prop.location}</p>
+                {prop.location && <p style={{ margin: '2px 0', fontSize: '11px', color: '#666' }}>{prop.location}</p>}
                 <p style={{ margin: 0, fontWeight: 'bold', fontSize: '12px', color: '#e11d48' }}>{prop.price} EGP / night</p>
               </div>
             </Popup>

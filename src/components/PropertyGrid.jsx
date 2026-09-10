@@ -88,7 +88,8 @@ const SkeletonGrid = ({ count = 12 }) => (
 const PropertyGrid = ({
   properties = [],
   isLoading = false,
-  selectedCategory = 'all'
+  selectedCategory = 'all',
+  onSelectProperty
 }) => {
   if (isLoading) {
     if (selectedCategory !== 'all') {
@@ -132,7 +133,11 @@ const PropertyGrid = ({
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-8">
           {filteredProperties.map((property, idx) => (
-            <PropertyCard key={property.id || idx} property={property} />
+            <PropertyCard 
+              key={property.id || idx} 
+              property={property} 
+              onClick={onSelectProperty}
+            />
           ))}
         </div>
       </div>
@@ -167,6 +172,7 @@ const PropertyGrid = ({
           title={sectionMap.alexandria.title}
           subtitle={sectionMap.alexandria.subtitle}
           properties={sectionMap.alexandria.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -175,6 +181,7 @@ const PropertyGrid = ({
           title={sectionMap.hotels.title}
           subtitle={sectionMap.hotels.subtitle}
           properties={sectionMap.hotels.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -183,6 +190,7 @@ const PropertyGrid = ({
           title={sectionMap.sheikh_zayed.title}
           subtitle={sectionMap.sheikh_zayed.subtitle}
           properties={sectionMap.sheikh_zayed.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -191,6 +199,7 @@ const PropertyGrid = ({
           title={sectionMap.new_cairo.title}
           subtitle={sectionMap.new_cairo.subtitle}
           properties={sectionMap.new_cairo.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -199,6 +208,7 @@ const PropertyGrid = ({
           title={sectionMap.hurghada.title}
           subtitle={sectionMap.hurghada.subtitle}
           properties={sectionMap.hurghada.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -209,6 +219,7 @@ const PropertyGrid = ({
           title={sectionMap.exp_cairo.title}
           subtitle={sectionMap.exp_cairo.subtitle}
           properties={sectionMap.exp_cairo.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -217,6 +228,7 @@ const PropertyGrid = ({
           title={sectionMap.photo_memories.title}
           subtitle={sectionMap.photo_memories.subtitle}
           properties={sectionMap.photo_memories.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -225,6 +237,7 @@ const PropertyGrid = ({
           title={sectionMap.october.title}
           subtitle={sectionMap.october.subtitle}
           properties={sectionMap.october.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -233,6 +246,7 @@ const PropertyGrid = ({
           title={sectionMap.dubai.title}
           subtitle={sectionMap.dubai.subtitle}
           properties={sectionMap.dubai.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -241,6 +255,7 @@ const PropertyGrid = ({
           title={sectionMap.sokhna.title}
           subtitle={sectionMap.sokhna.subtitle}
           properties={sectionMap.sokhna.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -249,6 +264,7 @@ const PropertyGrid = ({
           title={sectionMap.riyadh.title}
           subtitle={sectionMap.riyadh.subtitle}
           properties={sectionMap.riyadh.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -257,6 +273,7 @@ const PropertyGrid = ({
           title={sectionMap.alamein.title}
           subtitle={sectionMap.alamein.subtitle}
           properties={sectionMap.alamein.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -265,6 +282,7 @@ const PropertyGrid = ({
           title={sectionMap.istanbul.title}
           subtitle={sectionMap.istanbul.subtitle}
           properties={sectionMap.istanbul.properties}
+          onSelectProperty={onSelectProperty}
         />
       )}
 
@@ -273,6 +291,7 @@ const PropertyGrid = ({
           title="أماكن إقامة أخرى مقترحة لك"
           subtitle="مختارات إضافية للإقامة في مختلف المدن والمحافظات"
           properties={unassignedProperties}
+          onSelectProperty={onSelectProperty}
         />
       )}
     </div>

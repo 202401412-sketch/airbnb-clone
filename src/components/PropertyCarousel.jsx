@@ -55,7 +55,8 @@ const PropertyCarousel = ({
   properties = [],
   isLoading = false,
   visibleCount,
-  totalCount
+  totalCount,
+  onSelectProperty // 👈 تم إضافة استقبال الخاصية هنا
 }) => {
   const scrollRef = useRef(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -185,7 +186,10 @@ const PropertyCarousel = ({
                   className="flex-shrink-0"
                   style={{ width: CARD_WIDTH, scrollSnapAlign: 'start' }}
                 >
-                  <PropertyCard property={property} />
+                  <PropertyCard 
+                    property={property} 
+                    onClick={onSelectProperty} // 👈 تم تمرير الخاصية هنا إلى الكارت
+                  />
                 </div>
               ))}
 
