@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import Calendar from './Calendar';
 import Footer from './Footer.jsx';
+import { useUserSaved } from '../context/UserSavedContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import {
   Heart,
   Share,
@@ -34,29 +36,31 @@ import {
   AlertCircle,
   FileText,
   ShieldAlert,
-  Key
+  Key,
+  Send
 } from 'lucide-react';
 
-const PropertyDetails = ({ property, onClose }) => {
+const PropertyDetails = memo(({ property, onClose }) => {
+  const { user } = useAuth();
+  const { isFavorite, toggleFavorite, addBooking, sendMessage } = useUserSaved();
+
   if (!property) return null;
 
   // States
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [showAllAmenities, setShowAllAmenities] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
 
-  // Date Selection State (YYYY-MM-DD format)
+  // Date Selection State
   const defaultCheckIn = '2026-09-10';
   const defaultCheckOut = '2026-09-15';
   const [checkIn, setCheckIn] = useState(defaultCheckIn);
   const [checkOut, setCheckOut] = useState(defaultCheckOut);
 
   // Guest Selection
-  const [showGuestMenu, setShowGuestMenu] = useState(false);
   const [guests, setGuests] = useState({ adults: 2, children: 0, infants: 0 });
 
-  // Modal States
+  // Modal & Messaging States
   const [showReserveModal, setShowReserveModal] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [bookingReference, setBookingReference] = useState('');
@@ -64,9 +68,8 @@ const PropertyDetails = ({ property, onClose }) => {
   const [hostMessageSent, setHostMessageSent] = useState(false);
   const [hostMessageText, setHostMessageText] = useState('');
 
-  // Property Data Fillers
+  // Property Details
   const pricePerNight = property.pricePerNight || property.price || 4778;
-  const maxGuests = property.specs?.guests || 6;
   const title = property.title || "Luxury Apartment in San Stefano";
   const location = property.location || "San Stefano, Alexandria, Egypt";
   const rating = property.rating || 4.88;
@@ -82,13 +85,13 @@ const PropertyDetails = ({ property, onClose }) => {
   const propertyImages = property.images || [];
   const images = propertyImages.length >= 5 ? propertyImages : [...propertyImages, ...defaultImages.slice(propertyImages.length)];
 
-  // Calculate Nights & Prices
+  const favorited = isFavorite(property.id || title);
+
   const calculateNights = () => {
     if (!checkIn || !checkOut) return 1;
     const start = new Date(checkIn);
     const end = new Date(checkOut);
-    const diffTime = end.getTime() - start.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
     return diffDays > 0 ? diffDays : 1;
   };
 
@@ -111,8 +114,53 @@ const PropertyDetails = ({ property, onClose }) => {
 
   const handleConfirmBooking = () => {
     const randomRef = 'AB-' + Math.floor(100000 + Math.random() * 900000);
+    const bookingObj = {
+      id: randomRef,
+      userId: user?.id || user?.email || 'usr_guest',
+      userName: user?.name || 'Guest User',
+      propertyId: property.id || property.title,
+      propertyTitle: title,
+      propertyImage: images[0],
+      location: location,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      nightsCount: nightsCount,
+      totalPrice: totalPrice,
+      guestsCount: totalGuestCount,
+      createdAt: new Date().toISOString()
+    };
+
+    addBooking(bookingObj, user?.id);
     setBookingReference(randomRef);
     setBookingConfirmed(true);
+  };
+
+  const handleSendMessageToHost = (e) => {
+    e.preventDefault();
+    if (!hostMessageText.trim()) return;
+
+    const hostName = property.host?.name || "Farida";
+    const msgObj = {
+      id: 'MSG-' + Math.floor(100000 + Math.random() * 900000),
+      propertyId: property.id || property.title,
+      propertyTitle: title,
+      propertyImage: images[0],
+      hostName: hostName,
+      hostAvatar: property.host?.avatar || "https://i.pravatar.cc/150?img=47",
+      senderName: user?.name || "Guest User",
+      senderEmail: user?.email || "guest@airbnb.com",
+      messageText: hostMessageText,
+      timestamp: new Date().toISOString()
+    };
+
+    sendMessage(msgObj);
+    setHostMessageSent(true);
+
+    setTimeout(() => {
+      setHostMessageSent(false);
+      setShowMessageHostModal(false);
+      setHostMessageText('');
+    }, 2000);
   };
 
   const formatDateDisplay = (dateString) => {
@@ -122,12 +170,12 @@ const PropertyDetails = ({ property, onClose }) => {
   };
 
   const amenitiesList = [
-    { name: "Sea View", icon: Waves, offered: true },
-    { name: "High-Speed Wi-Fi", icon: Wifi, offered: true },
-    { name: "Central Air Conditioning", icon: Wind, offered: true },
-    { name: "HDTV with Netflix", icon: Tv, offered: true },
-    { name: "Free Driveway Parking", icon: Car, offered: true },
-    { name: "Fully Equipped Kitchen", icon: Utensils, offered: true }
+    { name: "Sea View", icon: Waves },
+    { name: "High-Speed Wi-Fi", icon: Wifi },
+    { name: "Central Air Conditioning", icon: Wind },
+    { name: "HDTV with Netflix", icon: Tv },
+    { name: "Free Driveway Parking", icon: Car },
+    { name: "Fully Equipped Kitchen", icon: Utensils }
   ];
 
   const ratingCategories = [
@@ -171,10 +219,14 @@ const PropertyDetails = ({ property, onClose }) => {
 
         <div className="flex items-center gap-3">
           <button onClick={handleShare} className="flex items-center gap-2 px-4 py-2 border rounded-xl hover:bg-gray-50 text-sm font-semibold">
-            <Share className="w-4 h-4" /> Share
+            <Share className="w-4 h-4" /> {copiedShare ? 'Copied!' : 'Share'}
           </button>
-          <button onClick={() => setIsLiked(!isLiked)} className="flex items-center gap-2 px-4 py-2 border rounded-xl hover:bg-gray-50 text-sm font-semibold">
-            <Heart className={`w-4 h-4 ${isLiked ? 'fill-[#FF385C] text-[#FF385C]' : ''}`} /> {isLiked ? 'Saved' : 'Save'}
+          <button 
+            onClick={() => toggleFavorite(property)} 
+            className="flex items-center gap-2 px-4 py-2 border rounded-xl hover:bg-gray-50 text-sm font-semibold"
+          >
+            <Heart className={`w-4 h-4 ${favorited ? 'fill-[#FF385C] text-[#FF385C]' : ''}`} /> 
+            <span>{favorited ? 'Saved' : 'Save'}</span>
           </button>
         </div>
       </div>
@@ -182,7 +234,7 @@ const PropertyDetails = ({ property, onClose }) => {
       {/* Main Details Body */}
       <div className="max-w-7xl mx-auto px-6 py-8 space-y-12">
         
-        {/* 1. Header & Title */}
+        {/* Title & Info Header */}
         <div>
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight">{title}</h1>
           <div className="flex items-center gap-2 text-sm font-semibold text-gray-800 mt-2">
@@ -197,7 +249,7 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
-        {/* 2. Photo Gallery Grid */}
+        {/* Gallery Grid */}
         <div className="relative rounded-3xl overflow-hidden group">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2.5 h-[360px] md:h-[460px]">
             <div className="md:col-span-2 h-full cursor-pointer overflow-hidden" onClick={() => setShowAllPhotos(true)}>
@@ -213,11 +265,11 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
-        {/* Main Content & Sticky Booking Widget */}
+        {/* Specs & Booking Column */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           <div className="lg:col-span-2 space-y-10">
             
-            {/* Overview & Host Summary */}
+            {/* Host Summary */}
             <div className="border-b pb-8 flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">
@@ -233,7 +285,7 @@ const PropertyDetails = ({ property, onClose }) => {
             {/* Description */}
             <div className="border-b pb-8 space-y-4">
               <h3 className="text-2xl font-bold text-gray-900">About this space</h3>
-              <p className="text-gray-700 text-base leading-relaxed">{property.description}</p>
+              <p className="text-gray-700 text-base leading-relaxed">{property.description || "Enjoy a luxury stay with magnificent views, high-speed Wi-Fi, and premium amenities."}</p>
             </div>
 
             {/* Amenities Grid */}
@@ -252,7 +304,7 @@ const PropertyDetails = ({ property, onClose }) => {
               </div>
             </div>
 
-            {/* 3. STANDALONE CALENDAR COMPONENT */}
+            {/* STANDALONE CALENDAR COMPONENT */}
             <Calendar
               startDate={checkIn}
               endDate={checkOut}
@@ -285,7 +337,7 @@ const PropertyDetails = ({ property, onClose }) => {
                 Reserve
               </button>
 
-              {/* Dynamic Price Breakdown */}
+              {/* Price Breakdown */}
               <div className="space-y-3.5 border-t pt-5 text-sm text-gray-700">
                 <div className="flex justify-between">
                   <span>{pricePerNight.toLocaleString()} EGP x {nightsCount} nights</span>
@@ -305,7 +357,7 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
-        {/* 4. Detailed Reviews Section */}
+        {/* Detailed Reviews */}
         <div className="border-t pt-12 space-y-10">
           <div className="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-gray-900">
             <Star className="w-7 h-7 fill-black text-black" />
@@ -365,7 +417,7 @@ const PropertyDetails = ({ property, onClose }) => {
           </div>
         </div>
 
-        {/* 5. "Meet Your Host" Card */}
+        {/* Meet Your Host & Contact Host Modal Trigger */}
         <div className="border-t pt-12 space-y-8">
           <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Meet your host</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
@@ -390,20 +442,25 @@ const PropertyDetails = ({ property, onClose }) => {
                 </div>
               </div>
             </div>
+            
             <div className="md:col-span-2 space-y-6">
               <p className="text-gray-600 text-sm leading-relaxed">{property.host?.bio || "We always strive to create a seamless, elegant, and personalized stay experience for our guests."}</p>
               <div className="grid grid-cols-2 gap-4 text-sm font-medium text-gray-700">
                 <div className="bg-gray-50 p-3.5 rounded-2xl border">Response rate: <strong className="text-gray-900">{property.host?.responseRate || "100%"}</strong></div>
                 <div className="bg-gray-50 p-3.5 rounded-2xl border">Languages: <strong className="text-gray-900">{property.host?.languages || "English, Arabic"}</strong></div>
               </div>
-              <button onClick={() => setShowMessageHostModal(true)} className="border-2 border-gray-900 px-6 py-3 rounded-2xl font-bold text-sm hover:bg-gray-900 hover:text-white transition">
-                Message Host
+              <button 
+                onClick={() => setShowMessageHostModal(true)} 
+                className="border-2 border-gray-900 px-6 py-3 rounded-2xl font-bold text-sm hover:bg-gray-900 hover:text-white transition flex items-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Message Host ({property.host?.name || "Farida"})</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* 6. "Things to Know" Footer Grid */}
+        {/* Things to Know */}
         <div className="border-t pt-12 space-y-8">
           <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Things to know</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -431,7 +488,58 @@ const PropertyDetails = ({ property, onClose }) => {
       {/* Global Footer */}
       <Footer />
 
-      {/* Confirmation Modal */}
+      {/* --- MODAL 1: MESSAGE HOST MODAL WITH LOCALSTORAGE PERSISTENCE --- */}
+      {showMessageHostModal && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
+          <div className="bg-white w-full max-w-lg rounded-3xl p-6 md:p-8 relative shadow-2xl space-y-6 animate-in fade-in duration-200">
+            {!hostMessageSent ? (
+              <form onSubmit={handleSendMessageToHost} className="space-y-5">
+                <div className="flex justify-between items-center border-b pb-4">
+                  <div className="flex items-center gap-3">
+                    <img src={property.host?.avatar || "https://i.pravatar.cc/150?img=47"} alt="Host" className="w-10 h-10 rounded-full object-cover border" />
+                    <div>
+                      <h3 className="text-base font-bold text-gray-900">Contact {property.host?.name || "Farida"}</h3>
+                      <p className="text-xs text-gray-500">Host of {title}</p>
+                    </div>
+                  </div>
+                  <button type="button" onClick={() => setShowMessageHostModal(false)} className="p-2 rounded-full hover:bg-gray-100">
+                    <X className="w-5 h-5 text-gray-700" />
+                  </button>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Your Message to Host *</label>
+                  <textarea
+                    rows="4"
+                    value={hostMessageText}
+                    onChange={(e) => setHostMessageText(e.target.value)}
+                    placeholder={`Hi ${property.host?.name || "Farida"}, I'm interested in booking ${title}. Is early check-in available?`}
+                    className="w-full p-3.5 border border-gray-300 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-black"
+                  ></textarea>
+                </div>
+
+                <div className="flex gap-3">
+                  <button type="button" onClick={() => setShowMessageHostModal(false)} className="w-1/3 border py-3 rounded-xl font-bold text-sm">
+                    Cancel
+                  </button>
+                  <button type="submit" className="w-2/3 bg-black hover:bg-gray-800 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                    <Send className="w-4 h-4" />
+                    <span>Send Message</span>
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="text-center py-6 space-y-4 animate-in fade-in">
+                <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
+                <h3 className="text-2xl font-bold text-gray-900">Message Sent to {property.host?.name || "Farida"}! 🎉</h3>
+                <p className="text-sm text-gray-600">Your message has been saved and delivered to the host inbox.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* --- MODAL 2: CONFIRM BOOKING MODAL WITH LOCALSTORAGE PERSISTENCE --- */}
       {showReserveModal && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
           <div className="bg-white w-full max-w-xl rounded-3xl p-8 relative shadow-2xl space-y-6">
@@ -476,6 +584,6 @@ const PropertyDetails = ({ property, onClose }) => {
 
     </div>
   );
-};
+});
 
 export default PropertyDetails;

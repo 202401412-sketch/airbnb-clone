@@ -1,10 +1,18 @@
+export const mockCategories = [
+  { id: "cat-homes", name: "Homes", slug: "homes", description: "Entire homes and apartments" },
+  { id: "cat-experiences", name: "Experiences", slug: "experiences", description: "Guided activities and tours" },
+  { id: "cat-services", name: "Services", slug: "services", description: "Personalized guest services" },
+  { id: "cat-hotels", name: "Hotels", slug: "hotels", description: "Boutique and luxury hotels" },
+  { id: "cat-mansions", name: "Mansions", slug: "mansions", description: "Luxury villas and estates" }
+];
+
 export const mockProperties = [
   {
     id: "alex-1",
-    title: "Apartment in San Stefano",
-    location: "San Stefano, Alexandria, Egypt",
+ title: "Apartment in San Stefano",
+ location: "San Stefano, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4778,
     nights: 2,
     rating: 4.88,
@@ -18,14 +26,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Sea View", "Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 31.2218, lng: 29.9441 },
-    description: "Luxury apartment with a breathtaking Mediterranean sea view in San Stefano."
+ description: "Luxury apartment with a breathtaking Mediterranean sea view in San Stefano."
   },
   {
     id: "alex-2",
-    title: "Apartment in Sidi Beshr Bahari",
-    location: "Sidi Beshr, Alexandria, Egypt",
+ title: "Apartment in Sidi Beshr Bahari",
+ location: "Sidi Beshr, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4168,
     nights: 2,
     rating: 4.86,
@@ -39,14 +47,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Kitchen", "Free parking"],
     coordinates: { lat: 31.2468, lng: 29.9902 },
-    description: "Quiet and cozy apartment in the heart of Sidi Beshr."
+ description: "Quiet and cozy apartment in the heart of Sidi Beshr."
   },
   {
     id: "alex-3",
-    title: "Villa in Alexandria",
-    location: "Alexandria, Egypt",
+ title: "Villa in Alexandria",
+ location: "Alexandria, Egypt",
     category: "Mansions",
-    type: "Entire villa",
+ type: "Entire villa",
     pricePerNight: 2974,
     nights: 2,
     rating: 4.97,
@@ -60,14 +68,14 @@ export const mockProperties = [
     specs: { guests: 8, bedrooms: 4, beds: 5, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.9716, lng: 29.6196 },
-    description: "Luxurious villa with a private garden in Alexandria."
+ description: "Luxurious villa with a private garden in Alexandria."
   },
   {
     id: "alex-4",
-    title: "Apartment in San Stefano",
-    location: "San Stefano, Alexandria, Egypt",
+ title: "Apartment in San Stefano",
+ location: "San Stefano, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4829,
     nights: 2,
     rating: 5.0,
@@ -77,18 +85,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=41" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=41" },
     specs: { guests: 5, bedrooms: 3, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 31.2208, lng: 29.9428 },
-    description: "Luxury Terrace Apartment EGPRamy EGP San Stefano."
+ description: "Luxury Terrace Apartment Ramy San Stefano."
   },
   {
     id: "alex-5",
-    title: "Apartment in San Stefano",
-    location: "San Stefano, Alexandria, Egypt",
+ title: "Apartment in San Stefano",
+ location: "San Stefano, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 8784,
     nights: 2,
     rating: 4.88,
@@ -100,16 +108,16 @@ export const mockProperties = [
     ],
     host: { name: "Essam", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=22" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
-    amenities: ["Wi-Fi", "Air conditioning", "EGP", "Free parking", "Kitchen"],
+    amenities: ["Wi-Fi", "Air conditioning", "Sea View", "Free parking", "Kitchen"],
     coordinates: { lat: 31.2215, lng: 29.9435 },
-    description: "Apartment EGP EGP EGP San Stefano EGP EGPCorniche."
+ description: "Modern Apartment San Stefano Corniche."
   },
   {
     id: "alex-6",
-    title: "Apartment in Sidi Beshr Bahari",
-    location: "Sidi Beshr Bahari, Alexandria, Egypt",
+ title: "Apartment in Sidi Beshr Bahari",
+ location: "Sidi Beshr Bahari, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2795,
     nights: 2,
     rating: 4.93,
@@ -123,14 +131,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 31.2481, lng: 29.988 },
-    description: "Apartment Stylish EGP EGP EGP Corniche Sidi Beshr."
+ description: "Apartment Stylish Corniche Sidi Beshr."
   },
   {
     id: "alex-7",
-    title: "Apartment in Sidi Beshr Bahari - Sidi Beshr Bahari",
-    location: "Sidi Beshr Bahari, Alexandria, Egypt",
+ title: "Apartment in Sidi Beshr Bahari - Sidi Beshr Bahari",
+ location: "Sidi Beshr Bahari, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4004,
     nights: 2,
     rating: 5.0,
@@ -144,14 +152,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 31.2491, lng: 29.9887 },
-    description: "Apartment Cozy EGP Sidi Beshr EGPBahari EGP EGP EGP EGP EGPBeach."
+ description: "Apartment Cozy Sidi Beshr Bahari Beach."
   },
   {
     id: "alex-8",
-    title: "Apartment EGP Fleming",
-    location: "Fleming, Alexandria, Egypt",
+ title: "Apartment Fleming",
+ location: "Fleming, Alexandria, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4883,
     nights: 2,
     rating: 4.97,
@@ -165,15 +173,15 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 31.2391, lng: 29.9622 },
-    description: "Apartment Stylish EGP EGP Fleming EGP EGPRamyEGP EGP EGPSea EGP."
+ description: "Apartment Stylish Fleming Ramy Sea ."
   },
 
   {
     id: "hotel-1",
-    title: "Hotel George - Astotel",
-    location: "Paris, France",
+ title: "Hotel George - Astotel",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 4971,
     nights: 2,
     rating: 4.83,
@@ -187,14 +195,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 48.8566, lng: 2.3522 },
-    description: "Hotel EGP EGP EGP EGP EGP EGP EGP Sightseeing Highlights."
+ description: "Hotel Sightseeing Highlights."
   },
   {
     id: "hotel-2",
-    title: "Hotel Beauregard",
-    location: "Paris, France",
+ title: "Hotel Beauregard",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 6996,
     nights: 2,
     rating: 4.94,
@@ -208,14 +216,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 48.875, lng: 2.298 },
-    description: "Hotel EGP EGP EGP EGP EGP EGP EGP."
+ description: "Hotel ."
   },
   {
     id: "hotel-3",
-    title: "Hotel Beaugency",
-    location: "Paris, France",
+ title: "Hotel Beaugency",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 9910,
     nights: 2,
     rating: 4.69,
@@ -229,14 +237,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 48.8741, lng: 2.3045 },
-    description: "Hotel EGP EGP EGP EGP EGP EGP."
+ description: "Hotel ."
   },
   {
     id: "hotel-4",
-    title: "Korner Montparnasse",
-    location: "Paris, France",
+ title: "Korner Montparnasse",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 7547,
     nights: 2,
     rating: 4.61,
@@ -250,14 +258,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 48.841, lng: 2.329 },
-    description: "Hotel EGP EGP EGP EGP EGP EGP EGP."
+ description: "Hotel ."
   },
   {
     id: "hotel-5",
-    title: "Korner Étoile",
-    location: "Paris, France",
+ title: "Korner Étoile",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 6955,
     nights: 2,
     rating: 4.74,
@@ -271,14 +279,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 48.8804, lng: 2.3548 },
-    description: "Hotel EGP EGP EGP EGP EGP EGP."
+ description: "Hotel ."
   },
   {
     id: "hotel-6",
-    title: "Hotel Monterosa - Astotel",
-    location: "Paris, France",
+ title: "Hotel Monterosa - Astotel",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 7172,
     nights: 2,
     rating: 4.8,
@@ -292,14 +300,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 48.8638, lng: 2.3512 },
-    description: "Hotel EGP EGP EGP EGP."
+ description: "Hotel ."
   },
   {
     id: "hotel-7",
-    title: "Hôtel des Orfèvres",
-    location: "Paris, France",
+ title: "Hôtel des Orfèvres",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Luxury Hotel",
+ type: "Luxury Hotel",
     pricePerNight: 15706,
     nights: 2,
     rating: 4.94,
@@ -313,14 +321,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 48.8553, lng: 2.3467 },
-    description: "Luxury Hotel EGP EGP EGP."
+ description: "Luxury Hotel ."
   },
   {
     id: "hotel-8",
-    title: "London Hotel - Paris",
-    location: "Paris, France",
+ title: "London Hotel - Paris",
+ location: "Paris, France",
     category: "Hotels",
-    type: "Hotel",
+ type: "Hotel",
     pricePerNight: 7913,
     nights: 2,
     rating: 4.61,
@@ -334,15 +342,15 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 48.8492, lng: 2.3601 },
-    description: "Hotel EGP EGP EGP EGP."
+ description: "Hotel ."
   },
 
   {
     id: "sz-1",
-    title: "Apartment EGP City El Sheikh Zayed",
-    location: "El Sheikh Zayed, Giza, Egypt",
+ title: "Apartment City El Sheikh Zayed",
+ location: "El Sheikh Zayed, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 5706,
     nights: 2,
     rating: 4.97,
@@ -356,14 +364,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Elevator", "Free parking", "Kitchen"],
     coordinates: { lat: 29.9742, lng: 30.9572 },
-    description: "Apartment Spacious EGP EGP EGP El Sheikh Zayed."
+ description: "Apartment Spacious El Sheikh Zayed."
   },
   {
     id: "sz-2",
-    title: "Apartment EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 1423,
     nights: 2,
     rating: 5.0,
@@ -377,14 +385,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 30.052, lng: 30.965 },
-    description: "Apartment EGP EGP EGP 6 October."
+ description: "Modern Apartment 6 October."
   },
   {
     id: "sz-3",
-    title: "Apartment EGP City El Sheikh Zayed",
-    location: "El Sheikh Zayed, Giza, Egypt",
+ title: "Apartment City El Sheikh Zayed",
+ location: "El Sheikh Zayed, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3457,
     nights: 2,
     rating: 4.98,
@@ -398,14 +406,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.039, lng: 30.976 },
-    description: "Apartment Cozy EGPEl Sheikh Zayed."
+ description: "Apartment Cozy El Sheikh Zayed."
   },
   {
     id: "sz-4",
-    title: "Apartment EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4245,
     nights: 2,
     rating: 5.0,
@@ -419,14 +427,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 30.021, lng: 30.989 },
-    description: "Apartment EGP EGP EGP EGP 6 October."
+ description: "Modern Apartment 6 October."
   },
   {
     id: "sz-5",
-    title: "Apartment EGP EGP EGP",
-    location: "Hadayek El Ahram, Giza, Egypt",
+ title: "Modern Apartment",
+ location: "Hadayek El Ahram, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2196,
     nights: 2,
     rating: 4.97,
@@ -440,14 +448,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.044, lng: 30.983 },
-    description: "Apartment EGP EGP EGP EGP Pyramids."
+ description: "Modern Apartment Pyramids."
   },
   {
     id: "sz-6",
-    title: "EGP EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 4067,
     nights: 2,
     rating: 5.0,
@@ -461,14 +469,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 29.968, lng: 30.952 },
-    description: "EGP EGP Spacious EGP EGP EGPOctober."
+ description: "Spacious October."
   },
   {
     id: "sz-7",
-    title: "Apartment EGP City El Sheikh Zayed",
-    location: "El Sheikh Zayed, Giza, Egypt",
+ title: "Apartment City El Sheikh Zayed",
+ location: "El Sheikh Zayed, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3884,
     nights: 2,
     rating: 4.87,
@@ -482,14 +490,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 30.031, lng: 30.958 },
-    description: "Apartment Stylish EGPCity El Sheikh Zayed."
+ description: "Apartment Stylish City El Sheikh Zayed."
   },
   {
     id: "sz-8",
-    title: "Apartment EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3704,
     nights: 2,
     rating: 4.93,
@@ -503,15 +511,15 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 30.046, lng: 30.972 },
-    description: "Apartment Luxury EGPCozy 6 October."
+ description: "Apartment Luxury Cozy 6 October."
   },
 
   {
     id: "nc-1",
-    title: "Apartment EGP Cairo EGP EGP EGP",
-    location: "New Cairo, Egypt",
+ title: "Luxury Apartment in Cairo",
+ location: "New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6838,
     nights: 2,
     rating: 4.97,
@@ -525,14 +533,14 @@ export const mockProperties = [
     specs: { guests: 5, bedrooms: 3, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.0054, lng: 31.4778 },
-    description: "Apartment Luxury EGP Cairo EGP EGP EGP."
+ description: "Apartment Luxury Cairo ."
   },
   {
     id: "nc-2",
-    title: "Apartment EGP EGPCountryside",
-    location: "5th Settlement, New Cairo, Egypt",
+ title: "Apartment Countryside",
+ location: "5th Settlement, New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3356,
     nights: 2,
     rating: 4.86,
@@ -546,14 +554,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 30.0185, lng: 31.502 },
-    description: "Apartment Quiet EGP EGP EGPCountryside EGPSettlement."
+ description: "Apartment Quiet Countryside First Settlement."
   },
   {
     id: "nc-3",
-    title: "Apartment EGP Cairo EGP",
-    location: "New Cairo, Egypt",
+ title: "Apartment Cairo ",
+ location: "New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2785,
     nights: 2,
     rating: 4.95,
@@ -567,14 +575,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.0279, lng: 31.4913 },
-    description: "Apartment EGP EGP Cairo EGP."
+ description: "Apartment Cairo ."
   },
   {
     id: "nc-4",
-    title: "Apartment EGP Cairo EGP",
-    location: "New Cairo, Egypt",
+ title: "Apartment Cairo ",
+ location: "New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 1762,
     nights: 2,
     rating: 5.0,
@@ -588,14 +596,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 30.035, lng: 31.482 },
-    description: "Apartment EGP EGP EGP EGPCairo EGP."
+ description: "Modern Apartment Cairo ."
   },
   {
     id: "nc-5",
-    title: "Apartment EGP Cairo EGP",
-    location: "New Cairo, Egypt",
+ title: "Apartment Cairo ",
+ location: "New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2029,
     nights: 2,
     rating: 4.98,
@@ -609,14 +617,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 3, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.012, lng: 31.435 },
-    description: "Apartment EGP EGPTerrace EGP Cairo EGP."
+ description: "Apartment Terrace Cairo ."
   },
   {
     id: "nc-6",
-    title: "Apartment EGP New Cairo",
-    location: "New Cairo, Egypt",
+ title: "Apartment New Cairo",
+ location: "New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 1876,
     nights: 2,
     rating: 5.0,
@@ -630,14 +638,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 30.001, lng: 31.515 },
-    description: "Apartment EGP EGP EGP EGP EGP."
+ description: "Modern Apartment ."
   },
   {
     id: "nc-7",
-    title: "Apartment EGP Cairo EGP EGP EGP",
-    location: "New Cairo, Egypt",
+ title: "Luxury Apartment in Cairo",
+ location: "New Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2981,
     nights: 2,
     rating: 4.97,
@@ -651,14 +659,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 30.021, lng: 31.469 },
-    description: "Apartment Cozy EGPQuiet EGP 1st Settlement."
+ description: "Apartment Cozy Quiet 1st Settlement."
   },
   {
     id: "nc-8",
-    title: "Apartment EGP EGP Airport",
-    location: "Sheraton Al Matar, Cairo, Egypt",
+ title: "Apartment Airport",
+ location: "Sheraton Al Matar, Cairo, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2896,
     nights: 2,
     rating: 4.98,
@@ -672,15 +680,15 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 30.048, lng: 31.491 },
-    description: "Apartment Cozy EGP EGP EGP Cairo."
+ description: "Apartment Cozy Cairo."
   },
 
   {
     id: "hg-1",
-    title: "Apartment EGP Hurghada",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Apartment Hurghada",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 1325,
     nights: 2,
     rating: 4.95,
@@ -694,14 +702,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 27.2252, lng: 33.8407 },
-    description: "Apartment EGP EGP Hurghada EGP EGP EGP EGPSea EGP."
+ description: "Apartment Resort Apartment in Hurghada Sea ."
   },
   {
     id: "hg-2",
-    title: "Apartment EGP Hurghada",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Apartment Hurghada",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2522,
     nights: 2,
     rating: 5.0,
@@ -715,14 +723,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 27.2100, lng: 33.8500 },
-    description: "Apartment Luxury EGPHurghada EGP Swimming Pool EGP."
+ description: "Apartment Luxury Hurghada Swimming Pool ."
   },
   {
     id: "hg-3",
-    title: "Apartment EGP EGP EGP",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Modern Apartment",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 1170,
     nights: 2,
     rating: 4.9,
@@ -736,14 +744,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 3, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 27.162, lng: 33.819 },
-    description: "Apartment Cozy EGP EGP EGP EGPHurghada."
+ description: "Apartment Cozy Resort Apartment in Hurghada."
   },
   {
     id: "hg-4",
-    title: "Apartment EGP Hurghada",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Apartment Hurghada",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 1658,
     nights: 2,
     rating: 5.0,
@@ -757,14 +765,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 27.23, lng: 33.85 },
-    description: "Apartment Stylish EGP EGP EGPSea EGP Hurghada."
+ description: "Apartment Stylish Sea Hurghada."
   },
   {
     id: "hg-5",
-    title: "Hotel EGP Hurghada",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Hotel Hurghada",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Hotels",
-    type: "Hotel room",
+ type: "Hotel room",
     pricePerNight: 821,
     nights: 2,
     rating: 4.95,
@@ -778,14 +786,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 27.3949, lng: 33.6783 },
-    description: "Hotel room Cozy EGPHurghada."
+ description: "Hotel room Cozy Hurghada."
   },
   {
     id: "hg-6",
-    title: "EGP EGP Hurghada",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Resort Apartment in Hurghada",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 1475,
     nights: 2,
     rating: 5.0,
@@ -799,14 +807,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 27.401, lng: 33.672 },
-    description: "EGP EGP EGP EGP Hurghada."
+ description: "Resort Apartment in Hurghada."
   },
   {
     id: "hg-7",
-    title: "Apartment EGP Hurghada",
-    location: "Hurghada, Red Sea, Egypt",
+ title: "Apartment Hurghada",
+ location: "Hurghada, Red Sea, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2629,
     nights: 2,
     rating: 5.0,
@@ -820,14 +828,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 26.851, lng: 33.952 },
-    description: "Apartment EGP EGP EGPSea EGPHurghada."
+ description: "Modern ApartmentSea Hurghada."
   },
   {
     id: "hg-8",
-    title: "Apartment EGP El Gouna",
-    location: "El Gouna, Hurghada, Egypt",
+ title: "Apartment El Gouna",
+ location: "El Gouna, Hurghada, Egypt",
     category: "Beachfront",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6728,
     nights: 2,
     rating: 4.97,
@@ -841,22 +849,22 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 27.388, lng: 33.682 },
-    description: "Apartment EGP EGP EGP EGPEl Gouna."
+ description: "Modern Apartment El Gouna."
   },
 
   {
     id: "exp-cairo-1",
-    title: "EGP EGP EGP EGP EGP EGP • EGP EGP EGP",
-    location: "Zamalek, Cairo, Egypt",
+ title: "Zamalek Nile Sunset Felucca Cruise",
+ location: "Zamalek, Cairo, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Nile Cruise Experience",
     pricePerNight: 977,
     nights: 1,
     rating: 4.94,
     reviewsCount: 142,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 977 / person",
+ badgeText: "Popular",
+    priceLabel: "EGP 977 / person",
     images: [
       "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800",
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800"
@@ -865,21 +873,21 @@ export const mockProperties = [
     specs: { guests: 10, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.0626, lng: 31.2224 },
-    description: "EGP EGP Charming EGP EGP EGP EGP EGP EGP."
+ description: "Sail along the timeless Nile River on a traditional wooden felucca at sunset in Zamalek.",
   },
   {
     id: "exp-cairo-2",
-    title: "Private Tour EGP EGP Giza EGPSphinx EGP EGP EGP",
-    location: "Giza, Egypt",
+ title: "Private Tour of Giza Pyramids & Sphinx",
+ location: "Giza, Egypt",
     category: "Experiences",
-    type: "Private Tour",
+ type: "Private Guided Tour",
     pricePerNight: 3305,
     nights: 1,
     rating: 4.92,
     reviewsCount: 89,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 3,305 / person",
+ badgeText: "Guest favorite",
+    priceLabel: "EGP 3,305 / person",
     images: [
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800",
       "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800"
@@ -888,21 +896,21 @@ export const mockProperties = [
     specs: { guests: 8, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 29.9792, lng: 31.1342 },
-    description: "EGP EGP EGP EGP Pyramids EGPSphinx EGP EGP EGP EGP."
+ description: "Uncover ancient secrets with a private Egyptologist guide at the Great Pyramids of Giza and Sphinx.",
   },
   {
     id: "exp-cairo-3",
-    title: "EGP EGP EGP EGPEgyptEGP EGP",
-    location: "Khan el-Khalili, Cairo, Egypt",
+ title: "Khan el-Khalili Food & Culture Walk",
+ location: "Khan el-Khalili, Cairo, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Culinary & Market Tour",
     pricePerNight: 1780,
     nights: 1,
     rating: 4.98,
     reviewsCount: 67,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 1,780 / person",
+ badgeText: "Best Seller",
+    priceLabel: "EGP 1,780 / person",
     images: [
       "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800",
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800"
@@ -911,44 +919,44 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.0478, lng: 31.2622 },
-    description: "EGP EGPAliEGP EGP EGP EGP EGPKhan El-Khalili."
+ description: "Taste authentic Egyptian street food and explore historic Khan el-Khalili bazaar alleys.",
   },
   {
     id: "exp-cairo-4",
-    title: "Private Tour EGP EGP Giza EGPSphinx EGP EGP EGP",
-    location: "Pyramids, Giza, Egypt",
+ title: "Giza Pyramids Sunset Camel Safari",
+ location: "Pyramids, Giza, Egypt",
     category: "Experiences",
-    type: "Private Tour",
+ type: "Desert Safari",
     pricePerNight: 3000,
     nights: 1,
     rating: 4.91,
     reviewsCount: 110,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 3,000 / person",
+ badgeText: "Top Rated",
+    priceLabel: "EGP 3,000 / person",
     images: [
       "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=800",
       "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800"
     ],
-    host: { name: "EGPCountryside", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=43" },
+    host: { name: "Countryside", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=43" },
     specs: { guests: 12, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 29.9753, lng: 31.1376 },
-    description: "EGP EGP EGP EGP EGP Pyramids."
+ description: "Enjoy a scenic camel or horseback ride across the Giza desert plateau at sunset.",
   },
   {
     id: "exp-cairo-5",
-    title: "EGP EGP EGP EGPEgyptEGP • EGP EGP EgyptEGP",
-    location: "EGP EGP Cairo",
+ title: "Egyptian Museum & Old Cairo Heritage Tour",
+ location: "Cairo",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Cultural Discovery",
     pricePerNight: 966,
     nights: 1,
     rating: 4.91,
     reviewsCount: 230,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 966 / person",
+ badgeText: "Popular",
+    priceLabel: "EGP 966 / person",
     images: [
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800",
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800"
@@ -957,44 +965,44 @@ export const mockProperties = [
     specs: { guests: 8, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.0444, lng: 31.2357 },
-    description: "EGP EGP EGP EGP EGP EGP EGPEgyptEGP."
+ description: "Explore ancient artifacts at the Egyptian Museum followed by a guided walk through Historic Coptic Cairo.",
   },
   {
     id: "exp-cairo-6",
-    title: "EGP Luxury EGP EGP EGP EGP EGP Giza",
-    location: "Pyramids, Giza, Egypt",
+ title: "Islamic Cairo & Citadel Discovery",
+ location: "Pyramids, Giza, Egypt",
     category: "Experiences",
-    type: "EGP",
+ type: "Historic Tour",
     pricePerNight: 1526,
     nights: 1,
     rating: 4.62,
     reviewsCount: 78,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 1,526 / person",
+ badgeText: null,
+    priceLabel: "EGP 1,450 / person",
     images: [
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800",
       "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=24" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=24" },
     specs: { guests: 10, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 29.9792, lng: 31.1342 },
-    description: "EGP EGP EGP EGP EGP EGP EGP EGP."
+ description: "Visit the majestic Saladin Citadel and Mosque of Muhammad Ali in Islamic Cairo.",
   },
   {
     id: "exp-cairo-7",
-    title: "EGP EGP EGP Giza",
-    location: "Giza, Egypt",
+ title: "Traditional Egyptian Cooking Class",
+ location: "Giza, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Cooking Workshop",
     pricePerNight: 2034,
     nights: 1,
     rating: 4.98,
     reviewsCount: 95,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 2,034 / person",
+ badgeText: "Guest favorite",
+    priceLabel: "EGP 1,200 / person",
     images: [
       "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800",
       "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=800"
@@ -1003,21 +1011,21 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 29.9937, lng: 31.1172 },
-    description: "EGP EGP EGPEgyptEGP EGP GEM EGP Pyramids."
+ description: "Learn to cook Koshary, Mahshi, and authentic Egyptian desserts with a local host in Zamalek.",
   },
   {
     id: "exp-cairo-8",
-    title: "EGP EGP EGP EGP EGP EGP",
-    location: "EGP Cairo",
+ title: "Al-Azhar Park Sunset Photo Walk",
+ location: " Cairo",
     category: "Experiences",
-    type: "EGP BahariEGP",
+ type: "Photography Tour",
     pricePerNight: 3200,
     nights: 1,
     rating: 4.97,
     reviewsCount: 140,
     isGuestFavorite: false,
-    badgeText: "EGP EGP",
-    priceLabel: "EGP EGP EGP 3,200 / person",
+ badgeText: null,
+    priceLabel: "EGP 850 / person",
     images: [
       "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800",
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800"
@@ -1026,15 +1034,15 @@ export const mockProperties = [
     specs: { guests: 10, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 29.9602, lng: 31.2569 },
-    description: "EGP Charming EGP EGP EGP EGP EGP EGP."
+ description: "Capture panoramic views of Cairo’s minarets at golden hour from Al-Azhar Park.",
   },
 
   {
     id: "photo-1",
-    title: "EGP EGP EGP EGP – EGP EGP",
-    location: "Pyramids, Giza, Egypt",
+ title: "– ",
+ location: "Pyramids, Giza, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "",
     pricePerNight: 2796,
     nights: 1,
     rating: 5.0,
@@ -1049,20 +1057,20 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 29.9792, lng: 31.1342 },
-    description: "EGP EGP EGP EGP EGP Pyramids EGP EGP EGP."
+ description: "Pyramids ."
   },
   {
     id: "photo-2",
-    title: "EGP EGP EGP EGP EGP EGP",
-    location: "Cairo EGP Egypt",
+ title: "Cairo Tour",
+ location: "Cairo, Egypt",
     category: "Experiences",
-    type: "EGP",
+ type: "Experience",
     pricePerNight: 40668,
     nights: 1,
     rating: 4.96,
     reviewsCount: 29,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 40,668 / person",
+    priceLabel: "EGP 40,668 / person",
     images: [
       "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800",
       "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800"
@@ -1071,20 +1079,20 @@ export const mockProperties = [
     specs: { guests: 5, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 30.0478, lng: 31.2622 },
-    description: "EGP EGP EGP EGP EGP EGP EGP."
+ description: "Cairo Photography."
   },
   {
     id: "photo-3",
-    title: "EGP EGP EGP Mostafa",
-    location: "SphinxEGP Giza",
+ title: "Sphinx Photography Session",
+ location: "Sphinx, Giza, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Experience",
     pricePerNight: 2288,
     nights: 1,
     rating: 5.0,
     reviewsCount: 145,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 2,288 / person",
+    priceLabel: "EGP 2,288 / person",
     images: [
       "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800",
       "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=800"
@@ -1093,20 +1101,20 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 29.9753, lng: 31.1376 },
-    description: "EGP EGP EGP EGP EGP EGP Sphinx."
+ description: "Sphinx."
   },
   {
     id: "photo-4",
-    title: "EGP Pyramids EGP",
-    location: "EGP EGP Giza",
+ title: "Pyramids Sunset Tour",
+ location: "Giza, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Experience",
     pricePerNight: 5389,
     nights: 1,
     rating: 5.0,
     reviewsCount: 198,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 5,389 / person",
+    priceLabel: "EGP 5,389 / person",
     images: [
       "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=800",
       "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800"
@@ -1115,103 +1123,103 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 29.975, lng: 31.138 },
-    description: "EGP EGP EGP EGP EGP EGP EGP EGP."
+ description: "Pyramids sunset tour."
   },
   {
     id: "photo-5",
-    title: "EGP EGP EGP EGP EGP EGP",
-    location: "CairoEGP Egypt",
+ title: "Old Cairo Walk",
+ location: "Cairo, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Experience",
     pricePerNight: 25418,
     nights: 1,
     rating: 5.0,
     reviewsCount: 42,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 25,418 / person",
+    priceLabel: "EGP 25,418 / person",
     images: [
       "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800",
       "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=33" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=33" },
     specs: { guests: 4, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.0444, lng: 31.2357 },
-    description: "EGP EGP EGP EGP EGP EGP EGP EGP Cairo."
+ description: "Cairo photo tour."
   },
   {
     id: "photo-6",
-    title: "EGP EGP",
-    location: "Cairo EGP Egypt",
+ title: "Street Food & Photo Experience",
+ location: "Cairo, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Experience",
     pricePerNight: 1526,
     nights: 1,
     rating: 4.92,
     reviewsCount: 88,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 1,526 / person",
+    priceLabel: "EGP 1,526 / person",
     images: [
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800",
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
     specs: { guests: 3, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 30.0511, lng: 31.2619 },
-    description: "EGP EGP EGP EGP EGP EGP EGP EGP."
+ description: "Street food walk."
   },
   {
     id: "photo-7",
-    title: "EGP EGP EGP EGP Cairo EGP EGP",
-    location: "EGP EGP Cairo",
+ title: "Nile Sunset Photography",
+ location: "Cairo, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Experience",
     pricePerNight: 3559,
     nights: 1,
     rating: 4.98,
     reviewsCount: 112,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 3,559 / person",
+    priceLabel: "EGP 3,559 / person",
     images: [
       "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800",
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
     specs: { guests: 2, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.0444, lng: 31.2357 },
-    description: "EGP EGP EGP EGP EGP EGP EGP EGP EGP."
+ description: "Nile photo tour."
   },
   {
     id: "photo-8",
-    title: "EGP EGP EGP EGP EGP Mohamed Ali",
-    location: "EGP Cairo",
+ title: "Mohamed Ali Citadel Tour",
+ location: "Cairo, Egypt",
     category: "Experiences",
-    type: "EGP EGP",
+ type: "Experience",
     pricePerNight: 2800,
     nights: 1,
     rating: 4.89,
     reviewsCount: 64,
     isGuestFavorite: false,
-    priceLabel: "EGP EGP EGP 2,800 / person",
+    priceLabel: "EGP 2,800 / person",
     images: [
       "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800",
       "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=24" },
+    host: { name: "Sami", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=24" },
     specs: { guests: 4, bedrooms: 0, beds: 0, baths: 0 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 30.0299, lng: 31.2611 },
-    description: "EGP Charming EGP EGP EGP EGP Mohamed Ali."
+ description: " Charming Mohamed Ali."
   },
 
   {
     id: "oct-1",
-    title: "Apartment EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 11337,
     nights: 2,
     rating: 4.97,
@@ -1225,14 +1233,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 29.9742, lng: 30.9572 },
-    description: "Apartment EGP EGP EGP EGP City EGP EGP October."
+ description: "Modern Apartment City October."
   },
   {
     id: "oct-2",
-    title: "Apartment EGP City El Sheikh Zayed",
-    location: "El Sheikh Zayed, Giza, Egypt",
+ title: "Apartment City El Sheikh Zayed",
+ location: "El Sheikh Zayed, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6101,
     nights: 2,
     rating: 5.0,
@@ -1246,14 +1254,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 30.0444, lng: 30.9833 },
-    description: "Stylish Flat in Sheikh Zayed."
+ description: "Stylish Flat in Sheikh Zayed."
   },
   {
     id: "oct-3",
-    title: "Apartment EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 5358,
     nights: 2,
     rating: 5.0,
@@ -1267,14 +1275,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 29.9815, lng: 30.9412 },
-    description: "Apartment Spacious EGP 6 October."
+ description: "Apartment Spacious 6 October."
   },
   {
     id: "oct-4",
-    title: "EGP EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 8134,
     nights: 2,
     rating: 5.0,
@@ -1288,14 +1296,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 29.9765, lng: 30.9598 },
-    description: "EGP EGP Spacious EGP EGP EGPOctober."
+ description: "Spacious October."
   },
   {
     id: "oct-5",
-    title: "Apartment EGP sheikh zayed",
-    location: "El Sheikh Zayed, Giza, Egypt",
+ title: "Apartment sheikh zayed",
+ location: "El Sheikh Zayed, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6223,
     nights: 2,
     rating: 5.0,
@@ -1309,14 +1317,14 @@ export const mockProperties = [
     specs: { guests: 5, bedrooms: 2, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.052, lng: 30.965 },
-    description: "EGP Quiet EGP El Sheikh Zayed."
+ description: " Quiet El Sheikh Zayed."
   },
   {
     id: "oct-6",
-    title: "Apartment EGP EGP EGP",
-    location: "Hadayek El Ahram, Giza, Egypt",
+ title: "Modern Apartment",
+ location: "Hadayek El Ahram, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4392,
     nights: 2,
     rating: 4.97,
@@ -1330,14 +1338,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 29.9821, lng: 31.1124 },
-    description: "Apartment EGP EGP Pyramids EGP Hadayek El Ahram."
+ description: "Apartment Pyramids Hadayek El Ahram."
   },
   {
     id: "oct-7",
-    title: "Apartment EGP City El Sheikh Zayed",
-    location: "El Sheikh Zayed, Giza, Egypt",
+ title: "Apartment City El Sheikh Zayed",
+ location: "El Sheikh Zayed, Giza, Egypt",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6914,
     nights: 2,
     rating: 4.98,
@@ -1351,14 +1359,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 30.039, lng: 30.976 },
-    description: "Apartment EGP El Sheikh Zayed."
+ description: "Apartment El Sheikh Zayed."
   },
   {
     id: "oct-8",
-    title: "EGP EGP City EGP EGP October",
-    location: "City EGP EGP OctoberEGP Giza",
+ title: "Apartment in 6th of October City",
+ location: "6th of October City, Giza, Egypt",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 8490,
     nights: 2,
     rating: 5.0,
@@ -1372,15 +1380,15 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 29.9511, lng: 31.0212 },
-    description: "EGP EGPSwimming Pool EGP October."
+ description: "Swimming Pool October."
   },
 
   {
     id: "dubai-1",
-    title: "Apartment EGP EGP EGP",
-    location: "EGP EGP Dubai",
+ title: "Modern Apartment",
+ location: "Dubai",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 24642,
     nights: 2,
     rating: 5.0,
@@ -1390,18 +1398,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800",
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=68" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=68" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 25.1124, lng: 55.139 },
-    description: "Apartment Luxury EGP EGP EGP EGP."
+ description: "Apartment Luxury ."
   },
   {
     id: "dubai-2",
-    title: "Apartment EGP Dubai EGP EGP",
-    location: "EGP City Dubai, UAE",
+ title: "Apartment Dubai ",
+ location: " City Dubai, UAE",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 13150,
     nights: 2,
     rating: 5.0,
@@ -1415,14 +1423,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 25.1972, lng: 55.2744 },
-    description: "Apartment EGP EGP EGP EGP Dubai."
+ description: "Modern Apartment Dubai."
   },
   {
     id: "dubai-3",
-    title: "Apartment EGP Dubai EGP EGP",
-    location: "EGP City Dubai, UAE",
+ title: "Apartment Dubai ",
+ location: " City Dubai, UAE",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 47063,
     nights: 2,
     rating: 4.97,
@@ -1436,14 +1444,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 3, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 25.1972, lng: 55.2744 },
-    description: "Apartment Luxury EGP EGP EGP EGP Dubai."
+ description: "Apartment Luxury Dubai."
   },
   {
     id: "dubai-4",
-    title: "Apartment EGP Dubai EGP EGP",
-    location: "EGP City Dubai, UAE",
+ title: "Apartment Dubai ",
+ location: " City Dubai, UAE",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 11437,
     nights: 2,
     rating: 4.84,
@@ -1457,14 +1465,14 @@ export const mockProperties = [
     specs: { guests: 5, bedrooms: 2, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 25.1972, lng: 55.2744 },
-    description: "Apartment EGP EGP EGP EGP Dubai."
+ description: "Modern Apartment Dubai."
   },
   {
     id: "dubai-5",
-    title: "Apartment EGP EGP EGP",
-    location: "EGP EGP Dubai",
+ title: "Modern Apartment",
+ location: "Dubai",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 14960,
     nights: 2,
     rating: 5.0,
@@ -1478,14 +1486,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 25.1124, lng: 55.139 },
-    description: "Apartment EGP EGP EGP EGP."
+ description: "Modern Apartment ."
   },
   {
     id: "dubai-6",
-    title: "Apartment EGP Dubai",
-    location: "Dubai, UAE",
+ title: "Apartment Dubai",
+ location: "Dubai, UAE",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 10295,
     nights: 2,
     rating: 5.0,
@@ -1495,18 +1503,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800",
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=52" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=52" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 25.0772, lng: 55.1332 },
-    description: "Apartment EGP EGP Dubai."
+ description: "Apartment Dubai."
   },
   {
     id: "dubai-7",
-    title: "Apartment EGP EGP EGP EGP",
-    location: "EGP EGP Dubai",
+ title: "Modern Apartment ",
+ location: "Dubai",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 8688,
     nights: 2,
     rating: 5.0,
@@ -1516,18 +1524,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=800",
       "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 25.0911, lng: 55.2015 },
-    description: "Apartment Cozy EGP EGP EGP."
+ description: "Apartment Cozy ."
   },
   {
     id: "dubai-8",
-    title: "Apartment EGPRamyEGP EGP Dubai EGP",
-    location: "Dubai EGP Dubai",
+ title: "Apartment Ramy Dubai ",
+ location: "Dubai Dubai",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 9800,
     nights: 2,
     rating: 4.96,
@@ -1541,15 +1549,15 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 25.0772, lng: 55.1332 },
-    description: "Apartment Luxury EGP Dubai EGP."
+ description: "Apartment Luxury Dubai ."
   },
 
   {
     id: "sokhna-1",
-    title: "EGP EGP EGP EGP",
-    location: "EGP Egypt",
+ title: "",
+ location: " Egypt",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 16186,
     nights: 2,
     rating: 4.92,
@@ -1559,18 +1567,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-151291774080-9991f1c4c750?q=80&w=800",
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=15" },
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 29.62, lng: 32.35 },
-    description: "EGP EGP Spacious EGP EGP EGPSea EGP."
+ description: "Spacious Sea ."
   },
   {
     id: "sokhna-2",
-    title: "Villa EGP EGP",
-    location: "EGP Ain Sokhna",
+ title: "Villa ",
+ location: " Ain Sokhna",
     category: "Mansions",
-    type: "Entire villa",
+ type: "Entire villa",
     pricePerNight: 22113,
     nights: 2,
     rating: 4.8,
@@ -1584,14 +1592,14 @@ export const mockProperties = [
     specs: { guests: 8, bedrooms: 4, beds: 5, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 29.5812, lng: 32.4112 },
-    description: "Villa EGP EGP EGP Swimming Pool EGP."
+ description: "Villa Swimming Pool ."
   },
   {
     id: "sokhna-3",
-    title: "EGP EGP EGP",
-    location: "EGP Ain Sokhna",
+ title: "",
+ location: " Ain Sokhna",
     category: "Beachfront",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 15657,
     nights: 2,
     rating: 5.0,
@@ -1601,18 +1609,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=800",
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=43" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=43" },
     specs: { guests: 5, bedrooms: 2, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 29.6102, lng: 32.3789 },
-    description: "EGP EGP EGP EGP EGPSea EGP."
+ description: "Sea ."
   },
   {
     id: "sokhna-4",
-    title: "Apartment EGP Red Sea Governorate",
-    location: "Ain SokhnaEGP EGPSea EGP",
+ title: "Apartment Red Sea Governorate",
+ location: "Ain SokhnaSea ",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4641,
     nights: 2,
     rating: 4.88,
@@ -1626,14 +1634,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 29.6311, lng: 32.3412 },
-    description: "Apartment Cozy EGPSokhna."
+ description: "Apartment Cozy Sokhna."
   },
   {
     id: "sokhna-5",
-    title: "EGP EGP EGP",
-    location: "EGP Ain Sokhna",
+ title: "",
+ location: " Ain Sokhna",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 27146,
     nights: 2,
     rating: 4.82,
@@ -1643,18 +1651,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
       "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=42" },
+    host: { name: "Sami", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=42" },
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 29.6455, lng: 32.3211 },
-    description: "EGP EGP EGPBeachEGP EGP."
+ description: "Beach."
   },
   {
     id: "sokhna-6",
-    title: "Apartment EGP EGP",
-    location: "EGP Ain Sokhna",
+ title: "Apartment ",
+ location: " Ain Sokhna",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 17755,
     nights: 2,
     rating: 5.0,
@@ -1668,14 +1676,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 29.5988, lng: 32.3901 },
-    description: "Apartment EGP EGP."
+ description: "Apartment ."
   },
   {
     id: "sokhna-7",
-    title: "Villa EGP EGP",
-    location: "EGP Ain Sokhna",
+ title: "Villa ",
+ location: " Ain Sokhna",
     category: "Mansions",
-    type: "Entire villa",
+ type: "Entire villa",
     pricePerNight: 14336,
     nights: 2,
     rating: 5.0,
@@ -1689,14 +1697,14 @@ export const mockProperties = [
     specs: { guests: 8, bedrooms: 4, beds: 5, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 29.6155, lng: 32.3611 },
-    description: "Villa EGP EGP."
+ description: "Villa ."
   },
   {
     id: "sokhna-8",
-    title: "EGP EGP EGP EGP EGP Sokhna",
-    location: "Ain Sokhna, Suez, Egypt",
+ title: "Sokhna",
+ location: "Ain Sokhna, Suez, Egypt",
     category: "Beach",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 2800,
     nights: 2,
     rating: 4.87,
@@ -1710,15 +1718,15 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 29.6288, lng: 32.3389 },
-    description: "EGP EGP EGP EGP EGP."
+ description: "."
   },
 
   {
     id: "riyadh-1",
-    title: "Apartment EGP Riyadh",
-    location: "Riyadh, Saudi Arabia",
+ title: "Apartment Riyadh",
+ location: "Riyadh, Saudi Arabia",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4471,
     nights: 2,
     rating: 4.78,
@@ -1728,18 +1736,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800"
     ],
-    host: { name: "EGP EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=65" },
+    host: { name: "Adel", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=65" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 24.8124, lng: 46.6382 },
-    description: "Apartment Luxury EGP EGP EGP Riyadh."
+ description: "Apartment Luxury Riyadh."
   },
   {
     id: "riyadh-2",
-    title: "Apartment EGP EGP",
-    location: "EGP EGP Riyadh",
+ title: "Apartment ",
+ location: "Riyadh",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4462,
     nights: 2,
     rating: 4.87,
@@ -1749,18 +1757,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800",
       "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=61" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=61" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 24.8311, lng: 46.6491 },
-    description: "Apartment EGP EGP EGP."
+ description: "Modern Apartment."
   },
   {
     id: "riyadh-3",
-    title: "Apartment EGP EGP",
-    location: "EGP EGP Riyadh",
+ title: "Apartment ",
+ location: "Riyadh",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 5531,
     nights: 2,
     rating: 4.96,
@@ -1770,18 +1778,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=800",
       "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=53" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=53" },
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 24.8012, lng: 46.7789 },
-    description: "Apartment Stylish EGP EGP EGP."
+ description: "Apartment Stylish ."
   },
   {
     id: "riyadh-4",
-    title: "Apartment EGP EGP",
-    location: "EGP EGP Riyadh",
+ title: "Apartment ",
+ location: "Riyadh",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3661,
     nights: 2,
     rating: 5.0,
@@ -1791,18 +1799,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=67" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=67" },
     specs: { guests: 6, bedrooms: 3, beds: 3, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 24.8189, lng: 46.6112 },
-    description: "Apartment Quiet EGP EGP EGP."
+ description: "Apartment Quiet ."
   },
   {
     id: "riyadh-5",
-    title: "Apartment EGP EGP",
-    location: "EGP EGP Riyadh",
+ title: "Apartment ",
+ location: "Riyadh",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4013,
     nights: 2,
     rating: 4.75,
@@ -1812,18 +1820,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800",
       "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=59" },
+    host: { name: "Sami", isSuperhost: false, avatar: "https://i.pravatar.cc/150?img=59" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 24.8255, lng: 46.7611 },
-    description: "Apartment EGP EGP EGP EGP."
+ description: "Modern Apartment ."
   },
   {
     id: "riyadh-6",
-    title: "Apartment EGP EGP",
-    location: "EGP EGP Riyadh",
+ title: "Apartment ",
+ location: "Riyadh",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 14295,
     nights: 2,
     rating: 5.0,
@@ -1837,14 +1845,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 24.6942, lng: 46.6853 },
-    description: "Apartment Luxury EGP EGP EGP."
+ description: "Apartment Luxury ."
   },
   {
     id: "riyadh-7",
-    title: "Apartment EGP EGP",
-    location: "EGP EGP Riyadh",
+ title: "Apartment ",
+ location: "Riyadh",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 5396,
     nights: 2,
     rating: 4.97,
@@ -1854,18 +1862,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800",
       "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=69" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=69" },
     specs: { guests: 8, bedrooms: 4, beds: 5, baths: 4 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 24.7712, lng: 46.5982 },
-    description: "Apartment Spacious EGPCozy EGP EGP."
+ description: "Apartment Spacious Cozy."
   },
   {
     id: "riyadh-8",
-    title: "EGP EGP EGP EGP EGP Riyadh",
-    location: "EGP EGP Riyadh",
+ title: "Riyadh",
+ location: "Riyadh",
     category: "Homes",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 2900,
     nights: 2,
     rating: 4.89,
@@ -1879,15 +1887,15 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 24.7955, lng: 46.6512 },
-    description: "EGP EGP EGP EGP EGP KAFD."
+ description: "KAFD."
   },
 
   {
     id: "al-1",
-    title: "EGP EGP EGP El Alamein",
-    location: "El AlameinEGP EGP",
+ title: "El Alamein",
+ location: "El Alamein",
     category: "Trending",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6100,
     nights: 2,
     rating: 5.0,
@@ -1897,18 +1905,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=800",
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=24" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=24" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.8358, lng: 28.9525 },
-    description: "EGP EGP EGP EGP El Alamein."
+ description: "El Alamein."
   },
   {
     id: "al-2",
-    title: "Villa EGP El Alamein",
-    location: "El AlameinEGP EGP",
+ title: "Villa El Alamein",
+ location: "El Alamein",
     category: "Mansions",
-    type: "Entire villa",
+ type: "Entire villa",
     pricePerNight: 11022,
     nights: 2,
     rating: 5.0,
@@ -1922,14 +1930,14 @@ export const mockProperties = [
     specs: { guests: 8, bedrooms: 4, beds: 5, baths: 3 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 30.8400, lng: 28.9600 },
-    description: "Villa EGP EGP Swimming Pool EGP El Alamein."
+ description: "Villa Swimming Pool El Alamein."
   },
   {
     id: "al-3",
-    title: "Apartment EGP El Alamein",
-    location: "El AlameinEGP EGP",
+ title: "Apartment El Alamein",
+ location: "El Alamein",
     category: "Beachfront",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6863,
     nights: 2,
     rating: 5.0,
@@ -1939,18 +1947,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800",
       "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?q=80&w=800"
     ],
-    host: { name: "EGPCountryside", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=43" },
+    host: { name: "Countryside", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=43" },
     specs: { guests: 5, bedrooms: 2, beds: 3, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.836, lng: 28.950 },
-    description: "Apartment EGPRamyEGP Luxury EGPEl Alamein."
+ description: "Apartment Ramy Luxury El Alamein."
   },
   {
     id: "al-4",
-    title: "EGP EGP El Alamein",
-    location: "El AlameinEGP EGP",
+ title: "El Alamein",
+ location: "El Alamein",
     category: "Beachfront",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 4829,
     nights: 2,
     rating: 5.0,
@@ -1964,14 +1972,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 30.8300, lng: 28.9400 },
-    description: "EGP EGP EGP EGP EGPSea EGPEl Alamein."
+ description: "Sea El Alamein."
   },
   {
     id: "al-5",
-    title: "Apartment EGP El Alamein",
-    location: "El AlameinEGP EGP",
+ title: "Apartment El Alamein",
+ location: "El Alamein",
     category: "Beachfront",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6113,
     nights: 2,
     rating: 4.89,
@@ -1985,14 +1993,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 30.8392, lng: 28.9512 },
-    description: "Apartment Luxury EGP El Alamein EGP EGP."
+ description: "Apartment Luxury El Alamein ."
   },
   {
     id: "al-6",
-    title: "Apartment EGP Sahel",
-    location: "North Coast EGP EGP",
+ title: "Apartment Sahel",
+ location: "North Coast ",
     category: "Beach",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3191,
     nights: 2,
     rating: 4.95,
@@ -2006,14 +2014,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 30.882, lng: 28.841 },
-    description: "Apartment EGP EGPNorth Coast EGP."
+ description: "Apartment North Coast ."
   },
   {
     id: "al-7",
-    title: "EGP Luxury EGP Marassi North Coast",
-    location: "EGP EGP EGP North Coast EGP",
+ title: " Luxury Marassi North Coast",
+ location: "North Coast ",
     category: "Beachfront",
-    type: "EGP Entire",
+ type: " Entire",
     pricePerNight: 7200,
     nights: 2,
     rating: 4.91,
@@ -2027,14 +2035,14 @@ export const mockProperties = [
     specs: { guests: 6, bedrooms: 3, beds: 4, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 30.9123, lng: 28.9451 },
-    description: "EGP EGP EGP Marassi."
+ description: "Marassi."
   },
   {
     id: "al-8",
-    title: "Apartment EGP El Alamein EGP",
-    location: "El Alamein EGP EGP",
+ title: "Apartment El Alamein ",
+ location: "El Alamein ",
     category: "Trending",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 8500,
     nights: 2,
     rating: 4.99,
@@ -2044,19 +2052,19 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800",
       "https://images.unsplash.com/photo-1567496898669-ee935f5f647a?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=33" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=33" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Washer"],
     coordinates: { lat: 30.8358, lng: 28.9525 },
-    description: "Apartment EGP EGP EGP El Alamein."
+ description: "Modern Apartment El Alamein."
   },
 
   {
     id: "istanbul-1",
-    title: "Apartment in Fatih",
-    location: "Fatih, Istanbul, Turkey",
+ title: "Apartment in Fatih",
+ location: "Fatih, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 5345,
     nights: 2,
     rating: 4.94,
@@ -2070,14 +2078,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen", "Pool"],
     coordinates: { lat: 41.0151, lng: 28.9497 },
-    description: "Apartment in Fatih near Hagia Sophia."
+ description: "Apartment in Fatih near Hagia Sophia."
   },
   {
     id: "istanbul-2",
-    title: "Apartment in Beyoğlu",
-    location: "Beyoğlu, Istanbul, Turkey",
+ title: "Apartment in Beyoğlu",
+ location: "Beyoğlu, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2784,
     nights: 2,
     rating: 5.0,
@@ -2091,14 +2099,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 41.0369, lng: 28.9775 },
-    description: "Modern apartment near Taksim Square."
+ description: "Modern apartment near Taksim Square."
   },
   {
     id: "istanbul-3",
-    title: "Apartment in Fatih",
-    location: "Fatih, Istanbul, Turkey",
+ title: "Apartment in Fatih",
+ location: "Fatih, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 9570,
     nights: 2,
     rating: 4.91,
@@ -2108,18 +2116,18 @@ export const mockProperties = [
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800",
       "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?q=80&w=800"
     ],
-    host: { name: "EGP", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
+    host: { name: "Sami", isSuperhost: true, avatar: "https://i.pravatar.cc/150?img=47" },
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Gym", "Pool", "Kitchen"],
     coordinates: { lat: 41.0422, lng: 29.0083 },
-    description: "Apartment in Fatih Istanbul."
+ description: "Apartment in Fatih Istanbul."
   },
   {
     id: "istanbul-4",
-    title: "Apartment in Beyoğlu",
-    location: "Beyoğlu, Istanbul, Turkey",
+ title: "Apartment in Beyoğlu",
+ location: "Beyoğlu, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3669,
     nights: 2,
     rating: 4.97,
@@ -2133,14 +2141,14 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Free parking", "Kitchen"],
     coordinates: { lat: 40.9901, lng: 29.0254 },
-    description: "Cozy apartment in Beyoğlu."
+ description: "Cozy apartment in Beyoğlu."
   },
   {
     id: "istanbul-5",
-    title: "Apartment in Fatih",
-    location: "Fatih, Istanbul, Turkey",
+ title: "Apartment in Fatih",
+ location: "Fatih, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 6951,
     nights: 2,
     rating: 4.91,
@@ -2154,14 +2162,14 @@ export const mockProperties = [
     specs: { guests: 2, bedrooms: 1, beds: 1, baths: 1 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Kitchen"],
     coordinates: { lat: 41.0256, lng: 28.9744 },
-    description: "Elegant apartment in Fatih."
+ description: "Elegant apartment in Fatih."
   },
   {
     id: "istanbul-6",
-    title: "Apartment in Fatih",
-    location: "Fatih, Istanbul, Turkey",
+ title: "Apartment in Fatih",
+ location: "Fatih, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 10251,
     nights: 2,
     rating: 4.77,
@@ -2175,14 +2183,14 @@ export const mockProperties = [
     specs: { guests: 4, bedrooms: 2, beds: 2, baths: 2 },
     amenities: ["Wi-Fi", "Air conditioning", "Free parking", "Allows pets", "Washer"],
     coordinates: { lat: 41.0512, lng: 28.9912 },
-    description: "Distinctive apartment in Fatih."
+ description: "Distinctive apartment in Fatih."
   },
   {
     id: "istanbul-7",
-    title: "Apartment in Beyoğlu",
-    location: "Beyoğlu, Istanbul, Turkey",
+ title: "Apartment in Beyoğlu",
+ location: "Beyoğlu, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 3370,
     nights: 2,
     rating: 4.94,
@@ -2196,14 +2204,14 @@ export const mockProperties = [
     specs: { guests: 5, bedrooms: 2, beds: 3, baths: 1 },
     amenities: ["Wi-Fi", "Free parking", "Kitchen"],
     coordinates: { lat: 41.0601, lng: 28.9872 },
-    description: "Cozy apartment in Beyoğlu."
+ description: "Cozy apartment in Beyoğlu."
   },
   {
     id: "istanbul-8",
-    title: "Apartment in Fatih Istanbul",
-    location: "Fatih, Istanbul, Turkey",
+ title: "Apartment in Fatih Istanbul",
+ location: "Fatih, Istanbul, Turkey",
     category: "Homes",
-    type: "Entire apartment",
+ type: "Entire apartment",
     pricePerNight: 2656,
     nights: 2,
     rating: 4.97,
@@ -2217,36 +2225,36 @@ export const mockProperties = [
     specs: { guests: 3, bedrooms: 1, beds: 2, baths: 1 },
     amenities: ["Wi-Fi", "Free parking", "Kitchen"],
     coordinates: { lat: 41.0151, lng: 28.9497 },
-    description: "Apartment in Fatih Istanbul."
+ description: "Apartment in Fatih Istanbul."
   }
 ];
 
 export const experienceCategories = [
-  { id: "1", title: "Cultural Tours", image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=400" },
-  { id: "2", title: "Sightseeing Highlights", image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" },
-  { id: "3", title: "Museums & Galleries", image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=400" },
-  { id: "4", title: "Food & Dining Tours", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400" },
-  { id: "5", title: "Outdoor Adventures", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=400" },
-  { id: "6", title: "Art Workshops", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=400" },
-  { id: "7", title: "Cooking Classes", image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400" },
-  { id: "8", title: "Architectural Tours", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=400" },
-  { id: "9", title: "Fine Dining", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400" },
-  { id: "10", title: "Water Sports", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=400" }
+ { id: "1", title: "Cultural Tours", image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=400" },
+ { id: "2", title: "Sightseeing Highlights", image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" },
+ { id: "3", title: "Museums & Galleries", image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=400" },
+ { id: "4", title: "Food & Dining Tours", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400" },
+ { id: "5", title: "Outdoor Adventures", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=400" },
+ { id: "6", title: "Art Workshops", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=400" },
+ { id: "7", title: "Cooking Classes", image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400" },
+ { id: "8", title: "Architectural Tours", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=400" },
+ { id: "9", title: "Fine Dining", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400" },
+ { id: "10", title: "Water Sports", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=400" }
 ];
 
 export const categories = [
-  { id: "all", title: "All", icon: "all" },
-  { id: "Homes", title: "Homes", icon: "homes" },
-  { id: "Mansions", title: "Mansions", icon: "mansions" },
-  { id: "Hotels", title: "Hotels", icon: "hotels" },
-  { id: "Beachfront", title: "Beachfront", icon: "beachfront" },
-  { id: "Beach", title: "Beaches", icon: "beach" },
-  { id: "Trending", title: "Trending", icon: "trending" },
-  { id: "Experiences", title: "Experiences", icon: "experiences" },
-  { id: "Pools", title: "Amazing Pools", icon: "pools" },
-  { id: "Cabins", title: "Cabins", icon: "cabins" },
-  { id: "Countryside", title: "Countryside", icon: "countryside" },
-  { id: "Cities", title: "Popular Cities", icon: "cities" },
-  { id: "Islands", title: "Islands", icon: "islands" },
-  { id: "Design", title: "Iconic Designs", icon: "design" }
+ { id: "all", title: "All", icon: "all" },
+ { id: "Homes", title: "Homes", icon: "homes" },
+ { id: "Mansions", title: "Mansions", icon: "mansions" },
+ { id: "Hotels", title: "Hotels", icon: "hotels" },
+ { id: "Beachfront", title: "Beachfront", icon: "beachfront" },
+ { id: "Beach", title: "Beaches", icon: "beach" },
+ { id: "Trending", title: "Trending", icon: "trending" },
+ { id: "Experiences", title: "Experiences", icon: "experiences" },
+ { id: "Pools", title: "Amazing Pools", icon: "pools" },
+ { id: "Cabins", title: "Cabins", icon: "cabins" },
+ { id: "Countryside", title: "Countryside", icon: "countryside" },
+ { id: "Cities", title: "Popular Cities", icon: "cities" },
+ { id: "Islands", title: "Islands", icon: "islands" },
+ { id: "Design", title: "Iconic Designs", icon: "design" }
 ];

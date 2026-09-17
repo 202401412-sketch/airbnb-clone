@@ -62,19 +62,30 @@ const LanguageModal = ({ isOpen, onClose, selectedLang = 'English', selectedCurr
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-      <div className="bg-white w-full max-w-4xl h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative" dir="ltr">
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && onClose) onClose();
+      }}
+    >
+      <div 
+        className="bg-white w-full max-w-4xl max-h-[90vh] h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative my-auto border border-gray-100" 
+        dir="ltr"
+        onClick={(e) => e.stopPropagation()}
+      >
         
         {/* Header Tabs */}
-        <div className="p-6 pb-0 border-b border-gray-200 relative">
+        <div className="p-6 pb-0 border-b border-gray-200 sticky top-0 bg-white z-10 flex items-center justify-between">
           <button 
+            type="button"
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-gray-100 transition absolute left-6 top-5 text-gray-700"
+            className="p-2 rounded-full hover:bg-gray-100 text-gray-900 bg-gray-50 border border-gray-200 transition flex items-center justify-center shadow-xs cursor-pointer"
+            aria-label="Close modal"
           >
-            <FiX className="w-5 h-5" />
+            <FiX className="w-5 h-5 text-gray-900 stroke-[2.5]" />
           </button>
 
-          <div className="flex gap-8 ml-12 text-sm font-semibold">
+          <div className="flex gap-8 ml-4 text-sm font-semibold flex-1">
             <button
               onClick={() => setActiveTab('lang')}
               className={`pb-4 transition border-b-2 ${

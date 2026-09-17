@@ -19,6 +19,8 @@ const translations = {
     // Search bar
     where: 'Where',
     searchDestinations: 'Search destinations',
+    when: 'When',
+    addDates: 'Add dates',
     checkIn: 'Check in',
     checkOut: 'Check out',
     who: 'Who',
@@ -98,6 +100,8 @@ const translations = {
     // Search bar
     where: 'الوجهة',
     searchDestinations: 'البحث عن الوجهات',
+    when: 'التاريخ',
+    addDates: 'إضافة تواريخ',
     checkIn: 'الوصول',
     checkOut: 'المغادرة',
     who: 'الضيوف',

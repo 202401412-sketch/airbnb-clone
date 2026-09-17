@@ -36,13 +36,27 @@ const FilterModal = ({ isOpen, onClose, onApplyFilters }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-      <div className="bg-white w-full max-w-xl max-h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative" dir="ltr">
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && onClose) onClose();
+      }}
+    >
+      <div 
+        className="bg-white w-full max-w-xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative my-auto border border-gray-100" 
+        dir="ltr"
+        onClick={(e) => e.stopPropagation()}
+      >
         
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 sticky top-0 bg-white z-10">
-          <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition text-gray-700">
-            <FiX className="w-5 h-5" />
+          <button 
+            type="button"
+            onClick={onClose} 
+            className="p-2 rounded-full hover:bg-gray-100 text-gray-900 bg-gray-50 border border-gray-200 transition flex items-center justify-center shadow-xs cursor-pointer"
+            aria-label="Close modal"
+          >
+            <FiX className="w-5 h-5 text-gray-900 stroke-[2.5]" />
           </button>
           <h3 className="font-bold text-lg text-gray-900">Filters</h3>
           <div className="w-8"></div>

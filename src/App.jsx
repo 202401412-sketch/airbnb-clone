@@ -15,11 +15,23 @@ import FilterModal from './components/common/FilterModal.jsx';
 import MapContainer from './components/common/MapContainer.jsx';
 import FloatingToggleButton from './components/common/FloatingToggleButton.jsx';
 
+// Dedicated Page Views
+import HelpCenterPage from './pages/HelpCenterPage.jsx';
+import PrivacyPage from './pages/PrivacyPage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
+import CompanyPage from './pages/CompanyPage.jsx';
+import SitemapPage from './pages/SitemapPage.jsx';
+import CancellationPage from './pages/CancellationPage.jsx';
+import SupportSafetyPage from './pages/SupportSafetyPage.jsx';
+import BecomeHostPage from './pages/BecomeHostPage.jsx';
+
 import { mockProperties } from './data/mockData.js';
 import { SearchProvider } from './context/SearchContext.jsx';
 import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
+import { UserSavedProvider } from './context/UserSavedContext.jsx';
 
-const MainLayout = () => {
+const MainLayout = ({ onNavigate }) => {
   const { language, setLanguage, currency, setCurrency, dir, t } = useLanguage();
   const [activeMainTab, setActiveMainTab] = useState('All');
   const [activeSearchSection, setActiveSearchSection] = useState(null);
@@ -109,11 +121,28 @@ const MainLayout = () => {
     setIsLangModalOpen(true);
   };
 
+  const handleSelectDestination = (cityName) => {
+    if (!cityName) return;
+
+    const filtered = mockProperties.filter((property) => {
+      const loc = (property.location || '').toLowerCase();
+      const title = (property.title || '').toLowerCase();
+      const target = cityName.toLowerCase();
+      return loc.includes(target) || title.includes(target);
+    });
+
+    if (filtered.length > 0) {
+      setDisplayedProperties(filtered);
+    }
+    setSelectedAmenity(cityName);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between" dir={dir}>
       
       {/* Sticky Header */}
-      <header className="sticky top-0 bg-white z-40 border-b border-gray-100">
+      <header className="sticky top-0 bg-white z-30 relative border-b border-gray-100">
         <Header 
           setIsLangModalOpen={() => handleOpenLangModal('lang')} 
           isScrolled={isScrolled} 
@@ -128,6 +157,7 @@ const MainLayout = () => {
           onOpenFilterModal={() => setIsFilterModalOpen(true)}
           activeMainTab={activeMainTab}
           onSelectMainTab={setActiveMainTab}
+          onNavigate={onNavigate}
         />
         
         {!isScrolled && !isSearched && (
@@ -212,7 +242,7 @@ const MainLayout = () => {
         initialTab={langModalTab}
       />
 
-      {/* Feature Modals (Become a host, Refer a host, Co-host, Gift cards, Help center) */}
+      {/* Feature Modals */}
       <InfoFeatureModal
         isOpen={Boolean(activeFeatureModal)}
         onClose={() => setActiveFeatureModal(null)}
@@ -238,17 +268,58 @@ const MainLayout = () => {
         onToggle={() => setShowMap(!showMap)}
       />
 
-      <Footer onOpenLangModal={handleOpenLangModal} setIsLangModalOpen={setIsLangModalOpen} />
+      <Footer 
+        onOpenLangModal={handleOpenLangModal} 
+        setIsLangModalOpen={setIsLangModalOpen} 
+        onOpenFeatureModal={setActiveFeatureModal}
+        onSelectDestination={handleSelectDestination}
+        onNavigate={onNavigate}
+      />
     </div>
   );
 };
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case 'help':
+        return <HelpCenterPage onNavigate={handleNavigate} />;
+      case 'privacy':
+        return <PrivacyPage onNavigate={handleNavigate} />;
+      case 'terms':
+        return <TermsPage onNavigate={handleNavigate} />;
+      case 'company':
+        return <CompanyPage onNavigate={handleNavigate} />;
+      case 'sitemap':
+        return <SitemapPage onNavigate={handleNavigate} />;
+      case 'cancellation':
+        return <CancellationPage onNavigate={handleNavigate} />;
+      case 'supportSafety':
+        return <SupportSafetyPage onNavigate={handleNavigate} />;
+      case 'becomeHost':
+        return <BecomeHostPage onNavigate={handleNavigate} />;
+      case 'home':
+      default:
+        return <MainLayout onNavigate={handleNavigate} />;
+    }
+  };
+
   return (
     <LanguageProvider>
-      <SearchProvider>
-        <MainLayout />
-      </SearchProvider>
+      <AuthProvider>
+        <UserSavedProvider>
+          <SearchProvider>
+            {renderCurrentPage()}
+          </SearchProvider>
+        </UserSavedProvider>
+      </AuthProvider>
     </LanguageProvider>
   );
 }
