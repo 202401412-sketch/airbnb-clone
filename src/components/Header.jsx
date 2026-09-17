@@ -9,6 +9,7 @@ import { MdOutlinePublic, MdOutlineCardTravel, MdOutlineRoomService } from 'reac
 import { FiHome } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useBusiness } from '../context/BusinessContext.jsx';
 import UserMenu from './UserMenu.jsx';
 
 const Header = ({ 
@@ -27,6 +28,7 @@ const Header = ({
 }) => {
   const { t, dir } = useLanguage();
   const { user, isHost, isGuest, logout, switchRole } = useAuth();
+  const { isBusinessMode, toggleBusinessMode } = useBusiness();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const handleFeatureClick = (featureName) => {
@@ -81,7 +83,10 @@ const Header = ({
         
         {/* Logo */}
         <div 
-          onClick={() => setIsSearched && setIsSearched(false)} 
+          onClick={() => {
+            if (setIsSearched) setIsSearched(false);
+            if (onNavigate) onNavigate('home');
+          }} 
           className="text-[#FF385C] flex items-center gap-1.5 cursor-pointer"
         >
           <FaAirbnb className="w-8 h-8" />
@@ -154,7 +159,26 @@ const Header = ({
         )}
 
         {/* Right Controls & User Menu */}
-        <div className="flex items-center gap-3 relative z-[100]">
+        <div className="flex items-center gap-2.5 relative z-[100]">
+          {/* Vantage Business Toggle Button */}
+          <button
+            type="button"
+            onClick={() => {
+              toggleBusinessMode();
+              if (onNavigate) {
+                onNavigate('vantage');
+              }
+            }}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 border cursor-pointer ${
+              isBusinessMode
+                ? 'bg-[#FF385C] text-white border-[#FF385C] shadow-sm'
+                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400 hover:bg-gray-50'
+            }`}
+          >
+            <FiBriefcase className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">{isBusinessMode ? 'Vantage Active' : 'Switch to Vantage'}</span>
+          </button>
+
           {/* Top Host Action Button */}
           {isHost ? (
             <button 

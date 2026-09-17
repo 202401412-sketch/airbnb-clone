@@ -24,6 +24,7 @@ import SitemapPage from './pages/SitemapPage.jsx';
 import CancellationPage from './pages/CancellationPage.jsx';
 import SupportSafetyPage from './pages/SupportSafetyPage.jsx';
 import BecomeHostPage from './pages/BecomeHostPage.jsx';
+import VantageBusiness from './components/VantageBusiness.jsx';
 
 import { mockProperties } from './data/mockData.js';
 import { SearchProvider } from './context/SearchContext.jsx';
@@ -31,7 +32,7 @@ import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { UserSavedProvider } from './context/UserSavedContext.jsx';
 
-const MainLayout = ({ onNavigate }) => {
+const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
   const { language, setLanguage, currency, setCurrency, dir, t } = useLanguage();
   const [activeMainTab, setActiveMainTab] = useState('All');
   const [activeSearchSection, setActiveSearchSection] = useState(null);
@@ -41,7 +42,6 @@ const MainLayout = ({ onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [selectedAmenity, setSelectedAmenity] = useState(null);
 
   // Developer 1 State
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -281,6 +281,7 @@ const MainLayout = ({ onNavigate }) => {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [selectedAmenity, setSelectedAmenity] = useState(null);
 
   const handleNavigate = (page) => {
     setCurrentPage(page);
@@ -305,9 +306,22 @@ export default function App() {
         return <SupportSafetyPage onNavigate={handleNavigate} />;
       case 'becomeHost':
         return <BecomeHostPage onNavigate={handleNavigate} />;
+      case 'vantage':
+        return (
+          <VantageBusiness 
+            onNavigate={handleNavigate} 
+            onSelectAmenity={setSelectedAmenity} 
+          />
+        );
       case 'home':
       default:
-        return <MainLayout onNavigate={handleNavigate} />;
+        return (
+          <MainLayout 
+            onNavigate={handleNavigate} 
+            selectedAmenity={selectedAmenity}
+            setSelectedAmenity={setSelectedAmenity}
+          />
+        );
     }
   };
 
