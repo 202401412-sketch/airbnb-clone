@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import { useUserSaved } from '../context/UserSavedContext.jsx';
 
-const PropertyCard = ({ property, onClick }) => {
+const PropertyCard = memo(({ property, onClick }) => {
   const { formatPrice, t, dir } = useLanguage();
+  const { isFavorite, toggleFavorite } = useUserSaved();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const [isLiked, setIsLiked] = useState(() => {
-    try {
-      const saved = localStorage.getItem('airbnb_wishlist');
-      const ids = saved ? JSON.parse(saved) : [];
-      return property?.id ? ids.includes(property.id) : false;
-    } catch {
-      return false;
-    }
-  });
+  const favorited = isFavorite(property?.id || property?.title);
 
   const fallbackImage = "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800";
 
@@ -33,34 +27,36 @@ const PropertyCard = ({ property, onClick }) => {
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const toggleWishlist = (e) => {
+  const handleToggleWishlist = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setIsLiked((prev) => {
-      const next = !prev;
-      if (property?.id) {
-        try {
-          const saved = localStorage.getItem('airbnb_wishlist');
-          const ids = saved ? JSON.parse(saved) : [];
-          const updated = next
-            ? [...new Set([...ids, property.id])]
-            : ids.filter((id) => id !== property.id);
-          localStorage.setItem('airbnb_wishlist', JSON.stringify(updated));
-        } catch {}
-      }
-      return next;
-    });
+    toggleFavorite(property);
   };
 
-  const egpBase = property?.pricePerNight ? (property.pricePerNight * (property.nights || 1)) : 3000;
-  const formattedPrice = formatPrice(egpBase);
+  const isExperience = property?.category === 'Experiences' || property?.id?.startsWith('exp-') || property?.id?.startsWith('photo-');
+  const priceVal = property?.pricePerNight || property?.price || 2500;
   const nightsCount = property?.nights || 1;
+  const egpBase = isExperience ? priceVal : priceVal * nightsCount;
+  const formattedPrice = formatPrice(egpBase);
 
-  const priceText = property?.priceLabel
-    ? property.priceLabel
-    : `${formattedPrice} ${t('forNights')} ${nightsCount} ${nightsCount === 1 ? t('night') : t('nights')}`;
+  // Line 3 Price Formatting (Clean, no duplicate EGP)
+  let priceText = '';
+  if (property?.priceLabel) {
+    priceText = property.priceLabel.replace(/(EGP\s*)+/gi, 'EGP ').trim();
+  } else if (isExperience) {
+    priceText = `${formattedPrice} / person`;
+  } else {
+    priceText = `${formattedPrice} ${t('forNights')} ${nightsCount} ${nightsCount === 1 ? t('night') : t('nights')}`;
+  }
+  priceText = priceText.replace(/(EGP\s*)+/g, 'EGP ');
 
-  const ratingText = property?.rating ? property.rating.toFixed(2).replace('.00', '.0') : "5.0";
+  // Line 2 Subtitle: Hosted by [Host Name] / Type / Category
+  const line2Subtitle = property?.host?.name && !property.host.name.includes('EGP')
+    ? `Hosted by ${property.host.name} · ${property?.type || property?.category || 'Stay'}`
+    : (property?.type || property?.category || 'Stay');
+
+  // Rating display
+  const ratingText = property?.rating ? property.rating.toFixed(2).replace('.00', '.0') : "4.95";
 
   return (
     <div 
@@ -68,8 +64,9 @@ const PropertyCard = ({ property, onClick }) => {
       className="flex flex-col gap-1.5 group cursor-pointer w-full"
       dir={dir}
     >
+      {/* Image Container */}
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
-        {property?.badgeText ? (
+        {property?.badgeText && !property.badgeText.includes('EGP') ? (
           <div className="absolute top-2.5 right-2.5 z-10 bg-gray-900/90 text-white backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm text-[11px] font-semibold tracking-tight">
             {property.badgeText}
           </div>
@@ -80,15 +77,16 @@ const PropertyCard = ({ property, onClick }) => {
         ) : null}
 
         <button
-          onClick={toggleWishlist}
+          type="button"
+          onClick={handleToggleWishlist}
           aria-label="Wishlist"
-          aria-pressed={isLiked}
+          aria-pressed={favorited}
           className="absolute top-2.5 left-2.5 z-10 p-1 rounded-full hover:scale-110 active:scale-95 transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill={isLiked ? "#FF385C" : "rgba(0, 0, 0, 0.35)"}
+            fill={favorited ? "#FF385C" : "rgba(0, 0, 0, 0.35)"}
             stroke="white"
             strokeWidth="1.6"
             className="w-5 h-5 transition drop-shadow-sm"
@@ -111,6 +109,7 @@ const PropertyCard = ({ property, onClick }) => {
           <>
             <div className="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ direction: 'ltr' }}>
               <button
+                type="button"
                 onClick={prevImage}
                 aria-label="Previous Image"
                 className="bg-white/90 p-1.5 rounded-full hover:bg-white text-gray-800 shadow-md hover:scale-105 active:scale-95 transition"
@@ -120,6 +119,7 @@ const PropertyCard = ({ property, onClick }) => {
                 </svg>
               </button>
               <button
+                type="button"
                 onClick={nextImage}
                 aria-label="Next Image"
                 className="bg-white/90 p-1.5 rounded-full hover:bg-white text-gray-800 shadow-md hover:scale-105 active:scale-95 transition"
@@ -144,7 +144,9 @@ const PropertyCard = ({ property, onClick }) => {
         )}
       </div>
 
+      {/* Item Details Layout */}
       <div className="pt-0.5 flex flex-col">
+        {/* Line 1: Title / Location + Rating */}
         <div className="flex items-center justify-between gap-1">
           <h3 className="font-semibold text-gray-900 text-[14px] truncate leading-snug">
             {property?.title || property?.location}
@@ -153,22 +155,22 @@ const PropertyCard = ({ property, onClick }) => {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 text-gray-900 inline">
               <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
             </svg>
-            {ratingText}
+            ★ {ratingText}
           </span>
         </div>
 
-        {property?.type && (
-          <p className="text-[13px] text-gray-500 truncate leading-snug">
-            {property.type}
-          </p>
-        )}
+        {/* Line 2: Hosted by [Host Name] / Category / Type */}
+        <p className="text-[13px] text-gray-500 truncate leading-snug">
+          {line2Subtitle}
+        </p>
 
+        {/* Line 3: Clean Price Formatting */}
         <div className="text-[13px] font-semibold text-gray-900 truncate leading-snug mt-0.5 flex items-center gap-1" dir="ltr">
           <span>{priceText}</span>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default PropertyCard;

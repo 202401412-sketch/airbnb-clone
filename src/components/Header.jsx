@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { FaAirbnb, FaUserCircle } from 'react-icons/fa';
-import { FiGlobe, FiMenu, FiSearch, FiSliders, FiHelpCircle, FiX } from 'react-icons/fi';
+import { 
+  FiGlobe, FiMenu, FiSearch, FiSliders, FiHelpCircle, FiX, 
+  FiLogOut, FiUser, FiKey, FiPlusSquare, FiHeart, FiBriefcase, 
+  FiRepeat, FiGrid
+} from 'react-icons/fi';
 import { MdOutlinePublic, MdOutlineCardTravel, MdOutlineRoomService } from 'react-icons/md';
 import { FiHome } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
+import UserMenu from './UserMenu.jsx';
 
 const Header = ({ 
   setIsLangModalOpen, 
@@ -16,14 +22,23 @@ const Header = ({
   activeMainTab = 'All',
   onSelectMainTab,
   onOpenAuth,
-  onOpenFeatureModal
+  onOpenFeatureModal,
+  onNavigate
 }) => {
   const { t, dir } = useLanguage();
+  const { user, isHost, isGuest, logout, switchRole } = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const handleFeatureClick = (featureName) => {
     setIsUserMenuOpen(false);
-    if (onOpenFeatureModal) {
+    if (onNavigate) {
+      if (featureName === 'helpCenter') onNavigate('help');
+      else if (featureName === 'becomeHost') onNavigate('becomeHost');
+      else if (featureName === 'referHost' || featureName === 'giftCards') onNavigate('company');
+      else if (featureName === 'findCoHost') onNavigate('becomeHost');
+      else onNavigate(featureName);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (onOpenFeatureModal) {
       onOpenFeatureModal(featureName);
     }
   };
@@ -33,6 +48,11 @@ const Header = ({
     if (onOpenAuth) {
       onOpenAuth();
     }
+  };
+
+  const handleLogoutClick = () => {
+    setIsUserMenuOpen(false);
+    logout();
   };
 
   const mainTabs = [
@@ -90,15 +110,43 @@ const Header = ({
         ) : (
           /* Compact Search Bar */
           <div 
-            onClick={() => setIsSearched && setIsSearched(false)} 
+            onClick={() => {
+              if (setIsSearched) setIsSearched(false);
+              if (setActiveSearchSection) setActiveSearchSection('when');
+            }} 
             className="flex items-center border border-gray-300 rounded-full py-2 px-5 shadow-sm hover:shadow-md transition cursor-pointer text-sm font-semibold gap-4 bg-white"
           >
-            <div className="flex items-center gap-2 pr-3 border-r border-gray-200">
+            <div 
+              onClick={(e) => {
+                e.stopPropagation();
+                if (setIsSearched) setIsSearched(false);
+                if (setActiveSearchSection) setActiveSearchSection('where');
+              }}
+              className="flex items-center gap-2 pr-3 border-r border-gray-200 hover:text-black"
+            >
               <span className="text-xl">🏚️</span>
               <span className="text-gray-900 font-bold">{t('homesNearby')}</span>
             </div>
-            <span className="text-gray-900 font-semibold border-r border-gray-200 pr-4">{t('anyWeek')}</span>
-            <span className="text-gray-500 font-normal">{t('addGuests')}</span>
+            <span 
+              onClick={(e) => {
+                e.stopPropagation();
+                if (setIsSearched) setIsSearched(false);
+                if (setActiveSearchSection) setActiveSearchSection('when');
+              }}
+              className="text-gray-900 font-semibold border-r border-gray-200 pr-4 hover:text-[#FF385C]"
+            >
+              {t('anyWeek')}
+            </span>
+            <span 
+              onClick={(e) => {
+                e.stopPropagation();
+                if (setIsSearched) setIsSearched(false);
+                if (setActiveSearchSection) setActiveSearchSection('who');
+              }}
+              className="text-gray-500 font-normal hover:text-black"
+            >
+              {t('addGuests')}
+            </span>
             <div className="bg-[#FF385C] text-white p-2 rounded-full ml-1">
               <FiSearch className="w-3.5 h-3.5 stroke-[3]" />
             </div>
@@ -106,14 +154,28 @@ const Header = ({
         )}
 
         {/* Right Controls & User Menu */}
-        <div className="flex items-center gap-3 relative">
-          <button 
-            type="button" 
-            onClick={() => handleFeatureClick('becomeHost')}
-            className="text-sm font-semibold hover:bg-gray-100 px-4 py-2 rounded-full transition hidden sm:block"
-          >
-            {t('becomeHost')}
-          </button>
+        <div className="flex items-center gap-3 relative z-[100]">
+          {/* Top Host Action Button */}
+          {isHost ? (
+            <button 
+              type="button" 
+              onClick={() => handleFeatureClick('becomeHost')}
+              className="text-xs font-bold bg-gradient-to-r from-rose-500 to-rose-600 text-white hover:opacity-95 px-4 py-2 rounded-full transition hidden sm:flex items-center gap-1.5 shadow-sm"
+            >
+              <FiGrid className="w-3.5 h-3.5" />
+              <span>Host Console</span>
+            </button>
+          ) : (
+            <button 
+              type="button" 
+              onClick={() => handleFeatureClick('becomeHost')}
+              className="text-sm font-semibold hover:bg-gray-100 px-4 py-2 rounded-full transition hidden sm:block"
+            >
+              {t('becomeHost')}
+            </button>
+          )}
+
+          {/* Language Selector Trigger */}
           <button 
             type="button" 
             onClick={() => setIsLangModalOpen && setIsLangModalOpen(true)}
@@ -122,70 +184,39 @@ const Header = ({
             <FiGlobe className="w-4 h-4" />
           </button>
           
+          {/* User Menu Trigger Button */}
           <button 
             type="button"
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-            className="flex items-center gap-3 border border-gray-300 rounded-full py-1.5 px-3 hover:shadow-md transition cursor-pointer bg-white"
+            className="flex items-center gap-2.5 border border-gray-300 rounded-full py-1.5 px-3 hover:shadow-md transition cursor-pointer bg-white"
           >
             <FiMenu className="text-gray-600 text-sm" />
-            <FaUserCircle className="text-gray-500 text-xl" />
+            {user ? (
+              <div className="flex items-center gap-2">
+                {user.avatar ? (
+                  <img src={user.avatar} alt={user.name} className="w-6 h-6 rounded-full object-cover border" />
+                ) : (
+                  <div className="w-6 h-6 bg-black text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <span className="text-xs font-bold text-gray-900 hidden md:inline max-w-[80px] truncate">
+                  {user.name.split(' ')[0]}
+                </span>
+              </div>
+            ) : (
+              <FaUserCircle className="text-gray-500 text-xl" />
+            )}
           </button>
 
-          {/* User Dropdown */}
-          {isUserMenuOpen && (
-            <div className="absolute right-0 top-12 w-64 bg-white rounded-2xl shadow-xl border border-gray-200 py-2 z-50 text-sm text-left">
-              <button 
-                onClick={() => handleFeatureClick('helpCenter')}
-                className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-2 text-gray-800 font-medium"
-              >
-                <FiHelpCircle className="w-4 h-4 text-gray-600" />
-                <span>{t('helpCenter')}</span>
-              </button>
-              <div className="border-t border-gray-100 my-1"></div>
-              <div 
-                onClick={() => handleFeatureClick('becomeHost')}
-                className="px-4 py-3 hover:bg-gray-50 cursor-pointer flex justify-between items-start gap-2"
-              >
-                <div>
-                  <div className="font-semibold text-gray-900 text-sm">{t('becomeHost')}</div>
-                  <div className="text-[11px] text-gray-500 leading-snug mt-0.5">
-                    It's easy to start hosting and earn extra income.
-                  </div>
-                </div>
-                <img 
-                  src="https://a0.muscache.com/pictures/2a166430-8c28-4200-b36e-aa9322fee2c4.jpg" 
-                  alt="Host" 
-                  className="w-10 h-10 object-cover rounded-lg flex-shrink-0"
-                />
-              </div>
-              <div className="border-t border-gray-100 my-1"></div>
-              <button 
-                onClick={() => handleFeatureClick('referHost')}
-                className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-gray-700 text-sm"
-              >
-                {t('referHost')}
-              </button>
-              <button 
-                onClick={() => handleFeatureClick('findCoHost')}
-                className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-gray-700 text-sm"
-              >
-                {t('findCoHost')}
-              </button>
-              <button 
-                onClick={() => handleFeatureClick('giftCards')}
-                className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-gray-700 text-sm"
-              >
-                {t('giftCards')}
-              </button>
-              <div className="border-t border-gray-100 my-1"></div>
-              <button 
-                onClick={handleAuthClick}
-                className="w-full text-left px-4 py-3 hover:bg-gray-50 font-bold text-black text-sm"
-              >
-                {t('loginSignUp')}
-              </button>
-            </div>
-          )}
+          {/* User Dropdown Component */}
+          <UserMenu 
+            isOpen={isUserMenuOpen}
+            onClose={() => setIsUserMenuOpen(false)}
+            onNavigate={onNavigate}
+            onOpenAuth={onOpenAuth}
+            onOpenFeatureModal={onOpenFeatureModal}
+          />
         </div>
 
       </div>

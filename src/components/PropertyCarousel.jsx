@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, memo } from 'react';
 import PropertyCard from './PropertyCard.jsx';
 
-const ShowAllCard = ({ count = 0, images = [] }) => {
+const ShowAllCard = memo(({ count = 0, images = [] }) => {
   const previewImages = images.slice(0, 4);
 
   return (
@@ -14,6 +14,7 @@ const ShowAllCard = ({ count = 0, images = [] }) => {
                 src={img}
                 alt="Preview"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                loading="lazy"
               />
             </div>
           ))}
@@ -45,11 +46,11 @@ const ShowAllCard = ({ count = 0, images = [] }) => {
       </div>
     </div>
   );
-};
+});
 
 const CARD_WIDTH = 220;
 
-const PropertyCarousel = ({
+const PropertyCarousel = memo(({
   title,
   subtitle,
   properties = [],
@@ -204,6 +205,6 @@ const PropertyCarousel = ({
       </div>
     </section>
   );
-};
+});
 
 export default PropertyCarousel;
