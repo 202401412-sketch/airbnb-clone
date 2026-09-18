@@ -23,17 +23,28 @@ const UserMenu = ({
     if (callback) callback();
   };
 
-  const handleFeatureClick = (featureName) => {
+  const handleFeatureClick = (target) => {
     if (onClose) onClose();
+
     if (onNavigate) {
-      if (featureName === 'helpCenter') onNavigate('help');
-      else if (featureName === 'becomeHost') onNavigate('becomeHost');
-      else if (featureName === 'referHost' || featureName === 'giftCards') onNavigate('company');
-      else if (featureName === 'findCoHost') onNavigate('becomeHost');
-      else onNavigate(featureName);
+      if (target === 'manageListings' || target === 'becomeHost' || target === 'findCoHost') {
+        onNavigate('becomeHost');
+      } else if (target === 'helpCenter') {
+        onNavigate('help');
+      } else if (target === 'trips') {
+        onNavigate('trips'); // 🟢 توجيه صح لصفحة الرحلات
+      } else if (target === 'wishlists') {
+        onNavigate('wishlists'); // 🟢 توجيه صح لصفحة المفضلة
+      } else if (target === 'referHost' || target === 'giftCards') {
+        onNavigate('company');
+      } else if (target === 'vantage') {
+        onNavigate('vantage');
+      } else {
+        onNavigate('home');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (onOpenFeatureModal) {
-      onOpenFeatureModal(featureName);
+      onOpenFeatureModal(target);
     }
   };
 
@@ -60,7 +71,10 @@ const UserMenu = ({
           {/* Role Switcher */}
           <button 
             type="button"
-            onClick={() => handleAction(() => switchRole(isHost ? 'guest' : 'host'))}
+            onClick={() => handleAction(() => {
+              switchRole(isHost ? 'guest' : 'host');
+              if (onNavigate) onNavigate(isHost ? 'home' : 'becomeHost');
+            })}
             className="w-full mt-2.5 py-1.5 px-3 bg-white border border-gray-300 hover:border-black rounded-xl text-xs font-semibold text-gray-800 flex items-center justify-between transition shadow-2xs cursor-pointer"
           >
             <span className="flex items-center gap-1.5">
@@ -77,7 +91,7 @@ const UserMenu = ({
         <div className="py-1">
           <button 
             type="button"
-            onClick={() => handleFeatureClick('becomeHost')}
+            onClick={() => handleFeatureClick('manageListings')}
             className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg flex items-center gap-2.5 text-gray-900 font-semibold cursor-pointer"
           >
             <FiGrid className="w-4 h-4 text-[#FF385C]" />
@@ -104,18 +118,20 @@ const UserMenu = ({
         </div>
       ) : isGuest && user ? (
         <div className="py-1">
+          {/* 🟢 تعديل زرار الرحلات */}
           <button 
             type="button"
-            onClick={() => handleFeatureClick('helpCenter')}
+            onClick={() => handleFeatureClick('trips')}
             className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg flex items-center gap-2.5 text-gray-900 font-semibold cursor-pointer"
           >
             <FiBriefcase className="w-4 h-4 text-[#FF385C]" />
             <span>My Trips & Bookings</span>
           </button>
 
+          {/* 🟢 تعديل زرار المفضلة */}
           <button 
             type="button"
-            onClick={() => handleFeatureClick('helpCenter')}
+            onClick={() => handleFeatureClick('wishlists')}
             className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg flex items-center gap-2.5 text-gray-700 cursor-pointer"
           >
             <FiHeart className="w-4 h-4 text-rose-500" />
