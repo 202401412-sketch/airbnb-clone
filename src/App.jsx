@@ -27,6 +27,10 @@ import SupportSafetyPage from './pages/SupportSafetyPage.jsx';
 import BecomeHostPage from './pages/BecomeHostPage.jsx';
 import VantageBusiness from './components/VantageBusiness.jsx';
 
+// 🟢 الصفحات الجديدة للرحلات والمفضلة
+import MyTripsPage from './pages/MyTripsPage.jsx';
+import WishlistsPage from './pages/WishlistsPage.jsx';
+
 import { mockProperties } from './data/mockData.js';
 import { SearchProvider } from './context/SearchContext.jsx';
 import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
@@ -224,6 +228,8 @@ const MainLayout = ({
         />
       )}
 
+      <LanguageModal 
+        isOpen={isLangModalOpen} 
       <LanguageModal
         isOpen={isLangModalOpen}
         onClose={() => setIsLangModalOpen(false)}
@@ -238,6 +244,11 @@ const MainLayout = ({
         isOpen={Boolean(activeFeatureModal)}
         onClose={() => setActiveFeatureModal(null)}
         feature={activeFeatureModal}
+      />
+
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
       />
 
       <FilterModal
@@ -282,6 +293,14 @@ export default function App() {
 
   const renderCurrentPage = () => {
     switch (currentPage) {
+      // 🟢 توجيه لصفحة الرحلات
+      case 'trips':
+        return <MyTripsPage onNavigate={handleNavigate} />;
+
+      // 🟢 توجيه لصفحة المفضلة
+      case 'wishlists':
+        return <WishlistsPage onNavigate={handleNavigate} />;
+
       case 'help':
         return <HelpCenterPage onNavigate={handleNavigate} />;
       case 'privacy':
