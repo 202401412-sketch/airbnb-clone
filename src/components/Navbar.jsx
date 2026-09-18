@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaAirbnb } from 'react-icons/fa';
+import UserMenu from './UserMenu.jsx';
 
 const languages = [
   { name: 'English', region: 'United States' },
   { name: 'English', region: 'United Kingdom' },
-  { name: 'العربية', region: 'العالم' },
+  { name: 'EGP', region: 'EGP' },
   { name: 'Azərbaycan dili', region: 'Azərbaycan' },
   { name: 'Bahasa Indonesia', region: 'Indonesia' },
   { name: 'Bosanski', region: 'Bosna i Hercegovina' },
@@ -49,7 +50,7 @@ const languages = [
 ];
 
 const currencies = [
-  { name: 'Egyptian pound', code: 'EGP', symbol: 'ج.م' },
+  { name: 'Egyptian pound', code: 'EGP', symbol: 'EGP' },
   { name: 'Australian dollar', code: 'AUD', symbol: '$' },
   { name: 'Brazilian real', code: 'BRL', symbol: 'R$' },
   { name: 'Bulgarian lev', code: 'BGN', symbol: 'лв.' },
@@ -60,7 +61,7 @@ const currencies = [
   { name: 'Costa Rican colon', code: 'CRC', symbol: '₡' },
   { name: 'Czech koruna', code: 'CZK', symbol: 'Kč' },
   { name: 'Danish krone', code: 'DKK', symbol: 'kr' },
-  { name: 'Emirati dirham', code: 'AED', symbol: 'د.إ' },
+  { name: 'Emirati dirham', code: 'AED', symbol: 'AED' },
   { name: 'Euro', code: 'EUR', symbol: '€' },
   { name: 'Ghanaian cedi', code: 'GHS', symbol: 'GHC' },
   { name: 'Hong Kong dollar', code: 'HKD', symbol: '$' },
@@ -81,7 +82,7 @@ const currencies = [
   { name: 'Philippine peso', code: 'PHP', symbol: '₱' },
   { name: 'Polish zloty', code: 'PLN', symbol: 'zł' },
   { name: 'Pound sterling', code: 'GBP', symbol: '£' },
-  { name: 'Qatari riyal', code: 'QAR', symbol: 'ر.ق' },
+  { name: 'Qatari riyal', code: 'QAR', symbol: 'QAR' },
   { name: 'Romanian leu', code: 'RON', symbol: 'lei' },
   { name: 'Saudi Arabian riyal', code: 'SAR', symbol: 'SR' },
   { name: 'Singapore dollar', code: 'SGD', symbol: '$' },
@@ -98,14 +99,13 @@ const currencies = [
   { name: 'Vietnamese dong', code: 'VND', symbol: '₫' }
 ];
 
-const Navbar = () => {
+const Navbar = ({ onNavigate, onOpenAuth, onOpenCalendar }) => {
   const [activeTab, setActiveTab] = useState('Homes');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangModalOpen, setIsLangModalOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState('lang');
   const [selectedCurrency, setSelectedCurrency] = useState('EGP');
 
-  // state لمراقبة التمرير (السكرووول)
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -122,7 +122,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className={`border-b sticky top-0 bg-white z-50 px-8 transition-all duration-300 shadow-sm ${
+    <header className={`border-b sticky top-0 bg-white z-[100] relative px-8 transition-all duration-300 shadow-sm ${
       isScrolled ? 'py-3' : 'pt-4 pb-6'
     }`}>
       {/* Top Bar */}
@@ -202,8 +202,11 @@ const Navbar = () => {
         )}
 
         {/* Right Menu Container */}
-        <div className="relative flex items-center gap-1 text-sm font-semibold">
-          <div className="hover:bg-gray-100 px-3 py-2 rounded-full cursor-pointer transition">
+        <div className="relative z-[100] flex items-center gap-1 text-sm font-semibold">
+          <div 
+            onClick={() => onNavigate ? onNavigate('becomeHost') : null} 
+            className="hover:bg-gray-100 px-3 py-2 rounded-full cursor-pointer transition"
+          >
             Become a host
           </div>
 
@@ -231,50 +234,12 @@ const Navbar = () => {
           </div>
 
           {/* Profile Dropdown Menu */}
-          {isMenuOpen && (
-            <div className="absolute right-0 top-12 w-72 bg-white rounded-2xl shadow-xl border border-gray-200 py-3 text-sm z-50 text-gray-800">
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
-                <span>Help Center</span>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              
-              <hr className="my-2 border-gray-100" />
-
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex justify-between items-start">
-                <div>
-                  <div className="font-bold text-gray-900">Become a host</div>
-                  <div className="text-xs text-gray-500 max-w-[170px] leading-tight mt-0.5">
-                    It's easy to start hosting and earn extra income.
-                  </div>
-                </div>
-                <svg className="w-6 h-6 text-gray-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </div>
-
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
-                <span>Refer a Host</span>
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
-                <span>Gift cards</span>
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V6a2 2 0 10-2 2h2zm-7 4h14a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1v-7a1 1 0 011-1z" />
-                </svg>
-              </div>
-
-              <hr className="my-2 border-gray-100" />
-
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-bold text-gray-900">
-                Log in or sign up
-              </div>
-            </div>
-          )}
+          <UserMenu 
+            isOpen={isMenuOpen}
+            onClose={() => setIsMenuOpen(false)}
+            onNavigate={onNavigate}
+            onOpenAuth={onOpenAuth}
+          />
         </div>
       </div>
 
@@ -293,8 +258,11 @@ const Navbar = () => {
 
           <span className="border-r h-8 border-gray-300"></span>
 
-          <div className="flex-1 px-6 py-1 hover:bg-gray-200/60 rounded-full transition">
-            <div className="text-xs font-bold text-black">When</div>
+          <div 
+            onClick={() => onOpenCalendar ? onOpenCalendar() : null}
+            className="flex-1 px-6 py-1 hover:bg-gray-200/60 rounded-full transition group"
+          >
+            <div className="text-xs font-bold text-black group-hover:text-[#FF385C]">When</div>
             <div className="text-xs text-gray-500">Add dates</div>
           </div>
 

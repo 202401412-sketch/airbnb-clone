@@ -31,7 +31,7 @@ const SearchModal = ({ activeSection = 'where', onClose }) => {
 
   return (
     <div className="bg-white p-6 rounded-3xl shadow-2xl border border-gray-100 max-w-xl mx-auto mt-2 z-50 relative text-left">
-      {/* التبويبات العلوية داخل المودال */}
+      {/* EGP EGP EGP EGP */}
       <div className="flex justify-around border-b border-gray-100 pb-3 mb-4 text-xs font-bold">
         <button 
           onClick={() => setCurrentTab('where')}

@@ -1,11 +1,11 @@
 import React, { createContext, useState, useContext } from 'react';
 
-// 1. إنشاء الـ Context
+// 1. EGP EGP Context
 const SearchContext = createContext();
 
-// 2. الـ Provider اللي هيشيل البيانات
+// 2. EGP Provider EGP EGP EGP
 export const SearchProvider = ({ children }) => {
-  // بيانات البحث
+  // EGP EGP
   const [destination, setDestination] = useState('');
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
@@ -16,7 +16,7 @@ export const SearchProvider = ({ children }) => {
     pets: 0,
   });
 
-  // حساب إجمالي عدد الضيوف
+  // EGP EGP EGP EGP
   const totalGuests = guests.adults + guests.children;
 
   return (
@@ -38,7 +38,7 @@ export const SearchProvider = ({ children }) => {
   );
 };
 
-// 3. Custom Hook عشان نستخدم البيانات بسهولة في أي مكان
+// 3. Custom Hook EGP EGP EGP EGP EGP EGP EGP
 export const useSearch = () => {
   return useContext(SearchContext);
 };
