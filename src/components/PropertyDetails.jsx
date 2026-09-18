@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react';
 import Calendar from './Calendar';
 import Footer from './Footer.jsx';
+import BookingWidget from './common/BookingWidget.jsx';
 import { useUserSaved } from '../context/UserSavedContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import {
@@ -40,7 +41,7 @@ import {
   Send
 } from 'lucide-react';
 
-const PropertyDetails = memo(({ property, onClose }) => {
+const PropertyDetails = memo(({ property, onClose, onOpenAuth, onNavigate }) => {
   const { user } = useAuth();
   const { isFavorite, toggleFavorite, addBooking, sendMessage } = useUserSaved();
 
@@ -317,43 +318,16 @@ const PropertyDetails = memo(({ property, onClose }) => {
 
           {/* Sticky Booking Widget */}
           <div className="relative">
-            <div className="border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xl sticky top-28 bg-white space-y-6">
-              <div className="flex justify-between items-baseline border-b pb-5">
-                <div>
-                  <span className="text-3xl font-extrabold text-gray-900">{pricePerNight.toLocaleString()} EGP</span>
-                  <span className="text-gray-500 text-base font-normal"> / night</span>
-                </div>
-                <div className="flex items-center gap-1 text-sm font-bold text-gray-900">
-                  <Star className="w-4 h-4 fill-black text-black" />
-                  <span>{rating}</span>
-                </div>
-              </div>
-
-              {/* Reserve Button */}
-              <button
-                onClick={() => setShowReserveModal(true)}
-                className="w-full bg-[#FF385C] hover:bg-[#E00B41] text-white py-4 rounded-2xl font-bold text-lg transition shadow-md"
-              >
-                Reserve
-              </button>
-
-              {/* Price Breakdown */}
-              <div className="space-y-3.5 border-t pt-5 text-sm text-gray-700">
-                <div className="flex justify-between">
-                  <span>{pricePerNight.toLocaleString()} EGP x {nightsCount} nights</span>
-                  <span className="font-medium">{basePrice.toLocaleString()} EGP</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Airbnb service fee (14%)</span>
-                  <span className="font-medium">{serviceFee.toLocaleString()} EGP</span>
-                </div>
-                <div className="flex justify-between text-base font-extrabold text-gray-900 pt-3 border-t">
-                  <span>Total before taxes</span>
-                  <span className="text-[#FF385C]">{totalPrice.toLocaleString()} EGP</span>
-                </div>
-              </div>
-
-            </div>
+            <BookingWidget
+              price={pricePerNight}
+              property={property}
+              onNavigate={onNavigate}
+              onReserve={(bookingData) => {
+                if (onNavigate) {
+                  onNavigate('checkout', { ...bookingData, property });
+                }
+              }}
+            />
           </div>
         </div>
 
@@ -539,48 +513,7 @@ const PropertyDetails = memo(({ property, onClose }) => {
         </div>
       )}
 
-      {/* --- MODAL 2: CONFIRM BOOKING MODAL WITH LOCALSTORAGE PERSISTENCE --- */}
-      {showReserveModal && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-xl rounded-3xl p-8 relative shadow-2xl space-y-6">
-            {!bookingConfirmed ? (
-              <>
-                <div className="flex justify-between items-center border-b pb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">Confirm Booking</h2>
-                  <button onClick={() => setShowReserveModal(false)} className="p-2 rounded-full hover:bg-gray-100"><X className="w-6 h-6" /></button>
-                </div>
 
-                <div className="space-y-3 text-sm text-gray-700">
-                  <div className="flex justify-between">
-                    <span>Dates</span>
-                    <span className="font-semibold">{formatDateDisplay(checkIn)} – {formatDateDisplay(checkOut)} ({nightsCount} nights)</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Guests</span>
-                    <span className="font-semibold">{totalGuestCount} guests</span>
-                  </div>
-                  <div className="flex justify-between pt-3 border-t text-lg font-bold text-gray-900">
-                    <span>Total Price</span>
-                    <span className="text-[#FF385C]">{totalPrice.toLocaleString()} EGP</span>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <button onClick={() => setShowReserveModal(false)} className="w-1/3 border py-3 rounded-xl font-bold">Cancel</button>
-                  <button onClick={handleConfirmBooking} className="w-2/3 bg-[#FF385C] text-white py-3 rounded-xl font-bold">Confirm Booking ({totalPrice.toLocaleString()} EGP)</button>
-                </div>
-              </>
-            ) : (
-              <div className="text-center py-6 space-y-4">
-                <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
-                <h3 className="text-2xl font-bold text-gray-900">Booking Confirmed! 🎉</h3>
-                <p className="text-sm text-gray-600">Reference: <strong className="font-mono">{bookingReference}</strong></p>
-                <button onClick={() => setShowReserveModal(false)} className="w-full bg-gray-900 text-white py-3 rounded-xl font-bold">Done</button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
     </div>
   );

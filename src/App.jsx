@@ -6,11 +6,12 @@ import PropertyDetails from './components/PropertyDetails.jsx';
 import Footer from './components/Footer.jsx';
 import LanguageModal from './components/LanguageModal.jsx';
 import InfoFeatureModal from './components/InfoFeatureModal.jsx';
+import CheckoutPage from './pages/CheckoutPage';
 
-// Developer 1 Components
+// Malak Components
 import AuthModal from './components/AuthModal.jsx';
 
-// Developer 4 Components
+// sara Components
 import FilterModal from './components/common/FilterModal.jsx';
 import MapContainer from './components/common/MapContainer.jsx';
 import FloatingToggleButton from './components/common/FloatingToggleButton.jsx';
@@ -32,7 +33,14 @@ import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { UserSavedProvider } from './context/UserSavedContext.jsx';
 
-const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
+const MainLayout = ({
+  onNavigate,
+  selectedAmenity,
+  setSelectedAmenity,
+  selectedProperty,
+  setSelectedProperty,
+  setIsAuthModalOpen,
+}) => {
   const { language, setLanguage, currency, setCurrency, dir, t } = useLanguage();
   const [activeMainTab, setActiveMainTab] = useState('All');
   const [activeSearchSection, setActiveSearchSection] = useState(null);
@@ -41,11 +49,6 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
   const [activeFeatureModal, setActiveFeatureModal] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState(null);
-
-  // Developer 1 State
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-
   // Developer 4 States
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [showMap, setShowMap] = useState(false);
@@ -60,7 +63,6 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Filter properties dynamically whenever quick filter amenity changes
   useEffect(() => {
     if (!selectedAmenity) {
       setDisplayedProperties(mockProperties);
@@ -78,12 +80,10 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
     setDisplayedProperties(filtered);
   }, [selectedAmenity]);
 
-  // Full Filter Modal application handler
   const handleApplyFilters = (filters) => {
     const { typeOfPlace, minPrice, maxPrice, bedrooms, amenities } = filters;
 
     const filtered = mockProperties.filter((property) => {
-      // Type matching
       const propType = property.type || property.category || '';
       let matchType = typeOfPlace === 'Any type';
       if (!matchType) {
@@ -94,17 +94,14 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
         }
       }
 
-      // Price matching
       const price = property.pricePerNight || property.price || 0;
       const matchPrice = price >= minPrice && price <= maxPrice;
 
-      // Bedrooms matching
       const numBedrooms = property.specs?.bedrooms || property.bedrooms || 1;
       const matchBedrooms =
         bedrooms === 'Any' ||
         (bedrooms === '4+' ? numBedrooms >= 4 : String(numBedrooms) === String(bedrooms));
 
-      // Amenities matching
       const propAmenities = property.amenities || [];
       const matchAmenities =
         !amenities || amenities.length === 0 ||
@@ -140,12 +137,10 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between" dir={dir}>
-      
-      {/* Sticky Header */}
       <header className="sticky top-0 bg-white z-30 relative border-b border-gray-100">
-        <Header 
-          setIsLangModalOpen={() => handleOpenLangModal('lang')} 
-          isScrolled={isScrolled} 
+        <Header
+          setIsLangModalOpen={() => handleOpenLangModal('lang')}
+          isScrolled={isScrolled}
           isSearched={isSearched}
           setIsSearched={setIsSearched}
           activeSearchSection={activeSearchSection}
@@ -159,21 +154,19 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
           onSelectMainTab={setActiveMainTab}
           onNavigate={onNavigate}
         />
-        
+
         {!isScrolled && !isSearched && (
           <div className="pb-4 pt-1 transition-all duration-200">
-            <SearchBar 
-              activeSection={activeSearchSection} 
-              setActiveSection={setActiveSearchSection} 
+            <SearchBar
+              activeSection={activeSearchSection}
+              setActiveSection={setActiveSearchSection}
               onSearch={() => setIsSearched(true)}
             />
           </div>
         )}
       </header>
 
-      {/* Main Content Area */}
       <main className="p-6 flex-1 relative max-w-7xl mx-auto w-full">
-        {/* Filter Trigger Button */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-3">
             <h2 className="text-xl font-bold text-gray-900">
@@ -205,35 +198,34 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
           </div>
         </div>
 
-        {/* Dynamic Display (Grid vs Map View) */}
         {showMap ? (
           <div className="h-[calc(100vh-220px)] w-full rounded-2xl overflow-hidden border border-gray-200">
-            <MapContainer 
-              properties={displayedProperties} 
-              onClose={() => setShowMap(false)} 
+            <MapContainer
+              properties={displayedProperties}
+              onClose={() => setShowMap(false)}
             />
           </div>
         ) : (
-          <PropertyGrid 
-            properties={displayedProperties} 
-            isLoading={false} 
+          <PropertyGrid
+            properties={displayedProperties}
+            isLoading={false}
             onSelectProperty={(property) => setSelectedProperty(property)}
             activeMainTab={activeMainTab}
           />
         )}
       </main>
 
-      {/* Property Details Modal */}
       {selectedProperty && (
-        <PropertyDetails 
-          property={selectedProperty} 
-          onClose={() => setSelectedProperty(null)} 
+        <PropertyDetails
+          property={selectedProperty}
+          onClose={() => setSelectedProperty(null)}
+          onNavigate={onNavigate}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
         />
       )}
 
-      {/* Language Modal */}
-      <LanguageModal 
-        isOpen={isLangModalOpen} 
+      <LanguageModal
+        isOpen={isLangModalOpen}
         onClose={() => setIsLangModalOpen(false)}
         selectedLang={language}
         selectedCurr={currency}
@@ -242,35 +234,26 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
         initialTab={langModalTab}
       />
 
-      {/* Feature Modals */}
       <InfoFeatureModal
         isOpen={Boolean(activeFeatureModal)}
         onClose={() => setActiveFeatureModal(null)}
         feature={activeFeatureModal}
       />
 
-      {/* Auth Modal (Dev 1) */}
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
-      />
-
-      {/* Filter Modal (Dev 4) */}
       <FilterModal
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}
         onApplyFilters={handleApplyFilters}
       />
 
-      {/* Floating Map/List Toggle Button (Dev 4) */}
       <FloatingToggleButton
         showMap={showMap}
         onToggle={() => setShowMap(!showMap)}
       />
 
-      <Footer 
-        onOpenLangModal={handleOpenLangModal} 
-        setIsLangModalOpen={setIsLangModalOpen} 
+      <Footer
+        onOpenLangModal={handleOpenLangModal}
+        setIsLangModalOpen={setIsLangModalOpen}
         onOpenFeatureModal={setActiveFeatureModal}
         onSelectDestination={handleSelectDestination}
         onNavigate={onNavigate}
@@ -282,8 +265,17 @@ const MainLayout = ({ onNavigate, selectedAmenity, setSelectedAmenity }) => {
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedAmenity, setSelectedAmenity] = useState(null);
+  const [bookingData, setBookingData] = useState(null);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  const handleNavigate = (page) => {
+  const handleNavigate = (page, data = null) => {
+    if (data) {
+      setBookingData(data);
+      if (data.property) {
+        setSelectedProperty(data.property);
+      }
+    }
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -313,6 +305,16 @@ export default function App() {
             onSelectAmenity={setSelectedAmenity} 
           />
         );
+      case 'checkout':
+        return (
+          <CheckoutPage
+            property={selectedProperty || bookingData?.property}
+            bookingDetails={bookingData}
+            onBack={() => setCurrentPage('home')}
+            onNavigate={handleNavigate}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
+          />
+        );
       case 'home':
       default:
         return (
@@ -320,6 +322,9 @@ export default function App() {
             onNavigate={handleNavigate} 
             selectedAmenity={selectedAmenity}
             setSelectedAmenity={setSelectedAmenity}
+            selectedProperty={selectedProperty} 
+            setSelectedProperty={setSelectedProperty} 
+            setIsAuthModalOpen={setIsAuthModalOpen} 
           />
         );
     }
@@ -331,6 +336,10 @@ export default function App() {
         <UserSavedProvider>
           <SearchProvider>
             {renderCurrentPage()}
+            <AuthModal
+              isOpen={isAuthModalOpen}
+              onClose={() => setIsAuthModalOpen(false)}
+            />
           </SearchProvider>
         </UserSavedProvider>
       </AuthProvider>
