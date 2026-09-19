@@ -229,8 +229,6 @@ const MainLayout = ({
       )}
 
       <LanguageModal 
-        isOpen={isLangModalOpen} 
-      <LanguageModal
         isOpen={isLangModalOpen}
         onClose={() => setIsLangModalOpen(false)}
         selectedLang={language}
@@ -244,11 +242,6 @@ const MainLayout = ({
         isOpen={Boolean(activeFeatureModal)}
         onClose={() => setActiveFeatureModal(null)}
         feature={activeFeatureModal}
-      />
-
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
       />
 
       <FilterModal
