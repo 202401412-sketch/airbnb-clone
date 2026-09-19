@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiCheck } from 'react-icons/fi';
 
-const LanguageModal = ({ isOpen, onClose, selectedLang = 'English', selectedCurr = 'Egyptian pound', onSelectLang, onSelectCurr, initialTab = 'lang' }) => {
-  const [activeTab, setActiveTab] = useState(initialTab); // 'lang' | 'currency'
+const LanguageModal = ({ 
+  isOpen, 
+  onClose, 
+  selectedLang = 'English', 
+  selectedCurr = 'Egyptian pound', 
+  onSelectLang, 
+  onSelectCurr, 
+  initialTab = 'lang' 
+}) => {
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [currentLang, setCurrentLang] = useState(selectedLang);
   const [currentCurr, setCurrentCurr] = useState(selectedCurr);
   const [translationAuto, setTranslationAuto] = useState(true);
@@ -23,30 +31,76 @@ const LanguageModal = ({ isOpen, onClose, selectedLang = 'English', selectedCurr
 
   if (!isOpen) return null;
 
+  // 🌐 قائمة شاملة بجميع اللغات والمناطق
   const languages = [
-    { name: 'English', region: 'United States', code: 'en' },
-    { name: 'English', region: 'United Kingdom', code: 'en' },
-    { name: 'Arabic', region: 'Arab World', code: 'ar' },
-    { name: 'French', region: 'France', code: 'fr' },
-    { name: 'German', region: 'Germany', code: 'de' },
-    { name: 'Spanish', region: 'Spain', code: 'es' },
-    { name: 'Italian', region: 'Italy', code: 'it' },
-    { name: 'Turkish', region: 'Turkey', code: 'tr' },
-    { name: 'Japanese', region: 'Japan', code: 'ja' },
-    { name: 'Korean', region: 'South Korea', code: 'ko' },
+    { name: 'English', region: 'United States', code: 'en-US' },
+    { name: 'English', region: 'United Kingdom', code: 'en-GB' },
+    { name: 'English', region: 'Canada', code: 'en-CA' },
+    { name: 'English', region: 'Australia', code: 'en-AU' },
+    { name: 'العربية', region: 'مصر', code: 'ar-EG' },
+    { name: 'العربية', region: 'المملكة العربية السعودية', code: 'ar-SA' },
+    { name: 'العربية', region: 'الإمارات العربية المتحدة', code: 'ar-AE' },
+    { name: 'العربية', region: 'الكويت', code: 'ar-KW' },
+    { name: 'العربية', region: 'قطر', code: 'ar-QA' },
+    { name: 'Français', region: 'France', code: 'fr-FR' },
+    { name: 'Français', region: 'Canada', code: 'fr-CA' },
+    { name: 'Français', region: 'Belgique', code: 'fr-BE' },
+    { name: 'Deutsch', region: 'Deutschland', code: 'de-DE' },
+    { name: 'Deutsch', region: 'Österreich', code: 'de-AT' },
+    { name: 'Deutsch', region: 'Schweiz', code: 'de-CH' },
+    { name: 'Español', region: 'España', code: 'es-ES' },
+    { name: 'Español', region: 'México', code: 'es-MX' },
+    { name: 'Español', region: 'Argentina', code: 'es-AR' },
+    { name: 'Italiano', region: 'Italia', code: 'it-IT' },
+    { name: 'Português', region: 'Brasil', code: 'pt-BR' },
+    { name: 'Português', region: 'Portugal', code: 'pt-PT' },
+    { name: 'Русский', region: 'Россия', code: 'ru-RU' },
+    { name: 'Türkçe', region: 'Türkiye', code: 'tr-TR' },
+    { name: 'Nederlands', region: 'Nederland', code: 'nl-NL' },
+    { name: 'Polski', region: 'Polska', code: 'pl-PL' },
+    { name: 'Svenska', region: 'Sverige', code: 'sv-SE' },
+    { name: 'Norsk', region: 'Norge', code: 'no-NO' },
+    { name: 'Dansk', region: 'Danmark', code: 'da-DK' },
+    { name: 'Suomi', region: 'Suomi', code: 'fi-FI' },
+    { name: 'Ελληνικά', region: 'Ελλάδα', code: 'el-GR' },
+    { name: '日本語', region: '日本', code: 'ja-JP' },
+    { name: '한국어', region: '대한민국', code: 'ko-KR' },
+    { name: '简体中文', region: '中国', code: 'zh-CN' },
+    { name: '繁體中文', region: '台灣', code: 'zh-TW' },
+    { name: 'हिन्दी', region: 'भारत', code: 'hi-IN' },
   ];
 
+  // 💰 قائمة شاملة بكافة العملات ورموزها
   const currencies = [
-    { name: 'Egyptian pound', symbol: 'EGP' },
+    { name: 'Egyptian pound', symbol: 'EGP – ج.م' },
     { name: 'United States dollar', symbol: 'USD – $' },
     { name: 'Euro', symbol: 'EUR – €' },
     { name: 'Pound sterling', symbol: 'GBP – £' },
-    { name: 'Emirati dirham', symbol: 'AED' },
-    { name: 'Saudi Arabian riyal', symbol: 'SAR' },
+    { name: 'Saudi Arabian riyal', symbol: 'SAR – ر.س' },
+    { name: 'Emirati dirham', symbol: 'AED – د.إ' },
+    { name: 'Kuwaiti dinar', symbol: 'KWD – د.ك' },
+    { name: 'Qatari riyal', symbol: 'QAR – ر.ق' },
+    { name: 'Bahraini dinar', symbol: 'BHD – د.ب' },
+    { name: 'Omani rial', symbol: 'OMR – ر.ع' },
+    { name: 'Jordanian dinar', symbol: 'JOD – د.أ' },
     { name: 'Canadian dollar', symbol: 'CAD – $' },
     { name: 'Australian dollar', symbol: 'AUD – $' },
+    { name: 'Swiss franc', symbol: 'CHF – CHF' },
     { name: 'Japanese yen', symbol: 'JPY – ¥' },
-    { name: 'Swiss franc', symbol: 'CHF' },
+    { name: 'Chinese yuan', symbol: 'CNY – ¥' },
+    { name: 'Indian rupee', symbol: 'INR – ₹' },
+    { name: 'Turkish lira', symbol: 'TRY – ₺' },
+    { name: 'Brazilian real', symbol: 'BRL – R$' },
+    { name: 'Mexican peso', symbol: 'MXN – $' },
+    { name: 'South African rand', symbol: 'ZAR – R' },
+    { name: 'Russian ruble', symbol: 'RUB – ₽' },
+    { name: 'Swedish krona', symbol: 'SEK – kr' },
+    { name: 'Norwegian krone', symbol: 'NOK – kr' },
+    { name: 'Danish krone', symbol: 'DKK – kr' },
+    { name: 'New Zealand dollar', symbol: 'NZD – $' },
+    { name: 'Singapore dollar', symbol: 'SGD – $' },
+    { name: 'Hong Kong dollar', symbol: 'HKD – $' },
+    { name: 'South Korean won', symbol: 'KRW – ₩' },
   ];
 
   const handleSelectLanguage = (lang) => {

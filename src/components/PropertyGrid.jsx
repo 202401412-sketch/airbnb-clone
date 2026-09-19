@@ -90,7 +90,9 @@ const SERVICES = [
     id: 'chef',
     title: 'Personal Chef Service',
     description: 'Enjoy custom gourmet meals prepared in your rental by top local chefs.',
-    price: 'From EGP 1,200 / meal',
+    priceLabel: 'From EGP 1,200 / meal',
+    numericPrice: 1200,
+    unitLabel: 'meal',
     rating: '4.98 (124 reviews)',
     image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80'
   },
@@ -98,7 +100,9 @@ const SERVICES = [
     id: 'transfer',
     title: 'Airport Transfer & Private Chauffeur',
     description: 'Seamless airport pickup and drop-off in premium luxury vehicles with professional drivers.',
-    price: 'From EGP 600 / trip',
+    priceLabel: 'From EGP 600 / trip',
+    numericPrice: 600,
+    unitLabel: 'trip',
     rating: '4.95 (88 reviews)',
     image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80'
   },
@@ -106,7 +110,9 @@ const SERVICES = [
     id: 'spa',
     title: 'In-House Spa & Wellness Treatments',
     description: 'Relaxing massages, facials, and spa treatments delivered directly to your doorstep.',
-    price: 'From EGP 850 / session',
+    priceLabel: 'From EGP 850 / session',
+    numericPrice: 850,
+    unitLabel: 'session',
     rating: '4.99 (210 reviews)',
     image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80'
   },
@@ -114,7 +120,9 @@ const SERVICES = [
     id: 'photo',
     title: 'Private Destination Photography',
     description: 'Capture unforgettable memories during your travel with a professional photographer.',
-    price: 'From EGP 950 / hour',
+    priceLabel: 'From EGP 950 / hour',
+    numericPrice: 950,
+    unitLabel: 'hour',
     rating: '4.97 (156 reviews)',
     image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80'
   }
@@ -125,8 +133,32 @@ const PropertyGrid = ({
   isLoading = false,
   selectedCategory = 'all',
   onSelectProperty,
-  activeMainTab = 'All'
+  activeMainTab = 'All',
+  onNavigate
 }) => {
+
+  const handleBookService = (service) => {
+    // إرسال البيانات بأسلوب الخدمة المخصص
+    const servicePayload = {
+      isService: true,
+      itemType: 'service',
+      service: {
+        id: service.id,
+        title: service.title,
+        description: service.description,
+        price: service.numericPrice,
+        priceLabel: service.priceLabel,
+        unitLabel: service.unitLabel,
+        image: service.image,
+        rating: service.rating
+      }
+    };
+
+    if (onNavigate) {
+      onNavigate('checkout', servicePayload);
+    }
+  };
+
   if (isLoading) {
     if (selectedCategory !== 'all') {
       return (
@@ -211,7 +243,11 @@ const PropertyGrid = ({
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {SERVICES.map((service) => (
-            <div key={service.id} className="group border border-gray-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition bg-white flex flex-col justify-between">
+            <div 
+              key={service.id} 
+              onClick={() => handleBookService(service)}
+              className="group border border-gray-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition bg-white flex flex-col justify-between cursor-pointer"
+            >
               <div>
                 <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 relative">
                   <img 
@@ -226,11 +262,17 @@ const PropertyGrid = ({
                 <div className="p-4">
                   <h3 className="font-bold text-gray-900 text-base mb-1">{service.title}</h3>
                   <p className="text-gray-500 text-xs line-clamp-2 mb-3">{service.description}</p>
-                  <span className="text-sm font-semibold text-gray-900">{service.price}</span>
+                  <span className="text-sm font-semibold text-gray-900">{service.priceLabel}</span>
                 </div>
               </div>
               <div className="p-4 pt-0">
-                <button className="w-full py-2 border border-black rounded-xl text-xs font-bold hover:bg-black hover:text-white transition">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleBookService(service);
+                  }}
+                  className="w-full py-2.5 border border-black rounded-xl text-xs font-bold hover:bg-black hover:text-white transition cursor-pointer"
+                >
                   Book service
                 </button>
               </div>
