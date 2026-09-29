@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, ParseIntPipe, Req } from '@nestjs/common';
 import { PaymentsService } from './payments.service.js';
 import { CreatePaymentDto } from './dto/create-payment.dto.js';
-import { UpdatePaymentDto } from './dto/update-payment.dto.js';
 
-@Controller('payments')
+@Controller('api/payments')
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Post()
-  create(@Body() createPaymentDto: CreatePaymentDto) {
-    return this.paymentsService.create(createPaymentDto);
+  // 1. POST /api/payments/checkout
+  @Post('checkout')
+  async createCheckout(@Body() dto: CreatePaymentDto, @Req() req: any) {
+    const userId = req.user?.id || 1;
+    return this.paymentsService.createCheckout(userId, dto);
   }
 
-  @Get()
-  findAll() {
-    return this.paymentsService.findAll();
+  // 2. POST /api/payments/webhook
+  @Post('webhook')
+  async handleWebhook(@Body() eventData: any) {
+    return this.paymentsService.handleWebhook(eventData);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paymentsService.findOne(+id);
+  // 3. GET /api/payments/history
+  @Get('history')
+  async getHistory(@Req() req: any) {
+    const userId = req.user?.id || 1;
+    return this.paymentsService.getHistory(userId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePaymentDto: UpdatePaymentDto) {
-    return this.paymentsService.update(+id, updatePaymentDto);
+  // 4. GET /api/payments/payouts
+  @Get('payouts')
+  async getPayouts(@Req() req: any) {
+    const hostId = req.user?.id || 1;
+    return this.paymentsService.getPayouts(hostId);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.paymentsService.remove(+id);
+  // 5. POST /api/payments/refund/:bookingId
+  @Post('refund/:bookingId')
+  async requestRefund(@Param('bookingId', ParseIntPipe) bookingId: number, @Req() req: any) {
+    const userId = req.user?.id || 1;
+    return this.paymentsService.requestRefund(bookingId, userId);
   }
 }
