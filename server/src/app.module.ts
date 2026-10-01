@@ -22,6 +22,7 @@ import { FeaturesModule } from './features/features.module.js';
 import { RatingFeaturesModule } from './rating-features/rating-features.module.js';
 import { UserPaymentMethodsModule } from './user-payment-methods/user-payment-methods.module.js';
 import { HelpArticlesModule } from './help-articles/help-articles.module.js';
+import { CorporateModule } from './corporate/corporate.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -62,6 +63,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     RatingFeaturesModule,
     UserPaymentMethodsModule,
     HelpArticlesModule,
+    CorporateModule,
   ],
   controllers: [AppController],
   providers: [AppService],
