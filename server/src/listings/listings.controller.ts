@@ -12,22 +12,36 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+<<<<<<< HEAD
 import { ListingsService } from './listings.service';
 import { CreateListingDto } from './dto/create-listing.dto';
 import { UpdateListingDto } from './dto/update-listing.dto';
+=======
+import { ListingsService } from './listings.service.js';
+import { CreateListingDto } from './dto/create-listing.dto.js';
+import { UpdateListingDto } from './dto/update-listing.dto.js';
+>>>>>>> 04bd5d5 (Merge branch 'main' into feature/homepage-grid)
 import {
   PaginationQueryDto,
   SearchListingDto,
   UpdateStatusDto,
+<<<<<<< HEAD
 } from './dto/listing-query.dto';
+=======
+} from './dto/listing-query.dto.js';
+>>>>>>> 04bd5d5 (Merge branch 'main' into feature/homepage-grid)
 
 @Controller(['api/properties', 'api/listings', 'listings'])
 export class ListingsController {
   constructor(private readonly listingsService: ListingsService) {}
 
+<<<<<<< HEAD
   // =============================================================
   // 1. STATIC ROUTES (MUST BE DECLARED BEFORE PARAMETRIC /:id ROUTES)
   // =============================================================
+=======
+  // 1. STATIC ROUTES (MUST BE DECLARED BEFORE PARAMETRIC /:id ROUTES)
+>>>>>>> 04bd5d5 (Merge branch 'main' into feature/homepage-grid)
 
   // 1. GET /api/properties -> Paginated property list
   @Get()
@@ -63,6 +77,7 @@ export class ListingsController {
     return this.listingsService.findByCategory(categoryId, paginationDto);
   }
 
+<<<<<<< HEAD
   // GET /api/properties/business-ready -> Get business ready corporate properties
   @Get('business-ready')
   async getBusinessReadyProperties() {
@@ -81,6 +96,9 @@ export class ListingsController {
   // =============================================================
   // 2. PARAMETRIC ROUTES (/:id)
   // =============================================================
+=======
+  // 2. PARAMETRIC ROUTES (/:id)
+>>>>>>> 04bd5d5 (Merge branch 'main' into feature/homepage-grid)
 
   // 6. GET /api/properties/:id -> Get single property details
   @Get(':id')
