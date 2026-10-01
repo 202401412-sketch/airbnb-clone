@@ -6,11 +6,13 @@ import {
 } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import Footer from '../components/Footer.jsx';
+import { createListing } from '../api/listings';
 
 const BecomeHostPage = ({ onNavigate, onOpenLangModal }) => {
   const { dir } = useLanguage();
   const [step, setStep] = useState(1);
   const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Host Form State
   const [title, setTitle] = useState('');
@@ -23,7 +25,7 @@ const BecomeHostPage = ({ onNavigate, onOpenLangModal }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [submittedProperty, setSubmittedProperty] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError('');
 
@@ -43,13 +45,37 @@ const BecomeHostPage = ({ onNavigate, onOpenLangModal }) => {
     const newProp = {
       title,
       location,
+      city: location.split(',')[0].trim(),
+      country: location.split(',')[1]?.trim() || 'Egypt',
       pricePerNight: Number(pricePerNight),
       type: propertyType,
-      bedrooms,
-      bathrooms,
-      description,
-      image: imageUrl || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800"
+      bedrooms: Number(bedrooms) || 1,
+      baths: Number(bathrooms) || 1,
+      description: description || 'Beautiful hosted property',
+      image: imageUrl || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800",
+      images: [imageUrl || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800"]
     };
+
+    setIsSubmitting(true);
+    try {
+      await createListing({
+        title: newProp.title,
+        description: newProp.description,
+        city: newProp.city,
+        country: newProp.country,
+        address: newProp.location,
+        pricePerNight: newProp.pricePerNight,
+        bedrooms: newProp.bedrooms,
+        beds: newProp.bedrooms,
+        baths: newProp.baths,
+        maxGuests: 4,
+        images: newProp.images,
+      });
+    } catch (err) {
+      console.warn('Backend createListing failed, preserving locally:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
 
     setSubmittedProperty(newProp);
     setStep(3);

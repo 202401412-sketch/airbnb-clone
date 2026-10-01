@@ -6,6 +6,7 @@ import {
   FiStar, FiPlus, FiMessageSquare, FiUserPlus, FiDownload, FiSearch, FiWifi, FiHeadphones
 } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import axios from 'axios';
 
 const VantageBusiness = ({ onNavigate, onSelectAmenity }) => {
   const { dir } = useLanguage();
@@ -154,20 +155,46 @@ const VantageBusiness = ({ onNavigate, onSelectAmenity }) => {
     }
   };
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!chatInput.trim()) return;
 
-    const userMsg = { sender: 'user', text: chatInput };
-    setChatMessages((prev) => [...prev, userMsg]);
+    const messageText = chatInput.trim();
     setChatInput('');
 
-    setTimeout(() => {
+    try {
+      const response = await axios.post('/api/messages/send', {
+        recipientId: 2,
+        messageText: messageText,
+      });
+
+      const saved = response.data?.data || response.data;
       setChatMessages((prev) => [
         ...prev,
-        { sender: 'bot', text: 'An enterprise support agent has received your query. We will contact your admin team shortly!' }
+        {
+          id: saved?.id,
+          sender: 'user',
+          text: saved?.messageText || messageText,
+          sentAt: saved?.sentAt,
+        },
       ]);
-    }, 1200);
+
+      setTimeout(() => {
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            sender: 'bot',
+            text: 'An enterprise support agent has received your query. We will contact your admin team shortly!',
+          },
+        ]);
+      }, 800);
+    } catch (err) {
+      console.error('Failed to send message via live API:', err);
+      setChatMessages((prev) => [
+        ...prev,
+        { sender: 'user', text: messageText },
+      ]);
+    }
   };
 
   const handleExploreStays = () => {
@@ -441,7 +468,7 @@ const VantageBusiness = ({ onNavigate, onSelectAmenity }) => {
                     className="flex-1 p-2.5 border rounded-xl text-xs focus:outline-none"
                   />
                   <button type="submit" className="bg-slate-900 text-white font-bold px-4 rounded-xl text-xs cursor-pointer">
-                    Send
+                    Send Message
                   </button>
                 </form>
               </div>

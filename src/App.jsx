@@ -31,7 +31,7 @@ import VantageBusiness from './components/VantageBusiness.jsx';
 import MyTripsPage from './pages/MyTripsPage.jsx';
 import WishlistsPage from './pages/WishlistsPage.jsx';
 
-import { mockProperties } from './data/mockData.js';
+import { getListings } from './api/listings';
 import { SearchProvider } from './context/SearchContext.jsx';
 import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
@@ -56,7 +56,50 @@ const MainLayout = ({
   // Developer 4 States
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const [displayedProperties, setDisplayedProperties] = useState(mockProperties);
+  const [allProperties, setAllProperties] = useState([]);
+  const [displayedProperties, setDisplayedProperties] = useState([]);
+  const [isLoadingProperties, setIsLoadingProperties] = useState(false);
+
+  // Fetch live properties from NestJS backend on mount (PostgreSQL)
+  useEffect(() => {
+    let isMounted = true;
+    const fetchBackendListings = async () => {
+      setIsLoadingProperties(true);
+      try {
+        const response = await getListings();
+        const list = Array.isArray(response?.data)
+          ? response.data
+          : Array.isArray(response)
+          ? response
+          : [];
+        if (isMounted && list.length > 0) {
+          const liveListings = list.map((item) => ({
+            ...item,
+            images: item.photos && item.photos.length > 0
+              ? item.photos.map((p) => p.photoUrl || p.url || p)
+              : ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800'],
+            price: Number(item.pricePerNight || item.price || 150),
+            pricePerNight: Number(item.pricePerNight || item.price || 150),
+            location: item.location || (item.address && item.city ? `${item.address}, ${item.city}, ${item.country || 'Egypt'}` : `${item.city || 'Dahab'}, ${item.country || 'Egypt'}`),
+            type: item.type || 'Entire home',
+            rating: item.rating ? Number(item.rating) : 4.9,
+            reviewsCount: item.reviewsCount ? Number(item.reviewsCount) : 18,
+            amenities: item.amenities || ['Wifi', 'Kitchen', 'Air conditioning'],
+          }));
+
+          setAllProperties(liveListings);
+          setDisplayedProperties(liveListings);
+        }
+      } catch (err) {
+        console.error('Failed to load listings from PostgreSQL backend:', err);
+      } finally {
+        if (isMounted) setIsLoadingProperties(false);
+      }
+    };
+
+    fetchBackendListings();
+    return () => { isMounted = false; };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,11 +112,11 @@ const MainLayout = ({
 
   useEffect(() => {
     if (!selectedAmenity) {
-      setDisplayedProperties(mockProperties);
+      setDisplayedProperties(allProperties);
       return;
     }
 
-    const filtered = mockProperties.filter((property) => {
+    const filtered = allProperties.filter((property) => {
       const propAmenities = property.amenities || [];
       return propAmenities.some((a) =>
         a.toLowerCase().includes(selectedAmenity.toLowerCase()) ||
@@ -82,12 +125,12 @@ const MainLayout = ({
     });
 
     setDisplayedProperties(filtered);
-  }, [selectedAmenity]);
+  }, [selectedAmenity, allProperties]);
 
   const handleApplyFilters = (filters) => {
     const { typeOfPlace, minPrice, maxPrice, bedrooms, amenities } = filters;
 
-    const filtered = mockProperties.filter((property) => {
+    const filtered = allProperties.filter((property) => {
       const propType = property.type || property.category || '';
       let matchType = typeOfPlace === 'Any type';
       if (!matchType) {
@@ -125,7 +168,7 @@ const MainLayout = ({
   const handleSelectDestination = (cityName) => {
     if (!cityName) return;
 
-    const filtered = mockProperties.filter((property) => {
+    const filtered = allProperties.filter((property) => {
       const loc = (property.location || '').toLowerCase();
       const title = (property.title || '').toLowerCase();
       const target = cityName.toLowerCase();

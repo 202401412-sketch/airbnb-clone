@@ -4,6 +4,7 @@ import { mockProperties } from '../data/mockData';
 import Calendar from '../components/Calendar';
 import Footer from '../components/Footer';
 import BookingWidget from '../components/common/BookingWidget.jsx';
+import axios from 'axios';
 
 import {
   Heart,
@@ -158,13 +159,25 @@ export default function PropertyDetails({ property: propProperty, onClose, onOpe
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSendMessageToHost = (e) => {
+  const handleSendMessageToHost = async (e) => {
     e.preventDefault();
     if (!user) {
       if (onOpenAuth) onOpenAuth();
       return;
     }
     if (!hostMessageText.trim()) return;
+
+    try {
+      await axios.post('/api/messages/send', {
+        recipientId: Number(propertyData?.hostId || propertyData?.host?.id || 2) || 2,
+        listingId: parseInt(String(propertyData?.id || id || 1).match(/\d+/)?.[0] || '1', 10) || 1,
+        messageText: hostMessageText.trim(),
+        senderId: Number(user?.id) || 1,
+      });
+    } catch (err) {
+      console.error('Error sending message via API:', err);
+    }
+
     setHostMessageSent(true);
     setTimeout(() => {
       setShowMessageHostModal(false);

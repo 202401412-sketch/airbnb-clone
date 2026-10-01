@@ -3,72 +3,77 @@ import PropertyCard from './PropertyCard.jsx';
 import PropertyCarousel from './PropertyCarousel.jsx';
 import ExperienceCategoryCarousel from './ExperienceCategoryCarousel.jsx';
 
+// Defensive string helpers to prevent TypeErrors on numeric IDs or missing fields from API
+const safeId = (p) => String(p?.id ?? '');
+const safeLoc = (p) => `${String(p?.location ?? '')} ${String(p?.address ?? '')} ${String(p?.city ?? '')} ${String(p?.country ?? '')} ${String(p?.title ?? '')}`;
+const safeCat = (p) => String(p?.category ?? '');
+
 const SECTIONS_CONFIG = [
   {
     id: "alexandria",
     title: "Popular homes in Alexandria",
-    match: (p) => p.id?.startsWith("alex-") || p.location?.includes("Alexandria") || p.location?.includes("San Stefano") || p.location?.includes("Sidi Beshr") || p.location?.includes("Fleming")
+    match: (p) => safeId(p).startsWith("alex-") || safeLoc(p).includes("Alexandria") || safeLoc(p).includes("San Stefano") || safeLoc(p).includes("Sidi Beshr") || safeLoc(p).includes("Fleming")
   },
   {
     id: "hotels",
     title: "Great hotels for your next trip",
     subtitle: "Plus, earn Airbnb credit when staying at a featured hotel.",
-    match: (p) => p.id?.startsWith("hotel-") || p.category === "Hotels"
+    match: (p) => safeId(p).startsWith("hotel-") || safeCat(p) === "Hotels"
   },
   {
     id: "sheikh_zayed",
     title: "Available homes for this weekend in Sheikh Zayed",
-    match: (p) => p.id?.startsWith("sz-") || (p.location?.includes("Zayed") && !p.id?.startsWith("oct-"))
+    match: (p) => safeId(p).startsWith("sz-") || (safeLoc(p).includes("Zayed") && !safeId(p).startsWith("oct-"))
   },
   {
     id: "new_cairo",
     title: "Stays in New Cairo",
-    match: (p) => p.id?.startsWith("nc-") || p.location?.includes("New Cairo") || p.location?.includes("5th Settlement") || p.location?.includes("Tagamoa")
+    match: (p) => safeId(p).startsWith("nc-") || safeLoc(p).includes("New Cairo") || safeLoc(p).includes("5th Settlement") || safeLoc(p).includes("Tagamoa")
   },
   {
     id: "hurghada",
     title: "Available homes for this weekend in Hurghada",
-    match: (p) => p.id?.startsWith("hg-") || p.location?.includes("Hurghada") || p.location?.includes("Gouna") || p.location?.includes("Sahl Hasheesh")
+    match: (p) => safeId(p).startsWith("hg-") || safeLoc(p).includes("Hurghada") || safeLoc(p).includes("Gouna") || safeLoc(p).includes("Sahl Hasheesh")
   },
   {
     id: "exp_cairo",
     title: "Popular travel experiences in Cairo",
-    match: (p) => p.id?.startsWith("exp-cairo-")
+    match: (p) => safeId(p).startsWith("exp-cairo-")
   },
   {
     id: "photo_memories",
     title: "Capture memories in a destination near you",
-    match: (p) => p.id?.startsWith("photo-")
+    match: (p) => safeId(p).startsWith("photo-")
   },
   {
     id: "october",
     title: "Homes in 6th of October City",
-    match: (p) => p.id?.startsWith("oct-") || p.location?.includes("October")
+    match: (p) => safeId(p).startsWith("oct-") || safeLoc(p).includes("October")
   },
   {
     id: "dubai",
     title: "Available homes next month in Dubai",
-    match: (p) => p.id?.startsWith("dubai-") || p.location?.includes("Dubai")
+    match: (p) => safeId(p).startsWith("dubai-") || safeLoc(p).includes("Dubai")
   },
   {
     id: "sokhna",
     title: "Places to stay in Ain Sokhna",
-    match: (p) => p.id?.startsWith("sokhna-") || p.location?.includes("Sokhna")
+    match: (p) => safeId(p).startsWith("sokhna-") || safeLoc(p).includes("Sokhna")
   },
   {
     id: "riyadh",
     title: "Explore homes in Riyadh",
-    match: (p) => p.id?.startsWith("riyadh-") || p.location?.includes("Riyadh")
+    match: (p) => safeId(p).startsWith("riyadh-") || safeLoc(p).includes("Riyadh")
   },
   {
     id: "alamein",
     title: "Popular homes in El Alamein",
-    match: (p) => p.id?.startsWith("al-") || p.location?.includes("Alamein") || p.location?.includes("Marassi")
+    match: (p) => safeId(p).startsWith("al-") || safeLoc(p).includes("Alamein") || safeLoc(p).includes("Marassi")
   },
   {
     id: "istanbul",
     title: "Stays in Istanbul",
-    match: (p) => p.id?.startsWith("istanbul-") || p.location?.includes("Istanbul")
+    match: (p) => safeId(p).startsWith("istanbul-") || safeLoc(p).includes("Istanbul")
   }
 ];
 
@@ -178,9 +183,9 @@ const PropertyGrid = ({
   const isFiltered = selectedCategory !== 'all' && Boolean(selectedCategory);
   
   if (isFiltered) {
-    const filteredProperties = properties.filter((p) => {
-      if (!p.category) return false;
-      return p.category.toLowerCase() === selectedCategory.toLowerCase();
+    const filteredProperties = (properties || []).filter((p) => {
+      if (!p || !p.category) return false;
+      return String(p.category).toLowerCase() === String(selectedCategory).toLowerCase();
     });
 
     if (filteredProperties.length === 0) {
@@ -216,14 +221,30 @@ const PropertyGrid = ({
 
   const sectionMap = {};
   SECTIONS_CONFIG.forEach((config) => {
-    const items = properties.filter((p) => {
-      if (assignedPropertyIds.has(p.id)) return false;
+    let items = (properties || []).filter((p) => {
+      if (!p) return false;
+      const pid = String(p.id ?? '');
+      if (assignedPropertyIds.has(pid)) return false;
       if (config.match(p)) {
-        assignedPropertyIds.add(p.id);
+        assignedPropertyIds.add(pid);
         return true;
       }
       return false;
     });
+
+    // Fallback / Loose Filter: If a specific city query returns fewer than 4 items,
+    // fall back to returning general properties so that every city carousel row renders fully populated across the screen
+    if (items.length > 0 && items.length < 4 && (properties || []).length >= 4) {
+      const needed = 4 - items.length;
+      const additional = (properties || []).filter((p) => {
+        if (!p) return false;
+        const pid = String(p.id ?? '');
+        return !items.some((existing) => String(existing.id) === pid);
+      }).slice(0, needed);
+
+      additional.forEach((p) => assignedPropertyIds.add(String(p.id ?? '')));
+      items = [...items, ...additional];
+    }
 
     sectionMap[config.id] = {
       ...config,
@@ -231,7 +252,9 @@ const PropertyGrid = ({
     };
   });
 
-  const unassignedProperties = properties.filter((p) => !assignedPropertyIds.has(p.id));
+  const unassignedProperties = (properties || []).filter(
+    (p) => p && !assignedPropertyIds.has(String(p.id ?? ''))
+  );
 
   // Services View
   if (activeMainTab === 'Services') {
