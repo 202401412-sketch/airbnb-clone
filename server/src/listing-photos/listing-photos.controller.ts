@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { ListingPhotosService } from './listing-photos.service.js';
 import { CreateListingPhotoDto } from './dto/create-listing-photo.dto.js';
-import { UpdateListingPhotoDto } from './dto/update-listing-photo.dto.js';
 
-@Controller('listing-photos')
+@Controller(['api/listing-photos', 'listing-photos'])
 export class ListingPhotosController {
-  constructor(private readonly listingPhotosService: ListingPhotosService) {}
+  constructor(private readonly photosService: ListingPhotosService) {}
 
   @Post()
-  create(@Body() createListingPhotoDto: CreateListingPhotoDto) {
-    return this.listingPhotosService.create(createListingPhotoDto);
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() createPhotoDto: CreateListingPhotoDto) {
+    return this.photosService.create(createPhotoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.listingPhotosService.findAll();
+  @Get('listing/:listingId')
+  findByListing(@Param('listingId') listingId: string) {
+    return this.photosService.findByListingId(listingId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.listingPhotosService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateListingPhotoDto: UpdateListingPhotoDto) {
-    return this.listingPhotosService.update(+id, updateListingPhotoDto);
+    return this.photosService.findOne(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.listingPhotosService.remove(+id);
+    return this.photosService.remove(id);
   }
 }
