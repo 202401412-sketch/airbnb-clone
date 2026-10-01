@@ -1,26 +1,74 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto.js';
-import { UpdateUserDto } from './dto/update-user.dto.js';
+import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+
+export class CreateUserDto {
+  @IsNotEmpty()
+  name: string;
+
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @MinLength(6)
+  password: string;
+}
+
+export class LoginDto {
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @MinLength(6)
+  password: string;
+}
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async register(createUserDto: CreateUserDto) {
+    return { success: true, message: 'User registered successfully', data: createUserDto };
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async login(loginDto: LoginDto) {
+    return { success: true, message: 'Logged in successfully', token: 'mock-jwt-token-xyz', email: loginDto.email };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async logout(req: any) {
+    return { success: true, message: 'Logged out successfully' };
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async refreshToken(refreshToken: string) {
+    return { success: true, accessToken: 'new-mock-jwt-token' };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async forgotPassword(email: string) {
+    return { success: true, message: 'Password reset link sent to email' };
+  }
+
+  async resetPassword(body: any) {
+    return { success: true, message: 'Password has been reset successfully' };
+  }
+
+  async getProfile(req: any) {
+    return { success: true, data: { id: 1, name: 'Malak Radwan' } };
+  }
+
+  async updateProfile(req: any, updateDto: any) {
+    return { success: true, message: 'Profile updated successfully', data: updateDto };
+  }
+
+  async updateAvatar(req: any, avatarUrl: string) {
+    return { success: true, message: 'Avatar updated successfully', avatarUrl };
+  }
+
+  async changePassword(req: any, body: any) {
+    return { success: true, message: 'Password changed successfully' };
+  }
+
+  async deleteAccount(req: any) {
+    return { success: true, message: 'Account deleted successfully' };
+  }
+
+  async getPublicProfile(id: string) {
+    return { success: true, data: { id, name: 'User Public Profile' } };
   }
 }
