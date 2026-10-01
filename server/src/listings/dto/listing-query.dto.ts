@@ -12,7 +12,7 @@ export class PaginationQueryDto {
   @Type(() => Number)
   @IsNumber()
   @Min(1)
-  limit?: number = 10;
+  limit?: number = 200;
 }
 
 export class SearchListingDto extends PaginationQueryDto {

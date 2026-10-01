@@ -9,7 +9,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Booking, BookingStatus } from './entities/booking.entity';
 import { Listing } from '../listings/entities/listing.entity';
-import { Property } from '../properties/entities/property.entity';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { BookingQueryDto } from './dto/booking-query.dto';
 
@@ -20,8 +19,6 @@ export class BookingsService {
     private readonly bookingRepository: Repository<Booking>,
     @InjectRepository(Listing)
     private readonly listingRepository: Repository<Listing>,
-    @InjectRepository(Property)
-    private readonly propertyRepository: Repository<Property>,
   ) {}
 
   /**
@@ -43,39 +40,37 @@ export class BookingsService {
     try {
       const dto = createBookingDto as any;
 
-      // 1. Extract & parse property ID to match database schema (handling "hg-1", "sz-2", etc.)
-      const rawProperty = dto.propertyId ?? dto.listingId ?? dto.property?.id ?? 1;
-      let numericPropId = 1;
-      const numMatch = String(rawProperty).match(/\d+/);
+      // 1. Extract & parse listing ID to match database schema (handling "hg-1", "sz-2", etc.)
+      const rawListingId = dto.listingId ?? dto.propertyId ?? dto.property?.id ?? 1;
+      let numericListingId = 1;
+      const numMatch = String(rawListingId).match(/\d+/);
       if (numMatch) {
         const parsed = parseInt(numMatch[0], 10);
         if (!isNaN(parsed) && parsed > 0) {
-          numericPropId = parsed;
+          numericListingId = parsed;
         }
       }
 
-      // Check if property exists in PostgreSQL properties table to satisfy FK constraint
-      let propertyId = String(numericPropId);
-      let propertyRecord: Property | null = null;
+      // Check if listing exists in PostgreSQL listings table using listingRepository
+      let listingRecord: Listing | null = null;
       try {
-        propertyRecord = await this.propertyRepository.findOne({
-          where: { id: propertyId },
+        listingRecord = await this.listingRepository.findOne({
+          where: { id: (dto.listingId ?? numericListingId) as any },
         });
-        if (!propertyRecord) {
-          // Fallback to first available property in the database to satisfy foreign key constraint
-          const fallback = await this.propertyRepository.findOne({
-            order: { id: 'ASC' },
+        if (!listingRecord) {
+          const fallback = await this.listingRepository.findOne({
+            order: { id: 'ASC' as any },
           });
           if (fallback) {
-            propertyId = String(fallback.id);
-            propertyRecord = fallback;
-          } else {
-            propertyId = '1';
+            listingRecord = fallback;
           }
         }
       } catch (err) {
-        propertyId = '1';
+        // Fallback safely if query encounters an issue
       }
+
+      const listingId = String(listingRecord?.id ?? numericListingId);
+      const propertyId = listingId;
 
       // 2. Ensure valid user mapping from users table or current session
       let resolvedUserId = 1;
@@ -122,12 +117,12 @@ export class BookingsService {
       let hostId = dto.hostId ? Number(dto.hostId) : undefined;
       let totalPrice = dto.totalPrice ? Number(dto.totalPrice) : undefined;
 
-      if (propertyRecord) {
-        if (!hostId) hostId = Number(propertyRecord.hostId) || 1;
+      if (listingRecord) {
+        if (!hostId) hostId = Number(listingRecord.hostId) || 1;
         if (!totalPrice) {
           const diffTime = Math.abs(new Date(checkOutDateStr).getTime() - new Date(checkInDateStr).getTime());
           const nights = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
-          totalPrice = nights * Number(propertyRecord.pricePerNight || 100);
+          totalPrice = nights * Number(listingRecord.pricePerNight || 100);
         }
       }
 
@@ -191,16 +186,20 @@ export class BookingsService {
 
     const enrichedData = await Promise.all(
       data.map(async (b) => {
-        const numericPropId = parseInt(b.propertyId, 10);
+        const numericListingId = parseInt(b.propertyId, 10);
         let listing: Listing | null = null;
-        if (!isNaN(numericPropId)) {
+        if (!isNaN(numericListingId)) {
           listing = await this.listingRepository.findOne({
-            where: { id: numericPropId },
+            where: { id: (numericListingId || b.propertyId) as any },
           });
         }
         return {
           ...b,
           id: Number(b.id),
+          listingId: b.propertyId,
+          listingTitle: listing?.title || `Listing #${b.propertyId}`,
+          listingCity: listing?.city || '',
+          listingCountry: listing?.country || '',
           propertyTitle: listing?.title || `Property #${b.propertyId}`,
           propertyCity: listing?.city || '',
           propertyCountry: listing?.country || '',
@@ -266,10 +265,10 @@ export class BookingsService {
   }
 
   /**
-   * 4. GET /api/bookings/check-availability/:propertyId — Check date range availability
+   * 4. GET /api/bookings/check-availability/:listingId — Check date range availability
    */
-  async checkAvailability(propertyId: string, checkIn?: string, checkOut?: string) {
-    const propertyIdStr = String(propertyId);
+  async checkAvailability(listingId: string | number, checkIn?: string, checkOut?: string) {
+    const listingIdStr = String(listingId);
 
     // Fetch existing active reservations for date range overview
     const bookedRanges = await this.bookingRepository
@@ -280,7 +279,7 @@ export class BookingsService {
         'booking.check_out',
         'booking.status',
       ])
-      .where('booking.property_id = :propertyId', { propertyId: propertyIdStr })
+      .where('booking.property_id = :listingId', { listingId: listingIdStr })
       .andWhere('UPPER(booking.status) IN (:...activeStatuses)', {
         activeStatuses: [BookingStatus.CONFIRMED, BookingStatus.PENDING],
       })
@@ -293,7 +292,7 @@ export class BookingsService {
 
       const conflicting = await this.bookingRepository
         .createQueryBuilder('booking')
-        .where('booking.property_id = :propertyId', { propertyId: propertyIdStr })
+        .where('booking.property_id = :listingId', { listingId: listingIdStr })
         .andWhere('UPPER(booking.status) IN (:...activeStatuses)', {
           activeStatuses: [BookingStatus.CONFIRMED, BookingStatus.PENDING],
         })
@@ -304,7 +303,8 @@ export class BookingsService {
         .getOne();
 
       return {
-        propertyId: propertyIdStr,
+        listingId: listingIdStr,
+        propertyId: listingIdStr,
         available: !conflicting,
         checkIn: checkInStr,
         checkOut: checkOutStr,
@@ -321,7 +321,8 @@ export class BookingsService {
     }
 
     return {
-      propertyId: propertyIdStr,
+      listingId: listingIdStr,
+      propertyId: listingIdStr,
       bookedRanges,
     };
   }
@@ -413,7 +414,7 @@ export class BookingsService {
 
     const overlapping = await this.bookingRepository
       .createQueryBuilder('b')
-      .where('b.property_id = :propertyId', { propertyId: booking.propertyId })
+      .where('b.property_id = :listingId', { listingId: booking.propertyId })
       .andWhere('b.id != :id', { id: booking.id })
       .andWhere('UPPER(b.status) = :status', { status: BookingStatus.CONFIRMED })
       .andWhere('b.check_in < :checkOut AND b.check_out > :checkIn', {

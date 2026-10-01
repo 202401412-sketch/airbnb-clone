@@ -12,20 +12,22 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { ListingsService } from './listings.service.js';
-import { CreateListingDto } from './dto/create-listing.dto.js';
-import { UpdateListingDto } from './dto/update-listing.dto.js';
+import { ListingsService } from './listings.service';
+import { CreateListingDto } from './dto/create-listing.dto';
+import { UpdateListingDto } from './dto/update-listing.dto';
 import {
   PaginationQueryDto,
   SearchListingDto,
   UpdateStatusDto,
-} from './dto/listing-query.dto.js';
+} from './dto/listing-query.dto';
 
 @Controller(['api/properties', 'api/listings', 'listings'])
 export class ListingsController {
   constructor(private readonly listingsService: ListingsService) {}
 
+  // =============================================================
   // 1. STATIC ROUTES (MUST BE DECLARED BEFORE PARAMETRIC /:id ROUTES)
+  // =============================================================
 
   // 1. GET /api/properties -> Paginated property list
   @Get()
@@ -61,7 +63,24 @@ export class ListingsController {
     return this.listingsService.findByCategory(categoryId, paginationDto);
   }
 
+  // GET /api/properties/business-ready -> Get business ready corporate properties
+  @Get('business-ready')
+  async getBusinessReadyProperties() {
+    return {
+      success: true,
+      properties: [
+        {
+          id: 'prop-1',
+          name: 'Executive Business Loft',
+          features: ['Fast Wifi', 'Workstation', 'Self check-in', 'Official Invoices'],
+        },
+      ],
+    };
+  }
+
+  // =============================================================
   // 2. PARAMETRIC ROUTES (/:id)
+  // =============================================================
 
   // 6. GET /api/properties/:id -> Get single property details
   @Get(':id')

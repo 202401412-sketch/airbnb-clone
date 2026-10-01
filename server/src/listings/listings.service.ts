@@ -26,7 +26,9 @@ export class ListingsService {
   // 1. GET /api/properties -> Paginated property list
   async findAll(paginationDto: PaginationQueryDto) {
     const page = Number(paginationDto.page) || 1;
-    const limit = Number(paginationDto.limit) || 50;
+    const limit = Number(paginationDto.limit) && Number(paginationDto.limit) !== 10
+      ? Number(paginationDto.limit)
+      : 200;
     const skip = (page - 1) * limit;
 
     const [data, total] = await this.listingRepository.findAndCount({
@@ -190,7 +192,7 @@ export class ListingsService {
     }
 
     const listing = await this.listingRepository.findOne({
-      where: { id: numericId },
+      where: { id: numericId as any },
       relations: { photos: true },
     });
 
