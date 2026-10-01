@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, ParseIntPipe, Req } from '@nestjs/common';
 import { WishlistsService } from './wishlists.service.js';
 import { CreateWishlistDto } from './dto/create-wishlist.dto.js';
-import { UpdateWishlistDto } from './dto/update-wishlist.dto.js';
+import { AddPropertyDto } from './dto/add-property.dto.js';
 
-@Controller('wishlists')
+@Controller('api/wishlists')
 export class WishlistsController {
   constructor(private readonly wishlistsService: WishlistsService) {}
 
-  @Post()
-  create(@Body() createWishlistDto: CreateWishlistDto) {
-    return this.wishlistsService.create(createWishlistDto);
-  }
-
   @Get()
-  findAll() {
-    return this.wishlistsService.findAll();
+  async getUserWishlists(@Req() req: any) {
+    const userId = req.user?.id || 1;
+    return this.wishlistsService.findAllByUser(userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.wishlistsService.findOne(+id);
+  @Post()
+  async createWishlist(@Body() createWishlistDto: CreateWishlistDto, @Req() req: any) {
+    const userId = req.user?.id || 1;
+    return this.wishlistsService.createWishlist(userId, createWishlistDto.name);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWishlistDto: UpdateWishlistDto) {
-    return this.wishlistsService.update(+id, updateWishlistDto);
+  @Post(':id/properties')
+  async addPropertyToWishlist(
+    @Param('id', ParseIntPipe) wishlistId: number,
+    @Body() addPropertyDto: AddPropertyDto,
+  ) {
+    return this.wishlistsService.addProperty(wishlistId, addPropertyDto.propertyId);
+  }
+
+  @Delete(':id/properties/:propertyId')
+  async removePropertyFromWishlist(
+    @Param('id', ParseIntPipe) wishlistId: number,
+    @Param('propertyId', ParseIntPipe) propertyId: number,
+  ) {
+    return this.wishlistsService.removeProperty(wishlistId, propertyId);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.wishlistsService.remove(+id);
+  async deleteWishlist(@Param('id', ParseIntPipe) wishlistId: number) {
+    return this.wishlistsService.deleteWishlist(wishlistId);
   }
 }
