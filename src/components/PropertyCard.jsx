@@ -33,7 +33,8 @@ const PropertyCard = memo(({ property, onClick }) => {
     toggleFavorite(property);
   };
 
-  const isExperience = property?.category === 'Experiences' || property?.id?.startsWith('exp-') || property?.id?.startsWith('photo-');
+  const propIdStr = String(property?.id ?? '');
+  const isExperience = property?.category === 'Experiences' || propIdStr.startsWith('exp-') || propIdStr.startsWith('photo-');
   const priceVal = property?.pricePerNight || property?.price || 2500;
   const nightsCount = property?.nights || 1;
   const egpBase = isExperience ? priceVal : priceVal * nightsCount;

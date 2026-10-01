@@ -4,6 +4,7 @@ import Footer from './Footer.jsx';
 import BookingWidget from './common/BookingWidget.jsx';
 import { useUserSaved } from '../context/UserSavedContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import axios from 'axios';
 import {
   Heart,
   Share,
@@ -113,10 +114,8 @@ const PropertyDetails = memo(({ property, onClose, onOpenAuth, onNavigate }) => 
     setTimeout(() => setCopiedShare(false), 2500);
   };
 
-  const handleConfirmBooking = () => {
-    const randomRef = 'AB-' + Math.floor(100000 + Math.random() * 900000);
+  const handleConfirmBooking = async () => {
     const bookingObj = {
-      id: randomRef,
       userId: user?.id || user?.email || 'usr_guest',
       userName: user?.name || 'Guest User',
       propertyId: property.id || property.title,
@@ -128,40 +127,70 @@ const PropertyDetails = memo(({ property, onClose, onOpenAuth, onNavigate }) => 
       nightsCount: nightsCount,
       totalPrice: totalPrice,
       guestsCount: totalGuestCount,
+      status: 'CONFIRMED',
       createdAt: new Date().toISOString()
     };
 
-    addBooking(bookingObj, user?.id);
-    setBookingReference(randomRef);
+    const res = await addBooking(bookingObj, user?.id);
+    setBookingReference(res?.id ? String(res.id) : '');
     setBookingConfirmed(true);
   };
 
-  const handleSendMessageToHost = (e) => {
+  const handleSendMessageToHost = async (e) => {
     e.preventDefault();
     if (!hostMessageText.trim()) return;
 
     const hostName = property.host?.name || "Farida";
+    const recipientId = Number(property.hostId || property.host?.id || 2) || 2;
+    const listingId = parseInt(String(property.id || 1).match(/\d+/)?.[0] || '1', 10) || 1;
+    const text = hostMessageText.trim();
+
     const msgObj = {
-      id: 'MSG-' + Math.floor(100000 + Math.random() * 900000),
-      propertyId: property.id || property.title,
+      propertyId: property.id || 1,
       propertyTitle: title,
       propertyImage: images[0],
       hostName: hostName,
       hostAvatar: property.host?.avatar || "https://i.pravatar.cc/150?img=47",
       senderName: user?.name || "Guest User",
       senderEmail: user?.email || "guest@airbnb.com",
-      messageText: hostMessageText,
+      messageText: text,
+      recipientId: recipientId,
+      senderId: user?.id || 1,
       timestamp: new Date().toISOString()
     };
 
-    sendMessage(msgObj);
-    setHostMessageSent(true);
+    try {
+      const res = await axios.post('/api/messages/send', {
+        recipientId,
+        listingId,
+        messageText: text,
+      });
 
-    setTimeout(() => {
-      setHostMessageSent(false);
-      setShowMessageHostModal(false);
-      setHostMessageText('');
-    }, 2000);
+      if (sendMessage) {
+        await sendMessage({
+          ...msgObj,
+          id: res.data?.data?.id || res.data?.id,
+        });
+      }
+      setHostMessageSent(true);
+
+      setTimeout(() => {
+        setHostMessageSent(false);
+        setShowMessageHostModal(false);
+        setHostMessageText('');
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to send message to host via API:', err);
+      if (sendMessage) {
+        await sendMessage(msgObj);
+      }
+      setHostMessageSent(true);
+      setTimeout(() => {
+        setHostMessageSent(false);
+        setShowMessageHostModal(false);
+        setHostMessageText('');
+      }, 2000);
+    }
   };
 
   const formatDateDisplay = (dateString) => {

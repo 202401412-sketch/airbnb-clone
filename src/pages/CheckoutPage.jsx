@@ -57,6 +57,8 @@ const CheckoutPage = ({
   const [cardCvv, setCardCvv] = useState('');
   const [cardName, setCardName] = useState(user?.name || '');
   const [cardError, setCardError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   // Editing UI Toggle State
   const [isEditingDates, setIsEditingDates] = useState(false);
@@ -92,13 +94,13 @@ const CheckoutPage = ({
     setActiveStep(3);
   };
 
-  const handleConfirmAndPay = () => {
-    const randomRef = 'AB-' + Math.floor(100000 + Math.random() * 900000);
+  const handleConfirmAndPay = async () => {
+    setSubmitError('');
+    setIsSubmitting(true);
     const bookingObj = {
-      id: randomRef,
-      userId: user?.id || 'usr_guest',
+      userId: user?.id || 1,
       userName: user?.name || cardName || 'Guest User',
-      propertyId: property?.id || title,
+      propertyId: property?.id || 1,
       propertyTitle: title,
       propertyImage: image,
       location: location,
@@ -108,15 +110,27 @@ const CheckoutPage = ({
       totalPrice: totalPrice,
       guestsCount: guestCount,
       paymentMethod: paymentMethod === 'card' ? 'Credit / Debit Card' : 'PayPal',
+      status: 'CONFIRMED',
       createdAt: new Date().toISOString()
     };
 
-    if (addBooking) {
-      addBooking(bookingObj, user?.id);
+    try {
+      let created = null;
+      if (addBooking) {
+        created = await addBooking(bookingObj, user?.id || 1);
+      }
+      setBookingRef(created?.id ? String(created.id) : '');
+      setIsConfirmed(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      const errMsg =
+        err?.response?.data?.message ||
+        err?.message ||
+        'Could not complete reservation. Please select different dates or try again.';
+      setSubmitError(errMsg);
+    } finally {
+      setIsSubmitting(false);
     }
-    setBookingRef(randomRef);
-    setIsConfirmed(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackNavigation = () => {
@@ -487,13 +501,22 @@ const CheckoutPage = ({
                   </p>
                 </div>
 
+                {submitError && (
+                  <div className="bg-rose-50 border border-rose-200 text-rose-800 text-xs p-3.5 rounded-xl font-medium flex items-center gap-2">
+                    <span className="font-bold">Error:</span> {submitError}
+                  </div>
+                )}
+
                 <button
                   type="button"
                   onClick={handleConfirmAndPay}
-                  className="w-full bg-[#FF385C] hover:bg-[#E00B41] text-white py-4 rounded-2xl font-black text-base transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#FF385C] hover:bg-[#E00B41] text-white py-4 rounded-2xl font-black text-base transition shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                 >
                   <Lock className="w-4 h-4" />
-                  <span>Confirm and Pay · {formatPrice(totalPrice)}</span>
+                  <span>
+                    {isSubmitting ? 'Processing Reservation...' : `Confirm and Pay · ${formatPrice(totalPrice)}`}
+                  </span>
                 </button>
               </div>
             )}

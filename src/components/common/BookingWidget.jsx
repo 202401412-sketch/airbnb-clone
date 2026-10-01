@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext.jsx';
-import { Star } from 'lucide-react';
+import { Star, AlertCircle } from 'lucide-react';
+import { checkAvailability } from '../../api/bookings';
 
 const BookingWidget = ({ 
   price = 4778, 
@@ -13,6 +14,8 @@ const BookingWidget = ({
   const [startDate, setStartDate] = useState('2026-10-02');
   const [endDate, setEndDate] = useState('2026-10-04');
   const [guests, setGuests] = useState(1);
+  const [isAvailable, setIsAvailable] = useState(true);
+  const [availabilityMessage, setAvailabilityMessage] = useState('');
 
   const pricePerNight = property?.pricePerNight || property?.price || price || 4778;
   const totalBase = pricePerNight * nights;
@@ -31,6 +34,29 @@ const BookingWidget = ({
       }
     }
   }, [startDate, nights]);
+
+  // Live availability validation against NestJS backend
+  useEffect(() => {
+    let active = true;
+    if (property?.id && startDate && endDate) {
+      checkAvailability(property.id, { checkIn: startDate, checkOut: endDate })
+        .then((res) => {
+          if (active && res) {
+            const avail = res.available !== false;
+            setIsAvailable(avail);
+            setAvailabilityMessage(
+              avail ? '' : '⚠️ Selected dates overlap with an existing reservation.'
+            );
+          }
+        })
+        .catch(() => {
+          if (active) setIsAvailable(true);
+        });
+    }
+    return () => {
+      active = false;
+    };
+  }, [property?.id, startDate, endDate]);
 
   const handleReserve = (e) => {
     if (e) {
@@ -112,10 +138,17 @@ const BookingWidget = ({
         </div>
       </div>
 
+      {availabilityMessage && (
+        <div className="bg-amber-50 border border-amber-200 text-amber-800 text-xs p-3 rounded-xl flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0 text-amber-600" />
+          <span>{availabilityMessage}</span>
+        </div>
+      )}
+
       <button 
         type="button"
         onClick={handleReserve}
-        className="w-full bg-[#FF385C] hover:bg-[#E00B41] text-white py-4 rounded-2xl font-bold text-lg transition shadow-md cursor-pointer"
+        className="w-full bg-[#FF385C] hover:bg-[#E00B41] text-white py-4 rounded-2xl font-bold text-lg transition shadow-md cursor-pointer disabled:opacity-50"
       >
         Reserve
       </button>
